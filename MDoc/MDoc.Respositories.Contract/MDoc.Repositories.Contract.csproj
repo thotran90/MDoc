@@ -7,8 +7,8 @@
     <ProjectGuid>{8D0420B2-3F05-4641-9F84-FA31A98DE6F8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MDoc.Respositories.Contract</RootNamespace>
-    <AssemblyName>MDoc.Respositories.Contract</AssemblyName>
+    <RootNamespace>MDoc.Repositories.Contract</RootNamespace>
+    <AssemblyName>MDoc.Repositories.Contract</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

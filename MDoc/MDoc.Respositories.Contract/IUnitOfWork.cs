@@ -3,7 +3,7 @@ using System.Data;
 using System.Data.Common;
 using System.Threading.Tasks;
 
-namespace MDoc.Respositories.Contract
+namespace MDoc.Repositories.Contract
 {
     public interface IUnitOfWork
     {

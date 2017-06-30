@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MDoc.EntityFramework;
 using MDoc.Repositories.Resolver;
-using MDoc.Respositories.Contract;
+using MDoc.Repositories.Contract;
 
 namespace MDoc.Repositories.Implements
 {

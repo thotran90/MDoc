@@ -1,6 +1,6 @@
 ﻿using System.Data.Entity;
 using MDoc.Repositories.Implements;
-using MDoc.Respositories.Contract;
+using MDoc.Repositories.Contract;
 using Microsoft.Practices.Unity;
 
 namespace MDoc.Repositories.Resolver

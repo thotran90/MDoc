@@ -4,7 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using MDoc.Respositories.Contract;
+using MDoc.Repositories.Contract;
 
 namespace MDoc.Repositories.Implements
 {

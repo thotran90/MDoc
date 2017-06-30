@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDoc.EntityFramework", "MDo
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{7EF8E1E9-D644-4CA5-A266-DB838FF3EFC2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDoc.Respositories.Contract", "MDoc.Respositories.Contract\MDoc.Respositories.Contract.csproj", "{8D0420B2-3F05-4641-9F84-FA31A98DE6F8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDoc.Repositories.Contract", "MDoc.Respositories.Contract\MDoc.Repositories.Contract.csproj", "{8D0420B2-3F05-4641-9F84-FA31A98DE6F8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDoc.Repositories", "MDoc.Repositories\MDoc.Repositories.csproj", "{4D5DE73E-562F-4D22-B0BE-212315CF5DB8}"
 EndProject

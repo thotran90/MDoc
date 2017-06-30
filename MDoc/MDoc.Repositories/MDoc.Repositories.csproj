@@ -75,9 +75,9 @@
       <Project>{69612f87-d82b-406f-8048-946c2c97d410}</Project>
       <Name>MDoc.EntityFramework</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MDoc.Respositories.Contract\MDoc.Respositories.Contract.csproj">
+    <ProjectReference Include="..\MDoc.Respositories.Contract\MDoc.Repositories.Contract.csproj">
       <Project>{8d0420b2-3f05-4641-9f84-fa31a98de6f8}</Project>
-      <Name>MDoc.Respositories.Contract</Name>
+      <Name>MDoc.Repositories.Contract</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
