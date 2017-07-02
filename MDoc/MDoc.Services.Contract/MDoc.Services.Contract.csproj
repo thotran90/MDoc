@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5ABD9585-3508-49C9-93D3-8A297CEC92D4}</ProjectGuid>
+    <ProjectGuid>{706483C4-75EC-4902-BC3F-855A8431A7D6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MDoc.Infrastructures</RootNamespace>
-    <AssemblyName>MDoc.Infrastructures</AssemblyName>
+    <RootNamespace>MDoc.Services.Contract</RootNamespace>
+    <AssemblyName>MDoc.Services.Contract</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,9 +41,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MD5Helper.cs" />
-    <Compile Include="IDIBootstraper.cs" />
+    <Compile Include="DataContracts\User\SearchUserModel.cs" />
+    <Compile Include="IUserService.cs" />
+    <Compile Include="DataContracts\User\LoginModel.cs" />
+    <Compile Include="DataContracts\User\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MDoc.Infrastructures\MDoc.Infrastructures.csproj">
+      <Project>{5ABD9585-3508-49C9-93D3-8A297CEC92D4}</Project>
+      <Name>MDoc.Infrastructures</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

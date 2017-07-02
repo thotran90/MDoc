@@ -3,15 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MDoc.Services.Contract;
+using MDoc.Services.Contract.DataContracts.User;
 
 namespace MDoc.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IUserService _userService;
+
+        public HomeController(IUserService userService)
+        {
+            _userService = userService;
+        }
+
         public ActionResult Index()
         {
             ViewBag.Message = "Welcome to ASP.NET MVC!";
-
+            var result = _userService.Login(new LoginModel()
+            {
+                LoginId = "11",
+                Password = "aaa"
+            });
             return View();
         }
 
