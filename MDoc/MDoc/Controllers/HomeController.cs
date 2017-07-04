@@ -8,7 +8,7 @@ using MDoc.Services.Contract.DataContracts.User;
 
 namespace MDoc.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly IUserService _userService;
 
@@ -22,8 +22,8 @@ namespace MDoc.Controllers
             ViewBag.Message = "Welcome to ASP.NET MVC!";
             var result = _userService.Login(new LoginModel()
             {
-                LoginId = "11",
-                Password = "aaa"
+                LoginId = "admin",
+                Password = "Admin@123"
             });
             return View();
         }
