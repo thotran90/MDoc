@@ -22,7 +22,9 @@ namespace MDoc
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                      "~/Content/bootstrap.css",
+                     "~/Content/font-awesome.min.css",
                      "~/Content/Site.css"));
+            bundles.Add(new StyleBundle("~/Content/logon").Include("~/Content/logon.css"));
         }
     }
 }

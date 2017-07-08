@@ -1,0 +1,30 @@
+﻿@model MDoc.Services.Contract.DataContracts.User.LoginModel
+<div class="sign-in-htm">
+    @using (Html.BeginForm("LogOn", "Account", FormMethod.Post))
+    {
+        <div class="group">
+            @Html.LabelFor(m => m.LoginId, new Dictionary<string, object>() {{"class", "label"}})
+            @Html.TextBoxFor(m => m.LoginId, new {@class = "input"})
+        </div>
+        <div class="group">
+            @Html.LabelFor(m => m.Password, new Dictionary<string, object>() {{"class", "label"}})
+            @Html.PasswordFor(m => m.Password, new {@class = "input"})
+        </div>
+        <div class="group">
+            <input id="check" name="IsRemember" type="checkbox" class="check" checked>
+            <label for="check"><span class="icon"></span> Keep me Signed in</label>
+        </div>
+    }
+    
+    @*<div class="group">
+        <input id="check" type="checkbox" class="check" checked>
+        
+    </div>*@
+    <div class="group">
+        <input type="submit" class="button" value="Sign In">
+    </div>
+    <div class="hr"></div>
+    <div class="foot-lnk">
+        <a href="#forgot">Forgot Password?</a>
+    </div>
+</div>

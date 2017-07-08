@@ -9,10 +9,5 @@ namespace MDoc.Controllers
     [Authorize]
     public class BaseController : Controller
     {
-        // GET: Base
-        public ActionResult Index()
-        {
-            return View();
-        }
     }
 }

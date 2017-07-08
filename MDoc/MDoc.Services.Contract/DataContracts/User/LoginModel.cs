@@ -5,14 +5,15 @@ namespace MDoc.Services.Contract.DataContracts.User
 {
     public class LoginModel
     {
-        [Display(Name = "Login Id")]
+        [Display(Name = "username")]
         [Required]
         public string LoginId { get; set; }
 
-        [Display(Name = "Password")]
+        [Display(Name = "password")]
         [Required]
         public string Password { get; set; }
-
+        [Display(Name = "Keep me Signed in")]
+        public bool IsRemember { get; set; }
         public string SecurePassword => Password.ToMd5();
     }
 }
