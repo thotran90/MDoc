@@ -15,5 +15,6 @@ namespace MDoc.Services.Contract.DataContracts.User
         [Display(Name = "Keep me Signed in")]
         public bool IsRemember { get; set; }
         public string SecurePassword => Password.ToMd5();
+        public string ReturnUrl { get; set; }
     }
 }

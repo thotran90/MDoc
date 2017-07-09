@@ -10,22 +10,23 @@
     <meta charset="UTF-8">
     <title>Logon - Document Management</title>
     <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Open+Sans:600'>
-
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryVal")
+    @Scripts.Render("~/bundles/bootstrap")
     @Styles.Render("~/Content/logon")
-
-
 </head>
 
 <body>
-    <div class="login-wrap">
-        <div class="login-html">
-            <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
-            <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
-            <div class="login-form">
-                @Html.Partial("_SignIn", new LoginModel())
-                @Html.Partial("_SignUp")
-            </div>
+<div class="login-wrap">
+    <div class="login-html">
+        <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
+        <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
+        <div class="login-form">
+            @Html.Partial("_SignIn", new LoginModel())
+            @Html.Partial("_SignUp")
         </div>
     </div>
+</div>
+    @Html.Partial("_ForgotPassword")
 </body>
 </html>

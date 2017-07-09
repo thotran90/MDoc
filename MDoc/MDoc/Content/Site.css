@@ -1,756 +1,629 @@
-﻿html {
-    background-color: #e2e2e2;
+﻿/*====================== KENDO UI ==============================*/
+.k-header p {
     margin: 0;
-    padding: 0;
+    padding: 20px 10px;
+    font-size: 20px;
+    font-weight: lighter;
+}
+
+/* Sticky footer styles
+    -------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-    background-color: #fff;
-    border-top: solid 10px #000;
-    color: #333;
-    font-size: .85em;
-    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
-    margin: 0;
-    padding: 0;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
 }
 
-a {
-    color: #333;
-    outline: none;
-    padding-left: 3px;
-    padding-right: 3px;
-    text-decoration: underline;
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    background-color: #f5f5f5;
 }
 
-    a:link, a:visited,
-    a:active, a:hover {
-        color: #333;
+.container-fluid .text-muted {
+    margin: 20px 0;
+}
+
+.placeholders {
+    margin: 30px auto;
+}
+
+.placeholder img {
+    display: inline-block;
+}
+
+p .k-button {
+    margin: 0 15px 0 0;
+}
+
+.btn-toggle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-shadow: none;
+    height: 48px;
+}
+
+    .btn-toggle .k-icon {
+        opacity: 1;
     }
 
-    a:hover {
-        background-color: #c7d1d6;
+    .btn-toggle,
+    .k-primary.btn-toggle:hover,
+    .btn-toggle:focus:active:not(.k-state-disabled):not([disabled]),
+    .btn-toggle:focus:not(.k-state-disabled):not([disabled]) {
+        box-shadow: none;
+        border-radius: 0;
     }
 
-header, footer, hgroup,
-nav, section {
-    display: block;
-}
-
-mark {
-    background-color: #a6dbed;
-    padding-left: 5px;
-    padding-right: 5px;
-}
-
-.float-left {
-    float: left;
-}
-
-.float-right {
-    float: right;
-}
-
-.clear-fix:after {
-    content: ".";
-    clear: both;
-    display: block;
-    height: 0;
-    visibility: hidden;
-}
-
-h1, h2, h3,
-h4, h5, h6 {
-    color: #000;
-    margin-bottom: 0;
-    padding-bottom: 0;
-}
-
-h1 {
-    font-size: 2em;
-}
-
-h2 {
-    font-size: 1.75em;
-}
-
-h3 {
-    font-size: 1.2em;
-}
-
-h4 {
-    font-size: 1.1em;
-}
-
-h5, h6 {
-    font-size: 1em;
-}
-
-    h5 a:link, h5 a:visited, h5 a:active {
-        padding: 0;
-        text-decoration: none;
-    }
-
-
-/* main layout
-----------------------------------------------------------*/
-.content-wrapper {
-    margin: 0 auto;
-    max-width: 960px;
-}
-
-#body {
-    background-color: #efeeef;
-    clear: both;
-    padding-bottom: 35px;
-}
-
-    .main-content {
-        background: url("../Images/accent.png") no-repeat;
-        padding-left: 10px;
-        padding-top: 30px;
-    }
-
-    .featured + .main-content {
-        background: url("../Images/heroAccent.png") no-repeat;
-    }
-
-header .content-wrapper {
-    padding-top: 20px; 
-}
-
-footer {
-    clear: both;
-    background-color: #e2e2e2;
-    font-size: .8em;
-    height: 100px;
-}
-
-
-/* site title
-----------------------------------------------------------*/
-.site-title {
-    color: #c8c8c8;
-    font-family: Rockwell, Consolas, "Courier New", Courier, monospace;
-    font-size: 2.3em;
-    margin: 0;
-}
-
-.site-title a, .site-title a:hover, .site-title a:active {
-    background: none;
-    color: #c8c8c8;
-    outline: none;
-    text-decoration: none;
-}
-
-
-/* login
-----------------------------------------------------------*/
-#login {
-    display: block;
-    font-size: .85em;
-    margin: 0 0 10px;
-    text-align: right;
-}
-
-    #login a {
-        background-color: #d3dce0;
-        margin-left: 10px;
-        margin-right: 3px;
-        padding: 2px 3px;
-        text-decoration: none;
-    }
-
-    #login a.username {
-        background: none;
-        margin: 0;
-        padding: 0;
-        text-decoration: underline;
-    }
-
-    #login ul {
-        margin: 0;
-    }
-
-    #login li {
-        display: inline;
-        list-style: none;
-    }
-
-
-/* menu
-----------------------------------------------------------*/
-ul#menu {
-    font-size: 1.3em;
-    font-weight: 600;
-    margin: 0 0 5px;
-    padding: 0;
-    text-align: right;
-}
-
-    ul#menu li {
-        display: inline;
-        list-style: none;
-        padding-left: 15px;
-    }
-
-        ul#menu li a {
-            background: none;
-            color: #999;
-            text-decoration: none;
+        .btn-toggle .k-i-hbars,
+        .k-primary.btn-toggle:hover .k-i-hbars,
+        .btn-toggle:focus:active:not(.k-state-disabled):not([disabled]) .k-i-hbars,
+        .btn-toggle:focus:not(.k-state-disabled):not([disabled]) .k-i-hbars {
+            background-position: -80px -32px;
         }
 
-        ul#menu li a:hover {
-            color: #333;
-            text-decoration: none;
-        }
-
-
-/* page elements
-----------------------------------------------------------*/
-/* featured */
-.featured {
-    background-color: #fff;
-}
-
-    .featured .content-wrapper {
-        background-color: #7ac0da;
-        background-image: -ms-linear-gradient(left, #7ac0da 0%, #a4d4e6 100%);
-        background-image: -o-linear-gradient(left, #7ac0da 0%, #a4d4e6 100%);
-        background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #7ac0da), color-stop(1, #a4d4e6));
-        background-image: -webkit-linear-gradient(left, #7ac0da 0%, #a4d4e6 100%);
-        background-image: linear-gradient(left, #7ac0da 0%, #a4d4e6 100%);
-        color: #3e5667;
-        padding: 20px 40px 30px 40px;
-    }
-
-        .featured hgroup.title h1, .featured hgroup.title h2 {
-            color: #fff;
-        }
-
-        .featured p {
-            font-size: 1.1em;
-        }
-
-/* page titles */
-hgroup.title {
-    margin-bottom: 10px;
-}
-
-hgroup.title h1, hgroup.title h2 {
-    display: inline;
-}
-
-hgroup.title h2 {
-    font-weight: normal;
-    margin-left: 3px;
-}
-
-/* features */
-section.feature {
-    width: 300px;
-    float: left;
-    padding: 10px;
-}
-
-/* ordered list */
-ol.round {
-    list-style-type: none;
-    padding-left: 0;
-}
-
-    ol.round li {
-        margin: 25px 0;
-        padding-left: 45px;
-    }
-
-        ol.round li.zero {
-            background: url("../Images/orderedList0.png") no-repeat;
-        }
-
-        ol.round li.one {
-            background: url("../Images/orderedList1.png") no-repeat;
-        }
-
-        ol.round li.two {
-            background: url("../Images/orderedList2.png") no-repeat;
-        }
-
-        ol.round li.three {
-            background: url("../Images/orderedList3.png") no-repeat;
-        }
-
-        ol.round li.four {
-            background: url("../Images/orderedList4.png") no-repeat;
-        }
-
-        ol.round li.five {
-            background: url("../Images/orderedList5.png") no-repeat;
-        }
-
-        ol.round li.six {
-            background: url("../Images/orderedList6.png") no-repeat;
-        }
-
-        ol.round li.seven {
-            background: url("../Images/orderedList7.png") no-repeat;
-        }
-
-        ol.round li.eight {
-            background: url("../Images/orderedList8.png") no-repeat;
-        }
-
-        ol.round li.nine {
-            background: url("../Images/orderedList9.png") no-repeat;
-        }
-
-/* content */
-article {
-    float: left;
-    width: 70%;
-}
-
-aside {
-    float: right;
-    width: 25%;
-}
-
-    aside ul {
-        list-style: none;
-        padding: 0;
-    }
-
-        aside ul li {
-            background: url("../Images/bullet.png") no-repeat 0 50%;
-            padding: 2px 0 2px 20px;
-        }
-
-.label {
-    font-weight: 700;
-}
-
-/* login page */
-#loginForm {
-    border-right: solid 2px #c8c8c8;
-    float: left;
-    width: 55%;
-}
-
-    #loginForm .validation-error {
+@@media (max-width: 768px) {
+    .k-item {
         display: block;
-        margin-left: 15px;
-    }
-
-    #loginForm .validation-summary-errors ul {
-        margin: 0;
-        padding: 0;
-    }
-
-    #loginForm .validation-summary-errors li {
-        display: inline;
-        list-style: none;
-        margin: 0;
-    }
-
-    #loginForm input {
-        width: 250px;
-    }
-
-    #loginForm input[type="checkbox"],
-    #loginForm input[type="submit"],
-    #loginForm input[type="button"],
-    #loginForm button {
-        width: auto;
-    }
-
-#socialLoginForm {
-    margin-left: 40px;
-    float: left;
-    width: 40%;
-}
-
-    #socialLoginForm h2 {
-        margin-bottom:  5px;
-    }
-
-#socialLoginList button {
-    margin-bottom: 12px;
-}
-
-#logoutForm {
-    display: inline;
-}
-
-/* contact */
-.contact h3 {
-    font-size: 1.2em;
-}
-
-.contact p {
-    margin: 5px 0 0 10px;
-}
-
-.contact iframe {
-    border: 1px solid #333;
-    margin: 5px 0 0 10px;
-}
-
-/* forms */
-fieldset {
-    border: none;
-    margin: 0;
-    padding: 0;
-}
-
-    fieldset legend {
-        display: none;
-    }
-
-    fieldset ol {
-        padding: 0;
-        list-style: none;
-    }
-
-        fieldset ol li {
-            padding-bottom: 5px;
-        }
-
-label {
-    display: block;
-    font-size: 1.2em;
-    font-weight: 600;
-}
-
-label.checkbox {
-    display: inline;
-}
-
-input, textarea {
-    border: 1px solid #e2e2e2;
-    background: #fff;
-    color: #333;
-    font-size: 1.2em;
-    margin: 5px 0 6px 0;
-    padding: 5px;
-    width: 300px;
-}
-
-textarea {
-    font-family: inherit;
-    width: 500px;
-}
-
-    input:focus, textarea:focus {
-        border: 1px solid #7ac0da;
-    }
-
-    input[type="checkbox"] {
-        background: transparent;
-        border: inherit;
-        width: auto;
-    }
-
-    input[type="submit"],
-    input[type="button"],
-    button {
-        background-color: #d3dce0;
-        border: 1px solid #787878;
-        cursor: pointer;
-        font-size: 1.2em;
-        font-weight: 600;
-        padding: 7px;
-        margin-right: 8px;
-        width: auto;
-    }
-
-    td input[type="submit"],
-    td input[type="button"],
-    td button {
-        font-size: 1em;
-        padding: 4px;
-        margin-right: 4px;
-    }
-
-/* info and errors */
-.message-info {
-    border: 1px solid;
-    clear: both;
-    padding: 10px 20px;
-}
-
-.message-error {
-    clear: both;
-    color: #e80c4d;
-    font-size: 1.1em;
-    font-weight: bold;
-    margin: 20px 0 10px 0;
-}
-
-.message-success {
-    color: #7ac0da;
-    font-size: 1.3em;
-    font-weight: bold;
-    margin: 20px 0 10px 0;
-}
-
-.error {
-    color: #e80c4d;
-}
-
-/* styles for validation helpers */
-.field-validation-error {
-    color: #e80c4d;
-    font-weight: bold;
-}
-
-.field-validation-valid {
-    display: none;
-}
-
-input.input-validation-error {
-    border: 1px solid #e80c4d;
-}
-
-input[type="checkbox"].input-validation-error {
-    border: 0 none;
-}
-
-.validation-summary-errors {
-    color: #e80c4d;
-    font-weight: bold;
-    font-size: 1.1em;
-}
-
-.validation-summary-valid {
-    display: none;
-}
-
-
-/* tables
-----------------------------------------------------------*/
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-    margin-top: 0.75em;
-    border: 0 none;
-}
-
-th {
-    font-size: 1.2em;
-    text-align: left;
-    border: none 0px;
-    padding-left: 0;
-}
-
-    th a {
-        display: block;
-        position: relative;
-    }
-
-    th a:link, th a:visited, th a:active, th a:hover {
-        color: #333;
-        font-weight: 600;
-        text-decoration: none;
-        padding: 0;
-    }
-
-    th a:hover {
-        color: #000;
-    }
-
-    th.asc a, th.desc a {
-        margin-right: .75em;
-    }
-
-    th.asc a:after, th.desc a:after {
-        display: block;
-        position: absolute;
-        right: 0em;
-        top: 0;
-        font-size: 0.75em;
-    }
-
-    th.asc a:after {
-        content: '▲';
-    }
-
-    th.desc a:after {
-        content: '▼';
-    }
-
-td {
-    padding: 0.25em 2em 0.25em 0em;
-    border: 0 none;
-}
-
-tr.pager td {
-    padding: 0 0.25em 0 0;
-}
-
-
-/********************
-*   Mobile Styles   *
-********************/
-@media only screen and (max-width: 850px) {
-
-    /* header
-    ----------------------------------------------------------*/
-    header .float-left,
-    header .float-right {
-        float: none;
-    }
-
-    /* logo */
-    header .site-title {
-        margin: 10px;
-        text-align: center;
-    }
-
-    /* login */
-    #login {
-        font-size: .85em;
-        margin: 0 0 12px;
-        text-align: center;
-    }
-
-        #login ul {
-            margin: 5px 0;
-            padding: 0;
-        }
-
-        #login li {
-            display: inline;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        #login a {
-            background: none;
-            color: #999;
-            font-weight: 600;
-            margin: 2px;
-            padding: 0;
-        }
-
-        #login a:hover {
-            color: #333;
-        }
-
-    /* menu */
-    nav {
-        margin-bottom: 5px;
-    }
-
-    ul#menu {
-        margin: 0;
-        padding: 0;
-        text-align: center;
-    }
-
-        ul#menu li {
-            margin: 0;
-            padding: 0;
-        }
-
-
-    /* main layout
-    ----------------------------------------------------------*/
-    .main-content,
-    .featured + .main-content {
-        background-position: 10px 0;
-    }
-
-    .content-wrapper {
-        padding-right: 10px;
-        padding-left: 10px;
-    }
-
-    .featured .content-wrapper {
-        padding: 10px;
-    }
-
-    /* page content */
-    article, aside {
+        clear: both;
         float: none;
         width: 100%;
     }
 
-    /* ordered list */
-    ol.round {
-        list-style-type: none;
-        padding-left: 0;
+    .k-header h1 {
+        margin: 0;
+        padding: 16px 15px 14px 60px;
+        font-size: 18px;
+        font-weight: lighter;
+    }
+}
+/*====================== END KENDO UI ==============================*/
+/**
+ * Copyright 2015 Google Inc. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+body {
+    margin: 0;
+}
+
+/* Disable ugly boxes around images in IE10 */
+a img {
+    border: 0px;
+}
+
+::-moz-selection {
+    background-color: #6ab344;
+    color: #fff;
+}
+
+::selection {
+    background-color: #6ab344;
+    color: #fff;
+}
+
+.android-search-box .mdl-textfield__input {
+    color: rgba(0, 0, 0, 0.87);
+}
+
+.android-header .mdl-menu__container {
+    z-index: 50;
+    margin: 0 !important;
+}
+
+
+.mdl-textfield--expandable {
+    width: auto;
+}
+
+.android-fab {
+    position: absolute;
+    right: 20%;
+    bottom: -26px;
+    z-index: 3;
+    background: #64ffda !important;
+    color: black !important;
+}
+
+.android-mobile-title {
+    display: none !important;
+}
+
+
+.android-logo-image {
+    height: 28px;
+    width: 140px;
+}
+
+
+.android-header {
+    overflow: visible;
+    background-color: white;
+}
+
+    .android-header .material-icons {
+        color: #767777 !important;
     }
 
-        ol.round li {
-            padding-left: 10px;
-            margin: 25px 0;
+    .android-header .mdl-layout__drawer-button {
+        background: transparent;
+        color: #767777;
+    }
+
+    .android-header .mdl-navigation__link {
+        color: #757575;
+        font-weight: 700;
+        font-size: 14px;
+    }
+
+.android-navigation-container {
+    /* Simple hack to make the overflow happen to the left instead... */
+    direction: rtl;
+    -webkit-order: 1;
+    -ms-flex-order: 1;
+    order: 1;
+    width: 500px;
+    transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), width 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.android-navigation {
+    /* ... and now make sure the content is actually LTR */
+    direction: ltr;
+    -webkit-justify-content: flex-end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    width: 800px;
+}
+
+.android-search-box.is-focused + .android-navigation-container {
+    opacity: 0;
+    width: 100px;
+}
+
+
+.android-navigation .mdl-navigation__link {
+    display: inline-block;
+    height: 60px;
+    line-height: 68px;
+    background-color: transparent !important;
+    border-bottom: 4px solid transparent;
+}
+
+    .android-navigation .mdl-navigation__link:hover {
+        border-bottom: 4px solid #8bc34a;
+    }
+
+.android-search-box {
+    -webkit-order: 2;
+    -ms-flex-order: 2;
+    order: 2;
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
+.android-more-button {
+    -webkit-order: 3;
+    -ms-flex-order: 3;
+    order: 3;
+}
+
+
+.android-drawer {
+    border-right: none;
+}
+
+.android-drawer-separator {
+    height: 1px;
+    background-color: #dcdcdc;
+    margin: 8px 0;
+}
+
+.android-drawer .mdl-navigation__link.mdl-navigation__link {
+    font-size: 14px;
+    color: #757575;
+}
+
+.android-drawer span.mdl-navigation__link.mdl-navigation__link {
+    color: #8bc34a;
+}
+
+.android-drawer .mdl-layout-title {
+    position: relative;
+    background: #6ab344;
+    height: 160px;
+}
+
+.android-drawer .android-logo-image {
+    position: absolute;
+    bottom: 16px;
+}
+
+.android-be-together-section {
+    position: relative;
+    height: 800px;
+    width: auto;
+    background-color: #f3f3f3;
+    background: url('images/slide01.jpg') center 30% no-repeat;
+    background-size: cover;
+}
+
+.logo-font {
+    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    line-height: 1;
+    color: #767777;
+    font-weight: 500;
+}
+
+.android-slogan {
+    font-size: 60px;
+    padding-top: 160px;
+}
+
+.android-sub-slogan {
+    font-size: 21px;
+    padding-top: 24px;
+}
+
+.android-create-character {
+    font-size: 21px;
+    padding-top: 400px;
+}
+
+    .android-create-character a {
+        text-decoration: none;
+        color: #767777;
+        font-weight: 300;
+    }
+
+.android-screen-section {
+    position: relative;
+    padding-top: 60px;
+    padding-bottom: 80px;
+}
+
+.android-screens {
+    text-align: right;
+    width: 100%;
+    white-space: nowrap;
+    overflow-x: auto;
+}
+
+.android-screen {
+    text-align: center;
+}
+
+    .android-screen .android-link {
+        margin-top: 16px;
+        display: block;
+        z-index: 2;
+    }
+
+.android-image-link {
+    text-decoration: none;
+}
+
+.android-wear {
+    display: inline-block;
+    width: 160px;
+    margin-right: 32px;
+}
+
+    .android-wear .android-screen-image {
+        width: 40%;
+        z-index: 1;
+    }
+
+
+.android-phone {
+    display: inline-block;
+    width: 64px;
+    margin-right: 48px;
+}
+
+    .android-phone .android-screen-image {
+        width: 100%;
+        z-index: 1;
+    }
+
+
+.android-tablet {
+    display: inline-block;
+    width: 110px;
+    margin-right: 64px;
+}
+
+    .android-tablet .android-screen-image {
+        width: 100%;
+        z-index: 1;
+    }
+
+    .android-tablet .android-link {
+        display: block;
+        z-index: 2;
+    }
+
+
+.android-tv {
+    display: inline-block;
+    width: 300px;
+    margin-right: 80px;
+}
+
+    .android-tv .android-screen-image {
+        width: 100%;
+        z-index: 1;
+    }
+
+
+.android-auto {
+    display: inline-block;
+    width: 300px;
+    overflow: hidden;
+}
+
+    .android-auto .android-screen-image {
+        display: block;
+        height: 300px;
+        z-index: 1;
+    }
+
+
+.android-wear-section {
+    position: relative;
+    background: url('images/wear.png') center top no-repeat;
+    background-size: cover;
+    height: 800px;
+}
+
+.android-wear-band {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    background-color: #37474f;
+}
+
+.android-wear-band-text {
+    max-width: 800px;
+    margin-left: 25%;
+    padding: 24px;
+    text-align: left;
+    color: white;
+}
+
+    .android-wear-band-text p {
+        padding-top: 8px;
+    }
+
+.android-link {
+    text-decoration: none;
+    color: #8bc34a !important;
+}
+
+    .android-link:hover {
+        color: #7cb342 !important;
+    }
+
+    .android-link .material-icons {
+        position: relative;
+        top: -1px;
+        vertical-align: middle;
+    }
+
+.android-alt-link {
+    text-decoration: none;
+    color: #64ffda !important;
+    font-size: 16px;
+}
+
+    .android-alt-link:hover {
+        color: #00bfa5 !important;
+    }
+
+    .android-alt-link .material-icons {
+        position: relative;
+        top: 6px;
+    }
+
+.android-customized-section {
+    text-align: center;
+}
+
+.android-customized-section-text {
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 80px 16px 0 16px;
+}
+
+    .android-customized-section-text p {
+        padding-top: 16px;
+    }
+
+.android-customized-section-image {
+    background: url('images/devices.jpg') center top no-repeat;
+    background-size: cover;
+    height: 400px;
+}
+
+.android-more-section {
+    padding: 80px 0;
+    max-width: 1044px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+    .android-more-section .android-section-title {
+        margin-left: 12px;
+        padding-bottom: 24px;
+    }
+
+.android-card-container {
+}
+
+    .android-card-container .mdl-card__media {
+        overflow: hidden;
+        background: transparent;
+    }
+
+        .android-card-container .mdl-card__media img {
+            width: 100%;
         }
 
-            ol.round li.zero,
-            ol.round li.one,
-            ol.round li.two,
-            ol.round li.three,
-            ol.round li.four,
-            ol.round li.five,
-            ol.round li.six,
-            ol.round li.seven,
-            ol.round li.eight,
-            ol.round li.nine {
-                background: none;
-            }
-
-     /* features */
-     section.feature {
-        float: none;
-        padding: 10px;
-        width: auto;
-     }
-
-        section.feature img {
-            color: #999;
-            content: attr(alt);
-            font-size: 1.5em;
-            font-weight: 600;
-        }
-
-    /* forms */
-    input {
-        width: 90%;
-    }
-
-    /* login page */
-    #loginForm {
-        border-right: none;
-        float: none;
-        width: auto;
-    }
-
-        #loginForm .validation-error {
-            display: block;
-            margin-left: 15px;
-        }
-
-    #socialLoginForm {
-        margin-left: 0;
-        float: none;
-        width: auto;
-    }
-
-
-    /* footer
-    ----------------------------------------------------------*/
-    footer .float-left,
-    footer .float-right {
-        float: none;
-    }
-
-    footer {
-        text-align: center;
+    .android-card-container .mdl-card__title {
+        background: transparent;
         height: auto;
-        padding: 10px 0;
     }
 
-        footer p {
-            margin: 0;
+    .android-card-container .mdl-card__title-text {
+        color: black;
+        height: auto;
+    }
+
+    .android-card-container .mdl-card__supporting-text {
+        height: auto;
+        color: black;
+        padding-bottom: 56px;
+    }
+
+    .android-card-container .mdl-card__actions {
+        position: absolute;
+        bottom: 0;
+    }
+
+        .android-card-container .mdl-card__actions a {
+            border-top: none;
+            font-size: 16px;
         }
+
+.android-footer {
+    background-color: #fafafa;
+    position: relative;
+}
+
+    .android-footer a:hover {
+        color: #8bc34a;
+    }
+
+    .android-footer .mdl-mega-footer--top-section::after {
+        border-bottom: none;
+    }
+
+    .android-footer .mdl-mega-footer--middle-section::after {
+        border-bottom: none;
+    }
+
+    .android-footer .mdl-mega-footer--bottom-section {
+        position: relative;
+    }
+
+        .android-footer .mdl-mega-footer--bottom-section a {
+            margin-right: 2em;
+        }
+
+    .android-footer .mdl-mega-footer--right-section a .material-icons {
+        position: relative;
+        top: 6px;
+    }
+
+
+.android-link-menu:hover {
+    cursor: pointer;
+}
+
+
+/**** Mobile layout ****/
+@media (max-width: 900px) {
+    .android-navigation-container {
+        display: none;
+    }
+
+    .android-title {
+        display: none !important;
+    }
+
+    .android-mobile-title {
+        display: block !important;
+        position: absolute;
+        left: calc(50% - 70px);
+        top: 12px;
+        transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* WebViews in iOS 9 break the "~" operator, and WebViews in OS X 10.10 break
+     consecutive "+" operators in some cases. Therefore, we need to use both
+     here to cover all the bases. */
+    .android.android-search-box.is-focused ~ .android-mobile-title,
+    .android-search-box.is-focused + .android-navigation-container + .android-mobile-title {
+        opacity: 0;
+    }
+
+    .android-more-button {
+        display: none;
+    }
+
+    .android-search-box.is-focused {
+        width: calc(100% - 48px);
+    }
+
+    .android-search-box .mdl-textfield__expandable-holder {
+        width: 100%;
+    }
+
+    .android-be-together-section {
+        height: 350px;
+    }
+
+    .android-slogan {
+        font-size: 26px;
+        margin: 0 16px;
+        padding-top: 24px;
+    }
+
+    .android-sub-slogan {
+        font-size: 16px;
+        margin: 0 16px;
+        padding-top: 8px;
+    }
+
+    .android-create-character {
+        padding-top: 200px;
+        font-size: 16px;
+    }
+
+        .android-create-character img {
+            height: 12px;
+        }
+
+    .android-fab {
+        display: none;
+    }
+
+    .android-wear-band-text {
+        margin-left: 0;
+        padding: 16px;
+    }
+
+    .android-footer .mdl-mega-footer--bottom-section {
+        display: none;
+    }
 }
