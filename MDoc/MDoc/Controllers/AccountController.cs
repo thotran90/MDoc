@@ -23,8 +23,6 @@ namespace MDoc.Controllers
         #endregion
 
         #region [Implements]
-
-        [HttpPost]
         public ActionResult LogOff()
         {
             IdentitySignout();
@@ -52,7 +50,7 @@ namespace MDoc.Controllers
                 if (result.UserId != 0)
                 {
                     IdentitySignin(result,null,model.IsRemember);
-                    return RedirectToAction(model.ReturnUrl);
+                    return string.IsNullOrEmpty(model.ReturnUrl) ? Redirect("Home/Index") : Redirect(model.ReturnUrl);
                 }
             }
             ModelState.AddModelError("InvalidUser", "Username/Password is incorrect.");
