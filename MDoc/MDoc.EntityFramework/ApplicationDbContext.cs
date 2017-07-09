@@ -18,7 +18,9 @@ namespace MDoc.EntityFramework
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations
-                .Add(new ApplicationUserMapping());
+                .Add(new ApplicationUserMapping())
+                .Add(new AddressMapping())
+                .Add(new DocumentTypeMapping());
             base.OnModelCreating(modelBuilder);
         }
     }

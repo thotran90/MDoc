@@ -50,7 +50,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationDbContext.cs" />
+    <Compile Include="Mapping\AddressMapping.cs" />
     <Compile Include="Mapping\ApplicationUserMapping.cs" />
+    <Compile Include="Mapping\DocumentTypeMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
