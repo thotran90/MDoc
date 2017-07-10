@@ -52,7 +52,14 @@
     <Compile Include="ApplicationDbContext.cs" />
     <Compile Include="Mapping\AddressMapping.cs" />
     <Compile Include="Mapping\ApplicationUserMapping.cs" />
+    <Compile Include="Mapping\CustomerMapping.cs" />
+    <Compile Include="Mapping\DocumentStatusMapping.cs" />
     <Compile Include="Mapping\DocumentTypeMapping.cs" />
+    <Compile Include="Mapping\EducationTypeMapping.cs" />
+    <Compile Include="Mapping\GenderMapping.cs" />
+    <Compile Include="Mapping\ProgramMapping.cs" />
+    <Compile Include="Mapping\SchoolMapping.cs" />
+    <Compile Include="Mapping\SchoolTypeMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -43,9 +43,16 @@
   <ItemGroup>
     <Compile Include="Address.cs" />
     <Compile Include="ApplicationUser.cs" />
+    <Compile Include="Customer.cs" />
+    <Compile Include="DocumentStatus.cs" />
     <Compile Include="DocumentType.cs" />
+    <Compile Include="EducationType.cs" />
     <Compile Include="Enums\AddressType.cs" />
+    <Compile Include="Gender.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="School.cs" />
+    <Compile Include="SchoolType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

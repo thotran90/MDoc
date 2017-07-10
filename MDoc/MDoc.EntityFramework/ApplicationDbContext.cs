@@ -20,7 +20,14 @@ namespace MDoc.EntityFramework
             modelBuilder.Configurations
                 .Add(new ApplicationUserMapping())
                 .Add(new AddressMapping())
-                .Add(new DocumentTypeMapping());
+                .Add(new DocumentTypeMapping())
+                .Add(new ProgramMapping())
+                .Add(new EducationTypeMapping())
+                .Add(new SchoolTypeMapping())
+                .Add(new GenderMapping())
+                .Add(new SchoolMapping())
+                .Add(new DocumentStatusMapping())
+                .Add(new CustomerMapping());
             base.OnModelCreating(modelBuilder);
         }
     }
