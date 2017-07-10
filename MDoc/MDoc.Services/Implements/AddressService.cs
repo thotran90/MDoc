@@ -101,14 +101,28 @@ namespace MDoc.Services.Implements
             return newEntity;
         }
 
-        public AddressModel Update(AddressModel entity)
+        public AddressModel Update(AddressModel model)
         {
-            throw new NotImplementedException();
+            var entity = UnitOfWork.GetRepository<Address>().GetByKeys(model.AddressId);
+            if(entity == null) return new AddressModel() {AddressId = 0};
+
+            entity.Label = model.Label;
+            entity.ParentId = model.ParentId;
+            entity.PostalCode = model.PostalCode;
+            entity.AddressCode = model.AddressCode;
+            entity.TypeId = (AddressType) model.Type;
+
+            UnitOfWork.SaveChanges();
+            return model;
         }
 
         public bool Remove(AddressModel entity)
         {
-            throw new NotImplementedException();
+            var address = UnitOfWork.GetRepository<Address>().GetByKeys(entity.AddressId);
+            if (address == null) return false;
+            address.IsDisabled = true;
+            UnitOfWork.SaveChanges();
+            return true;
         }
 
         #endregion

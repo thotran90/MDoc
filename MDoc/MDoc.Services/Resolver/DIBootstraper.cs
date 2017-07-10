@@ -1,5 +1,6 @@
 ﻿using MDoc.Infrastructures;
 using MDoc.Services.Contract;
+using MDoc.Services.Contract.Interfaces;
 using MDoc.Services.Implements;
 using Microsoft.Practices.Unity;
 
@@ -33,6 +34,7 @@ namespace MDoc.Services.Resolver
         {
             if (_container == null) _container = container;
             container.RegisterType<IUserService, UserService>();
+            container.RegisterType<IAddressService, AddressService>();
         }
 
         #endregion

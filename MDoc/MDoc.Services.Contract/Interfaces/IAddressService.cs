@@ -10,7 +10,7 @@ namespace MDoc.Services.Contract.Interfaces
         AddressModel GetAddress(int id);
         IQueryable<AddressModel> ListOfSelectedAddress(string ids);
         AddressModel Create(AddressModel newEntity);
-        AddressModel Update(AddressModel entity);
+        AddressModel Update(AddressModel model);
         bool Remove(AddressModel entity);
     }
 }
