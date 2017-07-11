@@ -53,6 +53,7 @@
     <Compile Include="Mapping\AddressMapping.cs" />
     <Compile Include="Mapping\ApplicationUserMapping.cs" />
     <Compile Include="Mapping\CustomerMapping.cs" />
+    <Compile Include="Mapping\DocumentMapping.cs" />
     <Compile Include="Mapping\DocumentStatusMapping.cs" />
     <Compile Include="Mapping\DocumentTypeMapping.cs" />
     <Compile Include="Mapping\EducationTypeMapping.cs" />

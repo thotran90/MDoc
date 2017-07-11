@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace MDoc.Entities
 {
@@ -26,5 +27,6 @@ namespace MDoc.Entities
         public DateTime? UpdatedDate { get; set; }
         public bool IsDeleted { get; set; }
         public virtual Gender Gender { get; set; }
+        public virtual ICollection<Document> Documents { get; set; }
     }
 }

@@ -14,7 +14,7 @@ namespace MDoc.Entities
         public string AddressCode { get; set; }
         public string PostalCode { get; set; }
         public bool IsDisabled { get; set; }
-        public int ParentId { get; set; }
+        public int? ParentId { get; set; }
         public AddressType TypeId { get; set; }
         public virtual ICollection<Address> Children { get; set; }
         public virtual Address Parent { get; set; }

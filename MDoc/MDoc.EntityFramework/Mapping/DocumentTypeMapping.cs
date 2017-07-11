@@ -11,6 +11,10 @@ namespace MDoc.EntityFramework.Mapping
             ToTable("DocumentType");
             HasKey(m => m.DocumentTypeId);
             Property(m => m.DocumentTypeId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            HasMany(m=>m.Documents)
+                .WithRequired(m=>m.DocumentType)
+                .HasForeignKey(m=>m.DocumentTypeId)
+                .WillCascadeOnDelete(false);
         }
     }
 }
