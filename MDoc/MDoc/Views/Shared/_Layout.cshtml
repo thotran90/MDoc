@@ -17,8 +17,10 @@
        @Html.Partial("_Header")
         @Html.Partial("_Sidebar")
         <div class="android-content mdl-layout__content">
-            @RenderBody()
-            @Html.Partial("_Footer")
+            @Html.MvcSiteMap().SiteMapPath()
+            <div class="body">
+                @RenderBody()
+            </div>
         </div>
     </div>
     @Scripts.Render("~/bundles/coreJs")

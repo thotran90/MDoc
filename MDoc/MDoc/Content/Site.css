@@ -248,8 +248,8 @@ a img {
 
 .android-drawer .mdl-layout-title {
     position: relative;
-    background: #6ab344;
-    height: 160px;
+    background: #fafafa;
+    height: 65px;
 }
 
 .android-drawer .android-logo-image {
@@ -627,3 +627,20 @@ a img {
         display: none;
     }
 }
+
+
+/*============= Custom Css ===================*/
+.mdl-layout .android-content {
+    padding: 10px;
+    background-color: #ECEEF0;
+}
+
+.mdl-layout .android-content  .body {
+    border: 1px solid #ECEEF0;
+    min-height: 300px;
+    border-radius: 5px;
+    background-color: #ffffff;
+    padding: 0 10px;
+}
+
+/*============= End Custom Css ===================*/
