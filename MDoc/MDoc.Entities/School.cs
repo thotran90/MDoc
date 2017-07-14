@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MDoc.Entities
 {
     public class School
     {
+        public School()
+        {
+            EducationTypes = new HashSet<EducationType>();
+            Programs = new HashSet<Program>();
+        }
+
         public int SchoolId { get; set; }
         public byte SchoolTypeId { get; set; }
         public string Name { get; set; }
@@ -28,6 +31,5 @@ namespace MDoc.Entities
         public virtual SchoolType SchoolType { get; set; }
         public virtual ICollection<EducationType> EducationTypes { get; set; }
         public virtual ICollection<Program> Programs { get; set; }
-
     }
 }

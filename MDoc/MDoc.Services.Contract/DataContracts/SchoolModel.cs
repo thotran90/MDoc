@@ -10,10 +10,13 @@
         public string Mobile { get; set; }
         public string Description { get; set; }
         public string Address { get; set; }
-        public int CountryId { get; set; }
-        public int ProvinceId { get; set; }
-        public int DistrictId { get; set; }
-        public int WardId { get; set; }
+        public int? CountryId { get; set; }
+        public int? ProvinceId { get; set; }
+        public int? DistrictId { get; set; }
+        public int? WardId { get; set; }
         public int LoggedUserId { get; set; }
+        public string Country { get; set; }
+        public string ProgramIds { get; set; }
+        public string EducationTypeIds { get; set; }
     }
 }

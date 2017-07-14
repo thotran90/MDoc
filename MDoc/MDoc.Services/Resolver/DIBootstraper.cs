@@ -35,6 +35,7 @@ namespace MDoc.Services.Resolver
             if (_container == null) _container = container;
             container.RegisterType<IUserService, UserService>();
             container.RegisterType<IAddressService, AddressService>();
+            container.RegisterType<ISchoolService, SchoolService>();
         }
 
         #endregion

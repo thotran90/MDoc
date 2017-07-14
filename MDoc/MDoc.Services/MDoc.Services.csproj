@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Implements\AddressService.cs" />
     <Compile Include="Implements\BaseService.cs" />
+    <Compile Include="Implements\SchoolService.cs" />
     <Compile Include="Implements\UserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resolver\DIBootstraper.cs" />
