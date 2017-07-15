@@ -18,7 +18,7 @@ namespace MDoc.Services.Implements
         }
 
         #endregion
-
+        
         #region [Variable]
 
         #endregion
