@@ -18,7 +18,7 @@ namespace MDoc
                 "~/Scripts/select2.min.js",
                 "~/Scripts/custom/select2.js",
                 "~/Scripts/tinymce/tinymce.min.js",
-                "~/Scritps/application/common.js"
+                "~/Scripts/application/common.js"
             };
 
             var coreCss = new[]
@@ -48,6 +48,12 @@ namespace MDoc
             bundles.Add(new StyleBundle("~/Content/logon").Include(
                 "~/Content/bootstrap.min.css",
                 "~/Content/logon.css"));
+
+            bundles.Add(new ScriptBundle("~/application/school").Include("~/Scripts/application/school.js"));
+
+#if !DEBUG
+            BundleTable.EnableOptimizations = true;
+#endif
         }
     }
 }

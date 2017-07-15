@@ -237,6 +237,7 @@
     </None>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\application\common.js" />
+    <Content Include="Scripts\application\school.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\custom\select2.js" />
@@ -485,6 +486,9 @@
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.ttf" />
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.woff" />
     <Content Include="Scripts\tinymce\themes\inlite\src\test\.eslintrc" />
+    <Content Include="Views\School\Save.cshtml" />
+    <Content Include="Views\School\_Search.cshtml" />
+    <Content Include="Views\School\_ListOfSchool.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.css" />

@@ -1,5 +1,4 @@
 ﻿var common = (function() {
-
     
     var loadModal = function () {
         // Fill modal with content from link href
@@ -88,17 +87,23 @@
         });
     }
 
+    var setHeightContent = function() {
+         var height = $(window).height();
+        $("#mainContent").css("height", height - 150);
+        $("#mainContent").css("overflow", "auto");
+    }
+
     var registerComponent = function() {
         loadModal();
-        $.validator.setDefaults({
-            ignore: []
-        });
+        //$.validator.setDefaults({
+        //    ignore: []
+        //});
         loadAllSelect2();
         loadAllHtmlEditor();
+        setHeightContent();
     }
 
     return {
-        loading: loading,
         closeModal: closeModal,
         initHtmlEditor: loadAllHtmlEditor,
         registerComponent: registerComponent

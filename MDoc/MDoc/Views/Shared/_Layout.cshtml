@@ -18,7 +18,7 @@
         @Html.Partial("_Sidebar")
         <div class="android-content mdl-layout__content">
             @Html.MvcSiteMap().SiteMapPath()
-            <div class="body">
+            <div class="body" id="mainContent">
                 @RenderBody()
             </div>
         </div>

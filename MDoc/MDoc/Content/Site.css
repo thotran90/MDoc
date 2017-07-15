@@ -630,9 +630,13 @@ a img {
 
 
 /*============= Custom Css ===================*/
+.row {
+    margin-left: 0;
+    margin-right: 0;
+}
 .mdl-layout .android-content {
-    padding: 10px;
     background-color: #ECEEF0;
+    padding: 10px;
 }
 
 .mdl-layout .android-content  .body {
@@ -640,7 +644,12 @@ a img {
     min-height: 300px;
     border-radius: 5px;
     background-color: #ffffff;
-    padding: 0 10px;
+    padding: 10px 0;
 }
-
+.row-margintop {
+    margin-top: 15px !important;
+}
+.k-grid-toolbar  {
+    background-color: #778899;
+}
 /*============= End Custom Css ===================*/

@@ -1,7 +1,18 @@
-﻿
+﻿@model MDoc.Services.Contract.DataContracts.SchoolModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "List of schools";
 }
+<div class="row row-margintop">
+    @Html.Partial("_ListOfSchool")
+</div>
 
-<h2>Index</h2>
-
+@Html.Hidden("SchoolIndexUrl",Url.Action("Index","School"))
+@section scripts
+{
+    @Scripts.Render("~/application/school")
+    <script type="text/javascript">
+        $(function() {
+            school.setHeightGrid();
+        });
+    </script>
+}

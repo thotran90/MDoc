@@ -1,0 +1,39 @@
+﻿@using MDoc.Services.Contract.DataContracts
+<div class="col-md-12">
+    @(Html.Kendo().Grid<SchoolModel>()
+          .Name("GridSchools")
+          .Columns(columns =>
+          {
+              //columns.Bound(c => c.SchoolId).ClientTemplate(
+              //        @"<div class='customer-photo'
+              //            style='background-image: url(../../content/web/Customers/#:data.CustomerID#.jpg);'></div>
+              //        <div class='customer-name'>#: ContactName #</div>")
+              //  .Width(240);
+              columns.Bound(c => c.Name);
+              columns.Bound(c => c.Country);
+              columns.Bound(c => c.Website);
+              columns.Bound(c => c.Mobile);
+              columns.Bound(c => c.Email);
+          })
+          .ToolBar(toolbar =>
+          {
+              toolbar.Template(@<text>
+                                   <div class="grid-toolbar">
+                                       <a class="btn btn-primary" href="@Url.Action("Create")"><i class="fa fa-plus-circle"></i> Add new school</a>
+                                   </div>
+                                </text>);
+          })
+          .Scrollable()
+          .Filterable()
+          .Sortable()
+          .Pageable(pageable => pageable
+              .Refresh(true)
+              .PageSizes(true)
+              .ButtonCount(5))
+          .DataSource(dataSource => dataSource
+              .Server()
+              .Read(read => read.Action("ListOfSchool", "School"))
+              .PageSize(20)
+          )
+          )
+</div>
