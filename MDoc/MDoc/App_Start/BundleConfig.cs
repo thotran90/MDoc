@@ -14,13 +14,19 @@ namespace MDoc
                 "~/Scripts/bootstrap.js",
                 "~/Scripts/respond.js",
                 "~/Scripts/kendo.modernizr.custom.js",
-                "~/Scripts/material.min.js"
+                "~/Scripts/material.min.js",
+                "~/Scripts/select2.min.js",
+                "~/Scripts/custom/select2.js",
+                "~/Scripts/tinymce/tinymce.min.js",
+                "~/Scritps/application/common.js"
             };
 
             var coreCss = new[]
             {
                 "~/Content/bootstrap.min.css",
                 "~/Content/font-awesome.min.css",
+                "~/Content/select2/select2.css",
+                "~/Content/select2-bootstrap.css",
                 "~/Content/Site.css"
             };
 
