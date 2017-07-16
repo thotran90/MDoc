@@ -1,7 +1,51 @@
-﻿
+﻿@using MDoc.Extensions
+@using MDoc.Extensions.Options
+@model MDoc.Services.Contract.DataContracts.SchoolModel
 @{
-    ViewBag.Title = "Add new school";
+    ViewBag.Title = Model.IsUpdate ? "Edit school" : "Add new school";
 }
+@using (Html.BeginForm("Save", "School", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(m => m.SchoolId)
+    <div class="row">
+        <div class="col-md-3 col-sm-12 col-xs-12">
+            @Html.LabelFor(m => m.SchoolTypeId)
+            @Html.ValidationMessageFor(m => m.SchoolTypeId)
+            @Html.Select2AjaxFor(m => m.SchoolTypeId, Url.Action("SchoolTypes", "DataSource"), new Select2Option()
+            {
+                AllowClear = true,
+                Ajax = true,
+                MinimumInputLength = 0,
+                Width = "100%"
+            }, new {@class = "form-control"})
+        </div>
+        <div class="col-md-9 col-sm-12 col-xs-12">
+            @Html.LabelFor(m => m.Name)
+            @Html.ValidationMessageFor(m => m.Name)
+            @Html.TextBoxFor(m => m.Name, new {@class = "form-control"})
+        </div>
+    </div>
+    <div class="row row-margintop">
+        
+    </div>
+    <div class="row row-margintop">
+        <div class="col-md-4 col-sm-12 col-xs-12">
+            @Html.LabelFor(m => m.Mobile)
+            @Html.ValidationMessageFor(m => m.Mobile)
+            @Html.TextBoxFor(m => m.Mobile, new {@class = "form-control"})
+        </div>
+        <div class="col-md-4 col-sm-12 col-xs-12">
+            @Html.LabelFor(m => m.Website)
+            @Html.ValidationMessageFor(m => m.Website)
+            @Html.TextBoxFor(m => m.Website, new {@class = "form-control"})
+        </div>
+        <div class="col-md-4 col-sm-12 col-xs-12">
+            @Html.LabelFor(m => m.Email)
+            @Html.ValidationMessageFor(m => m.Email)
+            @Html.TextBoxFor(m => m.Email, new {@class = "form-control"})
+        </div>
 
-<h2>Create</h2>
-
+    </div>
+}

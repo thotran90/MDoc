@@ -59,7 +59,7 @@ namespace MDoc.Services.Implements
                 CountryId = model.CountryId,
                 Email = model.Email,
                 Mobile = model.Mobile,
-                SchoolTypeId = model.SchoolTypeId,
+                SchoolTypeId = Convert.ToByte(model.SchoolTypeId),
                 DistrictId = model.DistrictId,
                 ProvinceId = model.ProvinceId,
                 IsDeleted = false,
@@ -98,7 +98,7 @@ namespace MDoc.Services.Implements
             entity.Email = model.Email;
             entity.Website = model.Website;
             entity.Mobile = model.Mobile;
-            entity.SchoolTypeId = model.SchoolTypeId;
+            entity.SchoolTypeId = Convert.ToByte(model.SchoolTypeId);
             entity.Address = model.Address;
             entity.CountryId = model.CountryId;
             entity.ProvinceId = model.ProvinceId;
@@ -156,7 +156,7 @@ namespace MDoc.Services.Implements
                 Description = entity.Description,
                 DistrictId = entity.DistrictId,
                 ProvinceId = entity.ProvinceId,
-                SchoolTypeId = entity.SchoolTypeId,
+                SchoolTypeId = entity.SchoolTypeId.ToString(),
                 WardId = entity.WardId,
                 ProgramIds = entity.Programs.Select(x => x.ProgramId).JoinStrings(","),
                 EducationTypeIds = entity.EducationTypes.Select(x => x.EducationTypeId).JoinStrings(",")

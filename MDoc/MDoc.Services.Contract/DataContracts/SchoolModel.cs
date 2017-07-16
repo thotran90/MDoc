@@ -3,7 +3,7 @@
     public class SchoolModel
     {
         public int SchoolId { get; set; }
-        public byte SchoolTypeId { get; set; }
+        public string SchoolTypeId { get; set; }
         public string Name { get; set; }
         public string Website { get; set; }
         public string Email { get; set; }
@@ -18,5 +18,6 @@
         public string Country { get; set; }
         public string ProgramIds { get; set; }
         public string EducationTypeIds { get; set; }
+        public bool IsUpdate => SchoolId > 0;
     }
 }
