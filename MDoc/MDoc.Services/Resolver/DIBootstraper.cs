@@ -38,6 +38,7 @@ namespace MDoc.Services.Resolver
             container.RegisterType<ISchoolService, SchoolService>();
             container.RegisterType<IProgramService, ProgramService>();
             container.RegisterType<IEducationTypeService, EducationTypeService>();
+            container.RegisterType<ISchoolTypeService, SchoolTypeService>();
         }
 
         #endregion

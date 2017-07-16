@@ -45,12 +45,14 @@
     <Compile Include="DataContracts\EducationTypeModel.cs" />
     <Compile Include="DataContracts\ProgramModel.cs" />
     <Compile Include="DataContracts\SchoolModel.cs" />
+    <Compile Include="DataContracts\SchoolTypeModel.cs" />
     <Compile Include="DataContracts\User\SearchUserModel.cs" />
     <Compile Include="Enums\AddressTypeModel.cs" />
     <Compile Include="Interfaces\IAddressService.cs" />
     <Compile Include="Interfaces\IEducationTypeService.cs" />
     <Compile Include="Interfaces\IProgramService.cs" />
     <Compile Include="Interfaces\ISchoolService.cs" />
+    <Compile Include="Interfaces\ISchoolTypeService.cs" />
     <Compile Include="IUserService.cs" />
     <Compile Include="DataContracts\User\LoginModel.cs" />
     <Compile Include="DataContracts\User\UserModel.cs" />
