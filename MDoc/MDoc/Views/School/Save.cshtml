@@ -108,8 +108,34 @@
             @Html.TextAreaFor(m => m.Description, 5, 1, new {@class = "form-control"})
         </div>
     </div>
-    <div class="form-group row-margintop">
-        <a class="btn btn-default" href="@Url.Action("Index","School")"><i class="fa fa-backward"></i> Back to list</a>
-        <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
+    <div class="row row-margintop">
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            @Html.LabelFor(m=>m.EducationTypeIds)
+            @Html.ValidationMessageFor(m=>m.EducationTypeIds)
+            @Html.Select2AjaxFor(m=>m.EducationTypeIds,Url.Action("EducationTypes","DataSource"),new Select2Option()
+       {
+           AllowClear = true,
+           MinimumInputLength = 0,
+           Multiple = true,
+           Width = "100%"
+       },new {@class="form-control"})
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            @Html.LabelFor(m => m.ProgramIds)
+            @Html.ValidationMessageFor(m => m.ProgramIds)
+            @Html.Select2AjaxFor(m => m.ProgramIds, Url.Action("Programs", "DataSource"), new Select2Option()
+       {
+           AllowClear = true,
+           MinimumInputLength = 0,
+           Multiple = true,
+           Width = "100%"
+       }, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="row row-margintop">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <a class="btn btn-default" href="@Url.Action("Index", "School")"><i class="fa fa-backward"></i> Back to list</a>
+            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
+        </div>
     </div>
 }
