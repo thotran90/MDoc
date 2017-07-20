@@ -27,7 +27,7 @@ namespace MDoc.Services.Implements
 
         public IQueryable<AddressModel> ListOfAddress(AddressTypeModel type, int? parentId = null, string query = "")
         {
-            var address = UnitOfWork.GetRepository<Address>().Get(m => !m.IsDisabled && m.TypeId == (AddressType) type);
+            var address = UnitOfWork.GetRepository<Address>().Get(m => !m.IsDisabled && m.TypeId == type.ToString());
             if (parentId.HasValue)
             {
                 address = address.Where(m => m.ParentId == parentId.Value);
@@ -44,8 +44,7 @@ namespace MDoc.Services.Implements
                 AddressId = x.AddressId,
                 PostalCode = x.PostalCode,
                 Label = x.Label,
-                ParentId = x.ParentId,
-                Type = (AddressTypeModel) x.TypeId
+                ParentId = x.ParentId
             });
             return result;
         }
@@ -60,8 +59,7 @@ namespace MDoc.Services.Implements
                 Label = address.Label,
                 AddressCode = address.AddressCode,
                 PostalCode = address.PostalCode,
-                ParentId = address.ParentId,
-                Type = (AddressTypeModel) address.TypeId
+                ParentId = address.ParentId
             };
             return result;
         }
@@ -78,8 +76,7 @@ namespace MDoc.Services.Implements
                     AddressId = x.AddressId,
                     PostalCode = x.PostalCode,
                     Label = x.Label,
-                    ParentId = x.ParentId,
-                    Type = (AddressTypeModel) x.TypeId
+                    ParentId = x.ParentId
                 });
         }
 
@@ -91,7 +88,7 @@ namespace MDoc.Services.Implements
                 IsDisabled = false,
                 Label = newEntity.Label,
                 ParentId = newEntity.ParentId,
-                TypeId = (AddressType) newEntity.Type,
+                TypeId = newEntity.Type.ToString(),
                 PostalCode = newEntity.PostalCode
             };
             var result = UnitOfWork.GetRepository<Address>().Create(address);
@@ -110,7 +107,7 @@ namespace MDoc.Services.Implements
             entity.ParentId = model.ParentId;
             entity.PostalCode = model.PostalCode;
             entity.AddressCode = model.AddressCode;
-            entity.TypeId = (AddressType) model.Type;
+            entity.TypeId = model.Type.ToString();
 
             UnitOfWork.SaveChanges();
             return model;

@@ -1,8 +1,10 @@
 ﻿using System.Web.Mvc;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
+using MDoc.Models;
 using MDoc.Services.Contract.DataContracts;
 using MDoc.Services.Contract.Interfaces;
+using Microsoft.Ajax.Utilities;
 
 namespace MDoc.Controllers
 {
@@ -20,7 +22,6 @@ namespace MDoc.Controllers
         {
             return View();
         }
-        [HttpGet]
         public ActionResult ListOfSchool([DataSourceRequest] DataSourceRequest request)
         {
             var schools = _schoolService.GetSchools("");
@@ -47,6 +48,14 @@ namespace MDoc.Controllers
         {
             if (ModelState.IsValid)
             {
+                model.LoggedUserId = CurrentUser.UserId;
+                if (model.SchoolId > 0)
+                    _schoolService.Update(model);
+                else
+                {
+                    _schoolService.Create(model);
+                }
+                return RedirectToAction("Index");
             }
             ModelState.AddModelError("ModelInvalid","Fill all of required field before save change.");
             return View("Save", model);

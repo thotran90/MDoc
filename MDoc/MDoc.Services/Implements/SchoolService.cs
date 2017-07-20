@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using MDoc.Entities;
-using MDoc.Entities.Enums;
 using MDoc.Repositories.Contract;
 using MDoc.Services.Contract.DataContracts;
 using MDoc.Services.Contract.Interfaces;
@@ -18,7 +17,7 @@ namespace MDoc.Services.Implements
         }
 
         #endregion
-        
+
         #region [Variable]
 
         #endregion
@@ -34,7 +33,7 @@ namespace MDoc.Services.Implements
                 schools = schools.Where(m => m.Name.ToLower().Contains(query));
             }
             var result = schools
-                .Join(UnitOfWork.GetRepository<Address>().Get(a => a.TypeId == AddressType.C),
+                .Join(UnitOfWork.GetRepository<Address>().Get(a => a.TypeId == "C"),
                     school => school.CountryId,
                     country => country.AddressId, (school, country) => new {country, school})
                 .Select(x => new SchoolModel
@@ -52,6 +51,21 @@ namespace MDoc.Services.Implements
 
         public SchoolModel Create(SchoolModel model)
         {
+            byte schooTypeId = 0;
+            var isExistType = byte.TryParse(model.SchoolTypeId, out schooTypeId);
+            if (!isExistType)
+            {
+                var schoolType = new SchoolType()
+                {
+                    Label = model.SchoolTypeId,
+                    IsDisabled = false
+                };
+                UnitOfWork.GetRepository<SchoolType>().Create(schoolType);
+                UnitOfWork.SaveChanges();
+                schooTypeId = schoolType.SchoolTypeId;
+            }
+
+
             var entity = new School
             {
                 Address = model.Address,
@@ -59,7 +73,7 @@ namespace MDoc.Services.Implements
                 CountryId = model.CountryId,
                 Email = model.Email,
                 Mobile = model.Mobile,
-                SchoolTypeId = Convert.ToByte(model.SchoolTypeId),
+                SchoolTypeId = schooTypeId,
                 DistrictId = model.DistrictId,
                 ProvinceId = model.ProvinceId,
                 IsDeleted = false,
@@ -93,7 +107,7 @@ namespace MDoc.Services.Implements
         public SchoolModel Update(SchoolModel model)
         {
             var entity = UnitOfWork.GetRepository<School>().GetByKeys(model.SchoolId);
-            if(entity == null) return new SchoolModel() {SchoolId = 0};
+            if (entity == null) return new SchoolModel {SchoolId = 0};
             entity.Name = model.Name;
             entity.Email = model.Email;
             entity.Website = model.Website;
@@ -131,20 +145,19 @@ namespace MDoc.Services.Implements
         public bool Remove(SchoolModel model)
         {
             var entity = UnitOfWork.GetRepository<School>().GetByKeys(model.SchoolId);
-            if(entity == null) return false;
+            if (entity == null) return false;
             entity.IsDeleted = true;
             entity.UpdatedById = model.LoggedUserId;
             entity.UpdatedDate = DateTime.Now;
             UnitOfWork.SaveChanges();
             return true;
-            
         }
 
         public SchoolModel Detail(int schoolId)
         {
             var entity = UnitOfWork.GetRepository<School>().GetByKeys(schoolId);
-            if(entity == null) return  new SchoolModel() {SchoolId =  0};
-            var result = new SchoolModel()
+            if (entity == null) return new SchoolModel {SchoolId = 0};
+            var result = new SchoolModel
             {
                 SchoolId = entity.SchoolId,
                 Name = entity.Name,

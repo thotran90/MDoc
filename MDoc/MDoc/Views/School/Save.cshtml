@@ -1,4 +1,5 @@
-﻿@using MDoc.Extensions
+﻿@using System.Web.Mvc.Html
+@using MDoc.Extensions
 @using MDoc.Extensions.Options
 @model MDoc.Services.Contract.DataContracts.SchoolModel
 @{
@@ -28,7 +29,60 @@
         </div>
     </div>
     <div class="row row-margintop">
-        
+        <div class="col-md-3 col-sm-12 col-xs-12">
+            @Html.LabelFor(m => m.CountryId)
+            @Html.ValidationMessageFor(m => m.CountryId)
+            @Html.Select2AjaxFor(m => m.CountryId, Url.Action("Countries", "DataSource"), new Select2Option()
+            {
+                AllowClear = true,
+                MinimumInputLength = 1,
+                Width = "100%",
+                Placeholder = "Select country"
+            }, new {@class = "form-control"})
+        </div>
+        <div class="col-md-3 col-sm-12 col-xs-12">
+            @Html.LabelFor(m => m.ProvinceId)
+            @Html.ValidationMessageFor(m => m.ProvinceId)
+            @Html.Select2AjaxFor(m => m.ProvinceId, Url.Action("Provinces", "DataSource"), new Select2Option()
+            {
+                AllowClear = true,
+                MinimumInputLength = 1,
+                Width = "100%",
+                DependsOn = "CountryId",
+                Placeholder = "Select province"
+            }, new {@class = "form-control"})
+        </div>
+        <div class="col-md-3 col-sm-12 col-xs-12">
+            @Html.LabelFor(m => m.DistrictId)
+            @Html.ValidationMessageFor(m => m.DistrictId)
+            @Html.Select2AjaxFor(m => m.DistrictId, Url.Action("Districts", "DataSource"), new Select2Option()
+            {
+                AllowClear = true,
+                MinimumInputLength = 1,
+                Width = "100%",
+                DependsOn = "ProvinceId",
+                Placeholder = "Select district"
+            }, new {@class = "form-control"})
+        </div>
+        <div class="col-md-3 col-sm-12 col-xs-12">
+            @Html.LabelFor(m => m.WardId)
+            @Html.ValidationMessageFor(m => m.WardId)
+            @Html.Select2AjaxFor(m => m.WardId, Url.Action("Wards", "DataSource"), new Select2Option()
+            {
+                Width = "100%",
+                MinimumInputLength = 1,
+                AllowClear = true,
+                DependsOn = "DistrictId",
+                Placeholder = "Select ward"
+            }, new {@class = "form-control"})
+        </div>
+    </div>
+    <div class="row row-margintop">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            @Html.LabelFor(m=>m.Address)
+            @Html.ValidationMessageFor(m=>m.Address)
+            @Html.TextBoxFor(m=>m.Address,new {@class="form-control"})
+        </div>
     </div>
     <div class="row row-margintop">
         <div class="col-md-4 col-sm-12 col-xs-12">
@@ -46,6 +100,16 @@
             @Html.ValidationMessageFor(m => m.Email)
             @Html.TextBoxFor(m => m.Email, new {@class = "form-control"})
         </div>
-
+    </div>
+    <div class="row row-margintop">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            @Html.LabelFor(m => m.Description)
+            @Html.ValidationMessageFor(m => m.Description)
+            @Html.TextAreaFor(m => m.Description, 5, 1, new {@class = "form-control"})
+        </div>
+    </div>
+    <div class="form-group row-margintop">
+        <a class="btn btn-default" href="@Url.Action("Index","School")"><i class="fa fa-backward"></i> Back to list</a>
+        <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
     </div>
 }
