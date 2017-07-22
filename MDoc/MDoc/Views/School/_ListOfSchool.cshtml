@@ -4,24 +4,28 @@
           .Name("GridSchools")
           .Columns(columns =>
           {
-              //columns.Bound(c => c.SchoolId).ClientTemplate(
-              //        @"<div class='customer-photo'
-              //            style='background-image: url(../../content/web/Customers/#:data.CustomerID#.jpg);'></div>
-              //        <div class='customer-name'>#: ContactName #</div>")
-              //  .Width(240);
+              columns.Bound(c => c.SchoolId).ClientTemplate(@Html.Partial("_Command").ToHtmlString())
+                  .Width(150)
+                  .HeaderTemplate("Actions")
+                  .Sortable(false)
+                  .Filterable(false);
               columns.Bound(c => c.Name);
               columns.Bound(c => c.Country);
               columns.Bound(c => c.Website);
               columns.Bound(c => c.Mobile);
               columns.Bound(c => c.Email);
+              columns.Command(command =>
+                    {
+                        command.Destroy().Text("delete");
+                    }).Width(150);
           })
           .ToolBar(toolbar =>
           {
               toolbar.Template(@<text>
-                                   <div class="grid-toolbar">
-                                       <a class="btn btn-primary" href="@Url.Action("Create")"><i class="fa fa-plus-circle"></i> Add new school</a>
-                                   </div>
-                                </text>);
+    <div class="grid-toolbar">
+        <a class="btn btn-primary" href="@Url.Action("Create")"><i class="fa fa-plus-circle"></i> Add new school</a>
+    </div>
+    </text>    );
           })
           .Scrollable()
           .Filterable()
@@ -33,30 +37,9 @@
           .DataSource(dataSource => dataSource
               .Ajax()
               .Read(read => read.Action("ListOfSchool", "School"))
+              .Model(model => model.Id(p => p.SchoolId))
               .PageSize(20)
+              .Destroy(c=>c.Action("Remove","School"))
           )
-          )
+    )
 </div>
-
-
-@*@(Html.Kendo().Grid<MDoc.Models.OrderViewModel>()
-        .Name("grid")
-        .Columns(columns =>
-        {
-            columns.Bound(p => p.OrderID).Filterable(false);
-            columns.Bound(p => p.Freight);
-            columns.Bound(p => p.OrderDate).Format("{0:MM/dd/yyyy}");
-            columns.Bound(p => p.ShipName);
-            columns.Bound(p => p.ShipCity);
-        })
-        .Pageable()
-        .Sortable()
-        .Scrollable()
-        .Filterable()
-        .HtmlAttributes(new { style = "height:550px;" })
-        .DataSource(dataSource => dataSource
-        .Ajax()
-        .PageSize(20)
-        .Read(read => read.Action("Orders_Read", "Grid"))
-        )
-)*@

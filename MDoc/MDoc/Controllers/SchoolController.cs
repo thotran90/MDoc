@@ -5,6 +5,7 @@ using MDoc.Models;
 using MDoc.Services.Contract.DataContracts;
 using MDoc.Services.Contract.Interfaces;
 using Microsoft.Ajax.Utilities;
+using MvcSiteMapProvider;
 
 namespace MDoc.Controllers
 {
@@ -31,15 +32,19 @@ namespace MDoc.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
+        [MvcSiteMapNode(Title = "Create new school", ParentKey = "school")]
         public ActionResult Create()
         {
             return View("Save", new SchoolModel());
         }
 
         [HttpGet]
+        [MvcSiteMapNode(Title = "Update school information", PreservedRouteParameters = "id", ParentKey = "school")]
         public ActionResult Edit(int id)
         {
-            return View("Save", new SchoolModel());
+            var model = _schoolService.Detail(id);
+            if(model == null) return HttpNotFound();
+            return View("Save", model);
         }
 
         [HttpPost]
@@ -59,6 +64,18 @@ namespace MDoc.Controllers
             }
             ModelState.AddModelError("ModelInvalid","Fill all of required field before save change.");
             return View("Save", model);
+        }
+
+        [HttpPost]
+        public ActionResult Remove([DataSourceRequest] DataSourceRequest request, SchoolModel model)
+        {
+            if (model != null)
+            {
+                model.LoggedUserId = CurrentUser.UserId;
+                _schoolService.Remove(model);
+            }
+
+            return Json(new[] { model }.ToDataSourceResult(request, ModelState));
         }
     }
 }

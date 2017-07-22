@@ -15,7 +15,7 @@
     <AssemblyName>MDoc</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -238,6 +238,7 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\application\common.js" />
     <Content Include="Scripts\application\school.js" />
+    <Content Include="Scripts\bootstrap-confirmation.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\custom\select2.js" />
@@ -489,6 +490,7 @@
     <Content Include="Views\School\Save.cshtml" />
     <Content Include="Views\School\_Search.cshtml" />
     <Content Include="Views\School\_ListOfSchool.cshtml" />
+    <Content Include="Views\School\_Command.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.css" />

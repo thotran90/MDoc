@@ -27,11 +27,11 @@ namespace MDoc.Controllers
 
         #region [Implements]
 
-        public JsonResult EducationTypes(string ids = "", string query = "")
+        public JsonResult EducationTypes(string id = "", string query = "")
         {
-            if (!string.IsNullOrEmpty(ids))
+            if (!string.IsNullOrEmpty(id))
             {
-                var selectedType = _educationTypeService.GetEducationTypeViaIds(ids)
+                var selectedType = _educationTypeService.GetEducationTypeViaIds(id)
                     .Select(type => new { id = type.Id, text = type.Name }).ToList();
                 return Json(selectedType, JsonRequestBehavior.AllowGet);
             }
@@ -45,11 +45,11 @@ namespace MDoc.Controllers
                 : Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult Programs(string ids = "", string query = "")
+        public JsonResult Programs(string id = "", string query = "")
         {
-            if (!string.IsNullOrEmpty(ids))
+            if (!string.IsNullOrEmpty(id))
             {
-                var programs = _programService.GetProgramByIds(ids)
+                var programs = _programService.GetProgramByIds(id)
                     .Select(x => new {id = x.Id, text = x.Name})
                     .ToList();
                 return Json(programs, JsonRequestBehavior.AllowGet);

@@ -652,4 +652,9 @@ a img {
 .k-grid-toolbar  {
     background-color: #778899;
 }
+.field-validation-error {
+    color: red;
+    font-weight: bold;
+    font-style: italic;
+}
 /*============= End Custom Css ===================*/

@@ -12,6 +12,7 @@ namespace MDoc
             var corejs = new[]
             {
                 "~/Scripts/bootstrap.js",
+                "~/Scripts/bootstrap-confirmation.min.js",
                 "~/Scripts/respond.js",
                 "~/Scripts/kendo.modernizr.custom.js",
                 "~/Scripts/material.min.js",
