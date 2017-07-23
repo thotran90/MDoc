@@ -1,5 +1,4 @@
 ﻿using MDoc.Infrastructures;
-using MDoc.Services.Contract;
 using MDoc.Services.Contract.Interfaces;
 using MDoc.Services.Implements;
 using Microsoft.Practices.Unity;
@@ -39,6 +38,8 @@ namespace MDoc.Services.Resolver
             container.RegisterType<IProgramService, ProgramService>();
             container.RegisterType<IEducationTypeService, EducationTypeService>();
             container.RegisterType<ISchoolTypeService, SchoolTypeService>();
+            container.RegisterType<ICustomerService, CustomerService>();
+            container.RegisterType<IGenderService, GenderService>();
         }
 
         #endregion

@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using MDoc.Services.Contract.DataContracts.User;
 
-namespace MDoc.Services.Contract
+namespace MDoc.Services.Contract.Interfaces
 {
     public interface IUserService
     {

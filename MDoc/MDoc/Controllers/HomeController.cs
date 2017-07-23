@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using MDoc.Services.Contract;
+using MDoc.Services.Contract.Interfaces;
 
 namespace MDoc.Controllers
 {

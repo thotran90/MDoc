@@ -7,36 +7,42 @@ namespace MDoc.Controllers
 {
     public class DataSourceController : BaseController
     {
-        #region [Variable]
-        private readonly IEducationTypeService _educationTypeService;
-        private readonly IProgramService _programService;
-        private readonly ISchoolTypeService _schoolTypeService;
-        private readonly IAddressService _addressService;
-        #endregion
-
         #region [Constructor]
-        public DataSourceController(IEducationTypeService educationTypeService, IProgramService programService, ISchoolTypeService schoolTypeService, IAddressService addressService)
+
+        public DataSourceController(IEducationTypeService educationTypeService, IProgramService programService,
+            ISchoolTypeService schoolTypeService, IAddressService addressService, IGenderService genderService)
         {
             _educationTypeService = educationTypeService;
             _programService = programService;
             _schoolTypeService = schoolTypeService;
             _addressService = addressService;
+            _genderService = genderService;
         }
 
         #endregion
 
-        #region [Implements]
+        #region [Variable]
+
+        private readonly IEducationTypeService _educationTypeService;
+        private readonly IProgramService _programService;
+        private readonly ISchoolTypeService _schoolTypeService;
+        private readonly IAddressService _addressService;
+        private readonly IGenderService _genderService;
+
+        #endregion
+
+        #region [Actions]
 
         public JsonResult EducationTypes(string id = "", string query = "")
         {
             if (!string.IsNullOrEmpty(id))
             {
                 var selectedType = _educationTypeService.GetEducationTypeViaIds(id)
-                    .Select(type => new { id = type.Id, text = type.Name }).ToList();
+                    .Select(type => new {id = type.Id, text = type.Name}).ToList();
                 return Json(selectedType, JsonRequestBehavior.AllowGet);
             }
             var result = _educationTypeService.GetEducationTypes(query)
-                .Select(type => new { id = type.Id, text = type.Name })
+                .Select(type => new {id = type.Id, text = type.Name})
                 .OrderByDescending(m => m.text.Equals(query))
                 .Take(PageSize)
                 .ToList();
@@ -69,17 +75,17 @@ namespace MDoc.Controllers
             if (!string.IsNullOrEmpty(id))
             {
                 var types = _schoolTypeService.GetSchoolTypeByIds(id)
-                    .Select(x=> new {id=x.Id,text=x.Name})
+                    .Select(x => new {id = x.Id, text = x.Name})
                     .FirstOrDefault();
-                return Json(types,JsonRequestBehavior.AllowGet);
+                return Json(types, JsonRequestBehavior.AllowGet);
             }
             var result = _schoolTypeService.GetSchoolTypes(query)
                 .Select(x => new {id = x.Id.ToString(), text = x.Name})
                 .OrderByDescending(m => m.text.Equals(query))
                 .Take(PageSize)
                 .ToList();
-            if(!result.Any())
-                result.Add(new { id = query, text = "[New] " + query });
+            if (!result.Any())
+                result.Add(new {id = query, text = "[New] " + query});
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
@@ -89,14 +95,14 @@ namespace MDoc.Controllers
             {
                 var country = _addressService.GetAddress(id.Value);
                 if (country.AddressId == 0) return JsonNullResult;
-                return Json(new {id=country.AddressId,text=country.Label},JsonRequestBehavior.AllowGet);
+                return Json(new {id = country.AddressId, text = country.Label}, JsonRequestBehavior.AllowGet);
             }
             var result = _addressService.ListOfAddress(AddressTypeModel.C, null, query)
-                .Select(x=>new {id=x.AddressId,text=x.Label})
-                .OrderByDescending(m=>m.text.Equals(query))
+                .Select(x => new {id = x.AddressId, text = x.Label})
+                .OrderByDescending(m => m.text.Equals(query))
                 .Take(PageSize)
                 .ToList();
-            return Json(result,JsonRequestBehavior.AllowGet);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult Provinces(int? id, int countryId, string query = "")
@@ -105,10 +111,10 @@ namespace MDoc.Controllers
             {
                 var province = _addressService.GetAddress(id.Value);
                 if (province.AddressId == 0) return JsonNullResult;
-                return Json(new { id = province.AddressId, text = province.Label }, JsonRequestBehavior.AllowGet);
+                return Json(new {id = province.AddressId, text = province.Label}, JsonRequestBehavior.AllowGet);
             }
             var result = _addressService.ListOfAddress(AddressTypeModel.P, countryId, query)
-                .Select(x => new { id = x.AddressId, text = x.Label })
+                .Select(x => new {id = x.AddressId, text = x.Label})
                 .OrderByDescending(m => m.text.Equals(query))
                 .Take(PageSize)
                 .ToList();
@@ -121,10 +127,10 @@ namespace MDoc.Controllers
             {
                 var district = _addressService.GetAddress(id.Value);
                 if (district.AddressId == 0) return JsonNullResult;
-                return Json(new { id = district.AddressId, text = district.Label }, JsonRequestBehavior.AllowGet);
+                return Json(new {id = district.AddressId, text = district.Label}, JsonRequestBehavior.AllowGet);
             }
             var result = _addressService.ListOfAddress(AddressTypeModel.D, provinceId, query)
-                .Select(x => new { id = x.AddressId, text = x.Label })
+                .Select(x => new {id = x.AddressId, text = x.Label})
                 .OrderByDescending(m => m.text.Equals(query))
                 .Take(PageSize)
                 .ToList();
@@ -137,17 +143,33 @@ namespace MDoc.Controllers
             {
                 var ward = _addressService.GetAddress(id.Value);
                 if (ward.AddressId == 0) return JsonNullResult;
-                return Json(new { id = ward.AddressId, text = ward.Label }, JsonRequestBehavior.AllowGet);
+                return Json(new {id = ward.AddressId, text = ward.Label}, JsonRequestBehavior.AllowGet);
             }
             var result = _addressService.ListOfAddress(AddressTypeModel.W, districtId, query)
-                .Select(x => new { id = x.AddressId, text = x.Label })
+                .Select(x => new {id = x.AddressId, text = x.Label})
                 .OrderByDescending(m => m.text.Equals(query))
                 .Take(PageSize)
                 .ToList();
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        #endregion
+        public JsonResult Genders(byte? id, string query = "")
+        {
+            if (id.HasValue)
+            {
+                var gender = _genderService.Single(id.Value);
+                return gender.GenderId > 0
+                    ? Json(new {id = gender.GenderId, text = gender.Name}, JsonRequestBehavior.AllowGet)
+                    : JsonNullResult;
+            }
+            var result = _genderService.ListOfGenders(query)
+                .Select(m => new {id = m.GenderId, text = m.Name})
+                .OrderByDescending(m => m.text.Contains(query))
+                .Take(PageSize)
+                .ToList();
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
 
+        #endregion
     }
 }

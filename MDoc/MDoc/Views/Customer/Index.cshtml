@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "List of customer";
+}
+<div class="row row-margintop">
+    @Html.Partial("_ListOfCustomer")
+</div>
+@section scripts
+{
+    @Scripts.Render("~/application/customer")
+    <script type="text/javascript">
+        $(function() {
+            customer.setHeightGrid();
+        });
+    </script>
+}

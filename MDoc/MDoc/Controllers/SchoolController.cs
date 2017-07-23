@@ -1,36 +1,43 @@
 ﻿using System.Web.Mvc;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
-using MDoc.Models;
 using MDoc.Services.Contract.DataContracts;
 using MDoc.Services.Contract.Interfaces;
-using Microsoft.Ajax.Utilities;
 using MvcSiteMapProvider;
 
 namespace MDoc.Controllers
 {
     public class SchoolController : BaseController
     {
+        #region [Variable]
+
         private readonly ISchoolService _schoolService;
+
+        #endregion
+
+        #region [Contructor]
 
         public SchoolController(ISchoolService schoolService)
         {
             _schoolService = schoolService;
         }
 
-        // GET: School
+        #endregion
+
+        #region [Actions]
+
         public ActionResult Index()
         {
             return View();
         }
-        public ActionResult ListOfSchool([DataSourceRequest] DataSourceRequest request)
+
+        public JsonResult ListOfSchool([DataSourceRequest] DataSourceRequest request)
         {
             var schools = _schoolService.GetSchools("");
-
             var result = schools.ToDataSourceResult(request);
-
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+
         [HttpGet]
         [MvcSiteMapNode(Title = "Create new school", ParentKey = "school")]
         public ActionResult Create()
@@ -43,7 +50,7 @@ namespace MDoc.Controllers
         public ActionResult Edit(int id)
         {
             var model = _schoolService.Detail(id);
-            if(model == null) return HttpNotFound();
+            if (model.SchoolId == 0) return HttpNotFound();
             return View("Save", model);
         }
 
@@ -62,7 +69,7 @@ namespace MDoc.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            ModelState.AddModelError("ModelInvalid","Fill all of required field before save change.");
+            ModelState.AddModelError("ModelInvalid", "Fill all of required field before save change.");
             return View("Save", model);
         }
 
@@ -75,7 +82,9 @@ namespace MDoc.Controllers
                 _schoolService.Remove(model);
             }
 
-            return Json(new[] { model }.ToDataSourceResult(request, ModelState));
+            return Json(new[] {model}.ToDataSourceResult(request, ModelState));
         }
+
+        #endregion
     }
 }

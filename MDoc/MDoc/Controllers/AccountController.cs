@@ -2,6 +2,7 @@
 using System.Web.Security;
 using MDoc.Services.Contract;
 using MDoc.Services.Contract.DataContracts.User;
+using MDoc.Services.Contract.Interfaces;
 
 namespace MDoc.Controllers
 {

@@ -2,8 +2,8 @@
 using System.Linq;
 using MDoc.Entities;
 using MDoc.Repositories.Contract;
-using MDoc.Services.Contract;
 using MDoc.Services.Contract.DataContracts.User;
+using MDoc.Services.Contract.Interfaces;
 
 namespace MDoc.Services.Implements
 {
@@ -28,11 +28,12 @@ namespace MDoc.Services.Implements
             var userEntity =
                 UnitOfWork.GetRepository<ApplicationUser>()
                     .Single(m => !m.IsDisabled && m.LoginId == model.LoginId && m.Password == model.SecurePassword);
-            if(userEntity == null) return new UserModel()
-            {
-                UserId = 0
-            };
-            var result = new UserModel()
+            if (userEntity == null)
+                return new UserModel
+                {
+                    UserId = 0
+                };
+            var result = new UserModel
             {
                 UserId = userEntity.ApplicationUserId,
                 UserName = userEntity.UserName,
