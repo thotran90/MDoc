@@ -21,7 +21,7 @@ namespace MDoc.Services.Implements
         public IQueryable<GenderModel> ListOfGenders(string query = "")
             =>
                 UnitOfWork.GetRepository<Gender>()
-                    .Get(m => m.Label.ToLower().Contains(query.ToLower()))
+                    .Get(m=>m.Label.ToLower().Contains(query.ToLower()))
                     .Select(x => new GenderModel
                     {
                         GenderId = x.GenderId,

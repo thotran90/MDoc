@@ -1,0 +1,231 @@
+﻿@using MDoc.Extensions
+@using MDoc.Extensions.Options
+@model MDoc.Services.Contract.DataContracts.DocumentModel
+@{
+    ViewBag.Title = Model.CustomerId > 0 ? "Update document" : "Add new document";
+}
+@using (Html.BeginForm("Save", "Document", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(m => m.CustomerId)
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Customer</h3>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-12 col-xs-12">
+                            @Html.LabelFor(m => m.CustomerId)
+                            @Html.ValidationMessageFor(m => m.CustomerId)
+                            @Html.Select2AjaxFor(m => m.CustomerId, Url.Action("Customers", "DataSource"), new Select2Option()
+                       {
+                           MinimumInputLength = 3,
+                           Width = "100%",
+                           AllowClear = true,
+                           Placeholder = "Select exist customer..."
+                       }, new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-3 col-sm-12 col-xs-12">
+                            @Html.LabelFor(m => m.Customer.GenderId)
+                            @Html.ValidationMessageFor(m => m.Customer.GenderId)
+                            @Html.Select2AjaxFor(m => m.Customer.GenderId, Url.Action("Genders", "DataSource"), new Select2Option()
+                       {
+                           Width = "100%",
+                           MinimumInputLength = 0,
+                           AllowClear = false
+                       }, new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-3 col-sm-12 col-xs-12">
+                            @Html.LabelFor(m => m.Customer.LastName)
+                            @Html.ValidationMessageFor(m => m.Customer.LastName)
+                            @Html.TextBoxFor(m => m.Customer.LastName, new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-3 col-sm-12 col-xs-12">
+                            @Html.LabelFor(m => m.Customer.FirstName)
+                            @Html.ValidationMessageFor(m => m.Customer.FirstName)
+                            @Html.TextBoxFor(m => m.Customer.FirstName, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 col-sm-12 col-xs-12">
+                            @Html.LabelFor(m => m.Customer.DOB)
+                            @Html.ValidationMessageFor(m => m.Customer.DOB)
+                            @Html.Kendo().DatePickerFor(m => m.Customer.DOB).Format("MMM-dd-yyyy").HtmlAttributes(new { style = "width: 100%" })
+                        </div>
+                        <div class="col-md-3 col-sm-12 col-xs-12">
+                            @Html.LabelFor(m => m.Customer.Mobile)
+                            @Html.ValidationMessageFor(m => m.Customer.Mobile)
+                            @Html.TextBoxFor(m => m.Customer.Mobile, new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-3 col-xs-12 col-sm-12">
+                            @Html.LabelFor(m => m.Customer.Email)
+                            @Html.ValidationMessageFor(m => m.Customer.Email)
+                            @Html.TextBoxFor(m => m.Customer.Email, new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-3 col-sm-12 col-xs-12">
+                            @Html.LabelFor(m => m.Customer.NationalityId)
+                            @Html.ValidationMessageFor(m => m.Customer.NationalityId)
+                            @Html.Select2AjaxFor(m => m.Customer.NationalityId, Url.Action("Countries", "DataSource"), new Select2Option()
+                       {
+                           AllowClear = false,
+                           MinimumInputLength = 0,
+                           Width = "100%"
+                       }, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 col-sm-12 col-xs-12">
+                            @Html.LabelFor(m => m.Customer.CountryId)
+                            @Html.ValidationMessageFor(m => m.Customer.CountryId)
+                            @Html.Select2AjaxFor(m => m.Customer.CountryId, Url.Action("Countries", "DataSource"), new Select2Option()
+                       {
+                           AllowClear = true,
+                           MinimumInputLength = 0,
+                           Width = "100%",
+                           Placeholder = "Select country"
+                       }, new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-3 col-sm-12 col-xs-12">
+                            @Html.LabelFor(m => m.Customer.ProvinceId)
+                            @Html.ValidationMessageFor(m => m.Customer.ProvinceId)
+                            @Html.Select2AjaxFor(m => m.Customer.ProvinceId, Url.Action("SubProvinces", "DataSource"), new Select2Option()
+                       {
+                           AllowClear = true,
+                           MinimumInputLength = 0,
+                           Width = "100%",
+                           DependsOn = "Customer_CountryId",
+                           Placeholder = "Select province"
+                       }, new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-3 col-sm-12 col-xs-12">
+                            @Html.LabelFor(m => m.Customer.DistrictId)
+                            @Html.ValidationMessageFor(m => m.Customer.DistrictId)
+                            @Html.Select2AjaxFor(m => m.Customer.DistrictId, Url.Action("SubDistricts", "DataSource"), new Select2Option()
+                       {
+                           AllowClear = true,
+                           MinimumInputLength = 0,
+                           Width = "100%",
+                           DependsOn = "Customer_ProvinceId",
+                           Placeholder = "Select district"
+                       }, new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-3 col-sm-12 col-xs-12">
+                            @Html.LabelFor(m => m.Customer.WardId)
+                            @Html.ValidationMessageFor(m => m.Customer.WardId)
+                            @Html.Select2AjaxFor(m => m.Customer.WardId, Url.Action("SubWards", "DataSource"), new Select2Option()
+                       {
+                           Width = "100%",
+                           MinimumInputLength = 0,
+                           AllowClear = true,
+                           DependsOn = "Customer_DistrictId",
+                           Placeholder = "Select ward"
+                       }, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            @Html.LabelFor(m => m.Customer.Address)
+                            @Html.ValidationMessageFor(m => m.Customer.Address)
+                            @Html.TextBoxFor(m => m.Customer.Address, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 col-sm-12 col-xs-12">
+                            @Html.LabelFor(m => m.Customer.IdentityCardNo)
+                            @Html.ValidationMessageFor(m => m.Customer.IdentityCardNo)
+                            @Html.TextBoxFor(m => m.Customer.IdentityCardNo, new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-3 col-sm-12 col-xs-12">
+                            @Html.LabelFor(m => m.Customer.IdentityCardPlaceId)
+                            @Html.ValidationMessageFor(m => m.Customer.IdentityCardPlaceId)
+                            @Html.Select2AjaxFor(m => m.Customer.IdentityCardPlaceId, Url.Action("SubIdentityCardPlaces", "DataSource"), new Select2Option()
+                       {
+                           DependsOn = "Customer_NationalityId",
+                           AllowClear = true,
+                           MinimumInputLength = 0,
+                           Width = "100%"
+                       }, new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-3 col-sm-12 col-xs-12">
+                            @Html.LabelFor(m => m.Customer.IdentityCardDateValid)
+                            @Html.ValidationMessageFor(m => m.Customer.IdentityCardDateValid)
+                            @Html.Kendo().DatePickerFor(m => m.Customer.IdentityCardDateValid).Format("MMM-dd-yyyy").HtmlAttributes(new { style = "width: 100%" })
+                        </div>
+                        <div class="col-md-3 col-sm-12 col-xs-12">
+                            @Html.LabelFor(m => m.Customer.IdentityCardDateExpired)
+                            @Html.ValidationMessageFor(m => m.Customer.IdentityCardDateExpired)
+                            @Html.Kendo().DatePickerFor(m => m.Customer.IdentityCardDateExpired).Format("MMM-dd-yyyy").HtmlAttributes(new { style = "width:100%" })
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Document</h3>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-12 col-xs-12">
+                            @Html.LabelFor(m => m.DocumentTypeId)
+                            @Html.ValidationMessageFor(m => m.DocumentTypeId)
+                            @Html.Select2AjaxFor(m => m.DocumentTypeId, Url.Action("DocumentTypes", "DataSource"), new Select2Option()
+                            {
+                                MinimumInputLength = 0,
+                                Width = "100%",
+                                AllowClear = false
+                            }, new {@class = "form-control"})
+                        </div>
+                        <div class="col-md-3 col-sm-12 col-xs-12">
+                            @Html.LabelFor(m => m.ReferenceCountryId)
+                            @Html.ValidationMessageFor(m => m.ReferenceCountryId)
+                            @Html.Select2AjaxFor(m => m.ReferenceCountryId, Url.Action("Countries", "DataSource"), new Select2Option()
+                            {
+                                AllowClear = true,
+                                MinimumInputLength = 0,
+                                Width = "100%",
+                                Placeholder = "Select reference country..."
+                            }, new {@class = "form-control"})
+                        </div>
+                        <div class="col-md-3 col-sm-12 col-xs-12">
+                            @Html.LabelFor(m => m.ReferenceSchoolId)
+                            @Html.ValidationMessageFor(m => m.ReferenceSchoolId)
+                            @Html.Select2AjaxFor(m => m.ReferenceSchoolId, Url.Action("ReferenceSchools", "DataSource"), new Select2Option()
+                            {
+                                MinimumInputLength = 0,
+                                Width = "100%",
+                                AllowClear = true,
+                                Placeholder = "Select reference school...",
+                                DependsOn = "ReferenceCountryId"
+                            }, new {@class = "form-control"})
+                        </div>
+                        <div class="col-md-3 col-sm-12 col-xs-12">
+                            @Html.LabelFor(m=>m.ReferenceProgramId)
+                            @Html.ValidationMessageFor(m=>m.ReferenceProgramId)
+                            @Html.Select2AjaxFor(m=>m.ReferenceProgramId,Url.Action("Programs","DataSource"),new Select2Option()
+                       {
+                           Width = "100%",
+                           MinimumInputLength = 0,
+                           AllowClear = true,
+                           Placeholder = "Select references program..."
+                       },new {@class="form-control"})
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row row-margintop">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <a class="btn btn-default" href="@Url.Action("Index", "Customer")"><i class="fa fa-backward"></i> Back to list</a>
+            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
+        </div>
+    </div>
+}
+@section scripts
+ {
+    @Scripts.Render("~/application/document")
+}

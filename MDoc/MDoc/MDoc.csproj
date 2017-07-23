@@ -188,6 +188,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\DataSourceController.cs" />
+    <Compile Include="Controllers\DocumentController.cs" />
     <Compile Include="Controllers\GridController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SchoolController.cs" />
@@ -239,6 +240,7 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\application\common.js" />
     <Content Include="Scripts\application\customer.js" />
+    <Content Include="Scripts\application\document.js" />
     <Content Include="Scripts\application\school.js" />
     <Content Include="Scripts\bootstrap-confirmation.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -497,6 +499,10 @@
     <Content Include="Views\Customer\_ListOfCustomer.cshtml" />
     <Content Include="Views\Customer\_Command.cshtml" />
     <Content Include="Views\Customer\Save.cshtml" />
+    <Content Include="Views\Document\Index.cshtml" />
+    <Content Include="Views\Document\_ListOfDocument.cshtml" />
+    <Content Include="Views\Document\_Command.cshtml" />
+    <Content Include="Views\Document\Save.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.css" />

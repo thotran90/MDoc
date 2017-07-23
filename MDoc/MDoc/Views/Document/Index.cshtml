@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "List of document";
+}
+<div class="row row-margintop">
+    @Html.Partial("_ListOfDocument")
+</div>
+@section scripts
+{
+    @Scripts.Render("~/application/document")
+    <script type="text/javascript">
+        $(function() {
+            appDocument.setHeightGrid();
+        });
+    </script>
+}

@@ -52,6 +52,7 @@ namespace MDoc
 
             bundles.Add(new ScriptBundle("~/application/school").Include("~/Scripts/application/school.js"));
             bundles.Add(new ScriptBundle("~/application/customer").Include("~/Scripts/application/customer.js"));
+            bundles.Add(new ScriptBundle("~/application/document").Include("~/Scripts/application/document.js"));
 #if !DEBUG
             BundleTable.EnableOptimizations = true;
 #endif

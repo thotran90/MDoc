@@ -1,0 +1,45 @@
+﻿@using MDoc.Services.Contract.DataContracts
+<div class="col-md-12">
+    @(Html.Kendo().Grid<DocumentModel>()
+          .Name("GridDocuments")
+          .Columns(columns =>
+          {
+              columns.Bound(c => c.CustomerId).ClientTemplate(@Html.Partial("_Command").ToHtmlString())
+                  .Width(150)
+                  .HeaderTemplate("Actions")
+                  .Sortable(false)
+                  .Filterable(false);
+              columns.Bound(c => c.Customer.LastName);
+              columns.Bound(c => c.Customer.FirstName);
+              columns.Bound(c => c.Code);
+              columns.Bound(c => c.DocumentTypeId);
+              columns.Bound(c => c.DocumentStatusId);
+              columns.Command(command =>
+                    {
+                        command.Destroy().Text("delete");
+                    }).Width(150);
+          })
+          .ToolBar(toolbar =>
+          {
+              toolbar.Template(@<text>
+        <div class="grid-toolbar">
+            <a class="btn btn-primary" href="@Url.Action("Create")"><i class="fa fa-plus-circle"></i> Add new document</a>
+        </div>
+            </text>    );
+          })
+          .Scrollable()
+          .Filterable()
+          .Sortable()
+          .Pageable(pageable => pageable
+              .Refresh(true)
+              .PageSizes(true)
+              .ButtonCount(5))
+          .DataSource(dataSource => dataSource
+              .Ajax()
+              .Read(read => read.Action("ListOfDocument", "Document"))
+              .Model(model => model.Id(p => p.DocumentId))
+              .PageSize(20)
+              .Destroy(c => c.Action("Remove", "Customer"))
+          )
+    )
+</div>

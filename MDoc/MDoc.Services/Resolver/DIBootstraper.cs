@@ -42,6 +42,7 @@ namespace MDoc.Services.Resolver
             container.RegisterType<IGenderService, GenderService>();
             container.RegisterType<IDocumentTypeService, DocumentTypeService>();
             container.RegisterType<IDocumentStatusService, DocumentStatusService>();
+            container.RegisterType<IDocumentService, DocumentService>();
         }
 
         #endregion

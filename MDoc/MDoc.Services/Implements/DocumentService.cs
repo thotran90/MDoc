@@ -3,6 +3,7 @@ using System.Linq;
 using MDoc.Entities;
 using MDoc.Repositories.Contract;
 using MDoc.Services.Contract.DataContracts;
+using MDoc.Services.Contract.Enums;
 using MDoc.Services.Contract.Interfaces;
 
 namespace MDoc.Services.Implements
@@ -12,12 +13,14 @@ namespace MDoc.Services.Implements
         #region [Variable]
 
         private readonly ICustomerService _customerService;
+        private readonly IDocumentTypeService _documentTypeService;
 
         #endregion
         #region [Contructor]
-        public DocumentService(IUnitOfWork unitOfWork, ICustomerService customerService) : base(unitOfWork)
+        public DocumentService(IUnitOfWork unitOfWork, ICustomerService customerService, IDocumentTypeService documentTypeService) : base(unitOfWork)
         {
             _customerService = customerService;
+            _documentTypeService = documentTypeService;
         }
 
         #endregion
@@ -129,7 +132,8 @@ namespace MDoc.Services.Implements
                 FinalSchoolId = model.FinalSchoolId,
                 ReferenceCountryId = model.ReferenceCountryId,
                 ReferenceProgramId = model.ReferenceProgramId,
-                ReferenceSchoolId = model.ReferenceSchoolId
+                ReferenceSchoolId = model.ReferenceSchoolId,
+                DocumentStatusId = (byte) DocumentStatusEnum.PendingForValidation
             };
             if (model.CustomerId == 0)
             {
@@ -140,23 +144,55 @@ namespace MDoc.Services.Implements
             {
                 document.CustomerId = model.CustomerId;
             }
-
+            byte documentTypeId = 0;
+            if (byte.TryParse(model.DocumentTypeId, out documentTypeId))
+            {
+                document.DocumentTypeId = documentTypeId;
+            }
+            else
+            {
+                var newDocumentTypeArg = new DocumentTypeModel()
+                {
+                    Name = model.DocumentTypeId,
+                    Description = model.DocumentTypeId
+                };
+                var newType = _documentTypeService.Create(newDocumentTypeArg);
+                document.DocumentTypeId = newType.Id;
+            }
+            UnitOfWork.GetRepository<Document>().Create(document);
+            UnitOfWork.SaveChanges();
             return true;
         }
 
         public bool Update(DocumentModel model)
         {
-            throw new System.NotImplementedException();
+            var document = UnitOfWork.GetRepository<Document>().GetByKeys(model.DocumentId);
+            if (document == null) return false;
+
+            return true;
         }
 
         public bool Remove(DocumentModel model)
         {
-            throw new System.NotImplementedException();
+            var document = UnitOfWork.GetRepository<Document>().GetByKeys(model.DocumentId);
+            if(document == null) return false;
+            document.IsDeleted = true;
+            document.UpdatedById = model.LoggedUserId;
+            document.UpdatedDate = DateTime.Now;
+            UnitOfWork.SaveChanges();
+            return true;
         }
 
         public bool UpdateStatus(DocumentModel model)
         {
-            throw new System.NotImplementedException();
+            var document = UnitOfWork.GetRepository<Document>().GetByKeys(model.DocumentId);
+            if(document == null) return false;
+            if (model.DocumentStatusId == null) return false;
+            document.DocumentStatusId = model.DocumentStatusId.Value;
+            document.UpdatedById = model.LoggedUserId;
+            document.UpdatedDate = DateTime.Now;
+            UnitOfWork.SaveChanges();
+            return true;
         }
         #endregion
 
