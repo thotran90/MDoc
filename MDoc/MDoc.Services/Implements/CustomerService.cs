@@ -55,13 +55,14 @@ namespace MDoc.Services.Implements
                 DistrictId = customer.DistrictId,
                 Email = customer.Email,
                 GenderId = customer.GenderId,
-                IdentityCardDateExpired = customer.IdentityCardDareExpired,
+                IdentityCardDateExpired = customer.IdentityCardDateExpired,
                 IdentityCardDateValid = customer.IdentityCardDateValid,
                 IdentityCardNo = customer.IdentityCardNo,
                 IdentityCardPlaceId = customer.IdentityCardPlaceId,
                 Mobile = customer.Mobile,
                 ProvinceId = customer.ProvinceId,
-                WardId = customer.WardId
+                WardId = customer.WardId,
+                NationalityId = customer.NationalityId
             };
             return result;
         }
@@ -77,7 +78,7 @@ namespace MDoc.Services.Implements
                 Address = model.Address,
                 DOB = model.DOB.Value,
                 GenderId = model.GenderId,
-                IdentityCardDareExpired = model.IdentityCardDateExpired,
+                IdentityCardDateExpired = model.IdentityCardDateExpired,
                 IdentityCardDateValid = model.IdentityCardDateValid,
                 IdentityCardNo = model.IdentityCardNo,
                 IdentityCardPlaceId = model.IdentityCardPlaceId,
@@ -87,7 +88,8 @@ namespace MDoc.Services.Implements
                 IsDeleted = false,
                 Mobile = model.Mobile,
                 CreatedById = model.LoggedUserId,
-                CreatedDate = DateTime.Now
+                CreatedDate = DateTime.Now,
+                NationalityId = model.NationalityId
             };
             UnitOfWork.GetRepository<Customer>().Create(entity);
             UnitOfWork.SaveChanges();
@@ -112,6 +114,7 @@ namespace MDoc.Services.Implements
             customer.Address = model.Address;
             customer.UpdatedDate = DateTime.Now;
             customer.UpdatedById = model.LoggedUserId;
+            customer.NationalityId = model.NationalityId;
             UnitOfWork.SaveChanges();
             return true;
         }

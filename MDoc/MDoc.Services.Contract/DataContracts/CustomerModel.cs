@@ -37,10 +37,17 @@ namespace MDoc.Services.Contract.DataContracts
         [Required]
         [Display(Name = "Date of birth")]
         public DateTime? DOB { get; set; }
+        [Display(Name = "Identity Card Place")]
         public int? IdentityCardPlaceId { get; set; }
+        [Display(Name = "Identity Card Number")]
         public string IdentityCardNo { get; set; }
+        [Display(Name = "Identity Card Valid Date")]
         public DateTime? IdentityCardDateValid { get; set; }
+        [Display(Name = "Identity Card Expired Date")]
         public DateTime? IdentityCardDateExpired { get; set; }
         public int LoggedUserId { get; set; }
+        [Display(Name = "Nationality")]
+        [Required]
+        public int NationalityId { get; set; }
     }
 }

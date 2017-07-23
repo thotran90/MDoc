@@ -60,6 +60,15 @@ namespace MDoc.Controllers
         {
             if (ModelState.IsValid)
             {
+                model.LoggedUserId = CurrentUser.UserId;
+                if (model.CustomerId > 0)
+                {
+                    _customerService.Update(model);
+                }
+                else
+                {
+                    _customerService.Create(model);
+                }
                 return RedirectToAction("Index");
             }
             ModelState.AddModelError("InvalidModel", "Fill all of required field before submit data.");

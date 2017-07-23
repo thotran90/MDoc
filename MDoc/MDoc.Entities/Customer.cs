@@ -19,13 +19,14 @@ namespace MDoc.Entities
         public int WardId { get; set; }
         public string IdentityCardNo { get; set; }
         public DateTime? IdentityCardDateValid { get; set; }
-        public DateTime? IdentityCardDareExpired { get; set; }
+        public DateTime? IdentityCardDateExpired { get; set; }
         public int? IdentityCardPlaceId { get; set; }
         public int CreatedById { get; set; }
         public DateTime CreatedDate { get; set; }
         public int? UpdatedById { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public bool IsDeleted { get; set; }
+        public int  NationalityId { get; set; }
         public virtual Gender Gender { get; set; }
         public virtual ICollection<Document> Documents { get; set; }
     }

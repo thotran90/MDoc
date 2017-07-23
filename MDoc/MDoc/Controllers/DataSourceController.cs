@@ -170,6 +170,22 @@ namespace MDoc.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult IdentityCardPlaces(int? id, int nationalityId, string query = "")
+        {
+            if (id.HasValue)
+            {
+                var province = _addressService.GetAddress(id.Value);
+                if(province.AddressId == 0) return JsonNullResult;
+                return Json(new {id = province.AddressId, text = province.Label}, JsonRequestBehavior.AllowGet);
+            }
+            var result = _addressService.ListOfAddress(AddressTypeModel.P, nationalityId, query)
+                .Select(x => new {id = x.AddressId, text = x.Label})
+                .OrderByDescending(m => m.text.Equals(query))
+                .Take(PageSize)
+                .ToList();
+            return Json(result,JsonRequestBehavior.AllowGet);
+        }
+
         #endregion
     }
 }
