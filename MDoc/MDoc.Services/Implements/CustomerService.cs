@@ -67,7 +67,7 @@ namespace MDoc.Services.Implements
             return result;
         }
 
-        public bool Create(CustomerModel model)
+        public CustomerModel Create(CustomerModel model)
         {
             var entity = new Customer
             {
@@ -93,7 +93,8 @@ namespace MDoc.Services.Implements
             };
             UnitOfWork.GetRepository<Customer>().Create(entity);
             UnitOfWork.SaveChanges();
-            return entity.CustomerId > 0;
+            model.CustomerId = entity.CustomerId;
+            return model;
         }
 
         public bool Update(CustomerModel model)

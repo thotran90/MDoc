@@ -7,7 +7,7 @@ namespace MDoc.Services.Contract.Interfaces
     {
         IQueryable<CustomerModel> ListOfCustomers();
         CustomerModel Detail(int customerId);
-        bool Create(CustomerModel model);
+        CustomerModel Create(CustomerModel model);
         bool Update(CustomerModel model);
         bool Remove(CustomerModel model);
     }

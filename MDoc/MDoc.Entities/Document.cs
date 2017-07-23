@@ -9,11 +9,11 @@ namespace MDoc.Entities
         public byte DocumentTypeId { get; set; }
         public int CustomerId { get; set; }
         public string Code { get; set; }
-        public int FinalSchoolId { get; set; }
-        public int FinalProgramId { get; set; }
-        public int ReferenceCountryId { get; set; }
-        public int ReferenceSchoolId { get; set; }
-        public int ReferenceProgramId { get; set; }
+        public int? FinalSchoolId { get; set; }
+        public int? FinalProgramId { get; set; }
+        public int? ReferenceCountryId { get; set; }
+        public int? ReferenceSchoolId { get; set; }
+        public int? ReferenceProgramId { get; set; }
         public bool IsDeleted { get; set; }
         public int CreatedById { get; set; }
         public DateTime CreatedDate { get; set; }
