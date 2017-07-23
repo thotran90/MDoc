@@ -10,13 +10,14 @@ namespace MDoc.Controllers
         #region [Constructor]
 
         public DataSourceController(IEducationTypeService educationTypeService, IProgramService programService,
-            ISchoolTypeService schoolTypeService, IAddressService addressService, IGenderService genderService)
+            ISchoolTypeService schoolTypeService, IAddressService addressService, IGenderService genderService, IDocumentTypeService documentTypeService)
         {
             _educationTypeService = educationTypeService;
             _programService = programService;
             _schoolTypeService = schoolTypeService;
             _addressService = addressService;
             _genderService = genderService;
+            _documentTypeService = documentTypeService;
         }
 
         #endregion
@@ -28,6 +29,7 @@ namespace MDoc.Controllers
         private readonly ISchoolTypeService _schoolTypeService;
         private readonly IAddressService _addressService;
         private readonly IGenderService _genderService;
+        private readonly IDocumentTypeService _documentTypeService;
 
         #endregion
 
@@ -84,7 +86,7 @@ namespace MDoc.Controllers
                 .OrderByDescending(m => m.text.Equals(query))
                 .Take(PageSize)
                 .ToList();
-            if (!result.Any())
+            if (!result.Any() && !string.IsNullOrEmpty(query))
                 result.Add(new {id = query, text = "[New] " + query});
             return Json(result, JsonRequestBehavior.AllowGet);
         }
@@ -183,6 +185,24 @@ namespace MDoc.Controllers
                 .OrderByDescending(m => m.text.Equals(query))
                 .Take(PageSize)
                 .ToList();
+            return Json(result,JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult DocumentTypes(byte? id, string query = "")
+        {
+            if(id.HasValue)
+            {
+                var type = _documentTypeService.Single(id.Value);
+                return type.Id > 0
+                    ? Json(new {id = type.Id, text = type.Name}, JsonRequestBehavior.AllowGet)
+                    : JsonNullResult;
+            }
+            var result = _documentTypeService.ListOfDocumentType(query)
+                .Select(x => new {id = x.Id.ToString(), text = x.Name})
+                .OrderByDescending(m => m.text.Equals(query))
+                .Take(PageSize)
+                .ToList();
+            if(!result.Any() && !string.IsNullOrEmpty(query)) result.Add(new {id="[New] "+query,text=query});
             return Json(result,JsonRequestBehavior.AllowGet);
         }
 

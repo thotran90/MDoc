@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="DataContracts\AddressModel.cs" />
     <Compile Include="DataContracts\CustomerModel.cs" />
+    <Compile Include="DataContracts\DocumentStatusModel.cs" />
+    <Compile Include="DataContracts\DocumentTypeModel.cs" />
     <Compile Include="DataContracts\EducationTypeModel.cs" />
     <Compile Include="DataContracts\GenderModel.cs" />
     <Compile Include="DataContracts\ProgramModel.cs" />
@@ -52,6 +54,8 @@
     <Compile Include="Enums\AddressTypeModel.cs" />
     <Compile Include="Interfaces\IAddressService.cs" />
     <Compile Include="Interfaces\ICustomerService.cs" />
+    <Compile Include="Interfaces\IDocumentStatusService.cs" />
+    <Compile Include="Interfaces\IDocumentTypeService.cs" />
     <Compile Include="Interfaces\IEducationTypeService.cs" />
     <Compile Include="Interfaces\IGenderService.cs" />
     <Compile Include="Interfaces\IProgramService.cs" />

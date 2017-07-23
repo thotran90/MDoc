@@ -40,6 +40,8 @@ namespace MDoc.Services.Resolver
             container.RegisterType<ISchoolTypeService, SchoolTypeService>();
             container.RegisterType<ICustomerService, CustomerService>();
             container.RegisterType<IGenderService, GenderService>();
+            container.RegisterType<IDocumentTypeService, DocumentTypeService>();
+            container.RegisterType<IDocumentStatusService, DocumentStatusService>();
         }
 
         #endregion
