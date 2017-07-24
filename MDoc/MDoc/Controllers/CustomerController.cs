@@ -87,6 +87,13 @@ namespace MDoc.Controllers
             return Json(new[] {customer}.ToDataSourceResult(request, ModelState));
         }
 
+        [HttpGet]
+        public JsonResult Information(int id)
+        {
+            var model = _customerService.Detail(id);
+            return Json(model,JsonRequestBehavior.AllowGet);
+        }
+
         #endregion
     }
 }

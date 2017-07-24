@@ -311,7 +311,7 @@ namespace MDoc.Controllers
             if(!referenceCountryId.HasValue) return JsonNullResult;
             var result = _schoolService.GetSchools(query)
                 .Where(m => m.CountryId == referenceCountryId)
-                .Select(x => new {id = x.CountryId, text = x.Name})
+                .Select(x => new {id = x.SchoolId, text = x.Name})
                 .OrderByDescending(m => m.text.Equals(query))
                 .Take(PageSize)
                 .ToList();

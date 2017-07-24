@@ -158,8 +158,13 @@ function initSelect2Autocomplete(elt) {
         };;
     }
     if ($(elt).hasAttr('data-onchange')) {
+        //$(elt).select2(options).on('change', function () {
+        //    window[$(elt).data('onchange')]($(this));
+        //});
         $(elt).select2(options).on('change', function () {
-            window[$(elt).data('onchange')]($(this));
+            var action = $(elt).data("onchange");
+            var tempFunc = new Function(action);
+            tempFunc();
         });
     } else {
         $(elt).select2(options);
