@@ -136,9 +136,9 @@ function initSelect2Autocomplete(elt) {
                 if ($(element).hasAttr('data-dependson')) {
                     var elements = $(element).data('dependson');
                     $.each(elements.split(','), function (index, value) {
-                        var cSharpValue = value.split('_');
-                        cSharpValue = cSharpValue[cSharpValue.length - 1];
-                        data.push({ name: cSharpValue, value: $('#' + value).val() });
+                        //var cSharpValue = value.split('_');
+                        //cSharpValue = cSharpValue[cSharpValue.length - 1];
+                        data.push({ name: value, value: $('#' + value).val() });
                     });
                 }
                 data.push({ name: 'id', value: id });
