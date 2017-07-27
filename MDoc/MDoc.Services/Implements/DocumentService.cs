@@ -116,8 +116,9 @@ namespace MDoc.Services.Implements
         public string GenerateDocumentCode()
         {
             if (!UnitOfWork.GetRepository<Document>().Get().Any()) return 1.ToString("D6");
-            var currentCode = UnitOfWork.GetRepository<Document>().Get().Max(m => Convert.ToInt32(m));
-            return (currentCode + 1).ToString("D6");
+            var currentCode = UnitOfWork.GetRepository<Document>().Get().Max(m => m.Code);
+            var intCode = Convert.ToInt32(currentCode);
+            return (intCode + 1).ToString("D6");
         }
 
         public bool Create(DocumentModel model)
