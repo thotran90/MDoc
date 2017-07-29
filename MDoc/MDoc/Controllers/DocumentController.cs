@@ -48,7 +48,9 @@ namespace MDoc.Controllers
         [MvcSiteMapNode(Title = "Update document",ParentKey = "document", PreservedRouteParameters = "id")]
         public ActionResult Edit(int id)
         {
-            return View("Save", new DocumentModel());
+            var model = _documentService.Single(id);
+            if(model.DocumentId == 0) return HttpNotFound();
+            return View("Save", model);
         }
 
         [HttpPost]
@@ -59,7 +61,7 @@ namespace MDoc.Controllers
             {
                 model.LoggedUserId = CurrentUser.UserId;
                 model.Customer.LoggedUserId = CurrentUser.UserId;
-                if (model.DocumentId > 0)
+                if (model.IsUpdate)
                     _documentService.Update(model);
                 else
                 {

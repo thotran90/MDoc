@@ -81,6 +81,15 @@ namespace MDoc.Services.Implements
             return result;
         }
 
+        public IQueryable<ProgramModel> ProgramInSchool(int schoolId)
+            => UnitOfWork.GetRepository<Program>().Get(m => !m.IsDisabled)
+                .Where(m => m.Schools.Any(school => school.SchoolId == schoolId))
+                .Select(x => new ProgramModel()
+                {
+                    Id = x.ProgramId,
+                    Name = x.Label
+                });
+
         #endregion
     }
 }

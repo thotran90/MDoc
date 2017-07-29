@@ -9,15 +9,15 @@
                   .HeaderTemplate("Actions")
                   .Sortable(false)
                   .Filterable(false);
-              columns.Bound(c => c.Customer.LastName);
-              columns.Bound(c => c.Customer.FirstName);
               columns.Bound(c => c.Code);
+              columns.Bound(c => c.Customer.FullName);
               columns.Bound(c => c.DocumentType);
+              columns.Bound(c => c.Country);
               columns.Bound(c => c.DocumentStatus);
               columns.Command(command =>
-                    {
-                        command.Destroy().Text("delete");
-                    }).Width(150);
+              {
+                 command.Destroy().Text("delete");
+              }).Width(150);
           })
           .ToolBar(toolbar =>
           {

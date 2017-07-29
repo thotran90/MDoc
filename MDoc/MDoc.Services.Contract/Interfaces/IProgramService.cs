@@ -10,5 +10,6 @@ namespace MDoc.Services.Contract.Interfaces
         ProgramModel Update(ProgramModel model);
         bool Remove(int programId);
         IQueryable<ProgramModel> GetProgramByIds(string ids);
+        IQueryable<ProgramModel> ProgramInSchool(int schoolId);
     }
 }

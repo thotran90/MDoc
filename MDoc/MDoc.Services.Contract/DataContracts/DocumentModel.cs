@@ -25,5 +25,8 @@
         public string ReferenceSchool { get; set; }
         public string FinalCountry { get; set; }
         public string FinalSchool { get; set; }
+        public bool IsUpdate => DocumentId > 0;
+        public string Country { get; set; }
+
     }
 }

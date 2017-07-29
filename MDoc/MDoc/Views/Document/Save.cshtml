@@ -9,6 +9,7 @@
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
     @Html.HiddenFor(m => m.CustomerId)
+    @Html.HiddenFor(m=>m.DocumentId)
     <div class="row">
         <div class="col-md-12">
             <h3>Customer</h3>
@@ -24,7 +25,8 @@
                            Width = "100%",
                            AllowClear = true,
                            Placeholder = "Select exist customer...",
-                           OnChange = "appDocument.loadExistDocument()"
+                           OnChange = "appDocument.loadExistDocument()",
+                           Disabled = @Model.IsUpdate
                        }, new { @class = "form-control" })
                         </div>
                         <div class="col-md-3 col-sm-12 col-xs-12">
@@ -34,35 +36,68 @@
                        {
                            Width = "100%",
                            MinimumInputLength = 0,
-                           AllowClear = false
+                           AllowClear = false,
+                           Disabled = @Model.IsUpdate
                        }, new { @class = "form-control" })
                         </div>
                         <div class="col-md-3 col-sm-12 col-xs-12">
                             @Html.LabelFor(m => m.Customer.LastName)
                             @Html.ValidationMessageFor(m => m.Customer.LastName)
-                            @Html.TextBoxFor(m => m.Customer.LastName, new { @class = "form-control" })
+                            @if (Model.IsUpdate)
+                            {
+                                @Html.TextBoxFor(m=>m.Customer.LastName,new { @class = "form-control",@readonly="true"})
+                            }
+                            else
+                            {
+                                @Html.TextBoxFor(m => m.Customer.LastName, new { @class = "form-control" })
+                            }
+                            
                         </div>
                         <div class="col-md-3 col-sm-12 col-xs-12">
                             @Html.LabelFor(m => m.Customer.FirstName)
                             @Html.ValidationMessageFor(m => m.Customer.FirstName)
-                            @Html.TextBoxFor(m => m.Customer.FirstName, new { @class = "form-control" })
+                            @if (Model.IsUpdate)
+                            {
+                                @Html.TextBoxFor(m => m.Customer.FirstName, new { @class = "form-control", @readonly = true })
+                            }
+                            else
+                            {
+                                @Html.TextBoxFor(m => m.Customer.FirstName, new { @class = "form-control" })
+                            }
+                           
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-3 col-sm-12 col-xs-12">
                             @Html.LabelFor(m => m.Customer.DOB)
                             @Html.ValidationMessageFor(m => m.Customer.DOB)
-                            @Html.Kendo().DatePickerFor(m => m.Customer.DOB).Format("MMM-dd-yyyy").HtmlAttributes(new { style = "width: 100%" })
+                            @Html.Kendo().DatePickerFor(m => m.Customer.DOB).Enable(!Model.IsUpdate).Format("MMM-dd-yyyy").HtmlAttributes(new { style = "width: 100%" })
                         </div>
                         <div class="col-md-3 col-sm-12 col-xs-12">
                             @Html.LabelFor(m => m.Customer.Mobile)
                             @Html.ValidationMessageFor(m => m.Customer.Mobile)
-                            @Html.TextBoxFor(m => m.Customer.Mobile, new { @class = "form-control" })
+                            @if (Model.IsUpdate)
+                            {
+                                @Html.TextBoxFor(m => m.Customer.Mobile, new { @class = "form-control", @readonly = true })
+                            }
+                            else
+                            {
+                                @Html.TextBoxFor(m => m.Customer.Mobile, new { @class = "form-control" })
+                            }
+                            
                         </div>
                         <div class="col-md-3 col-xs-12 col-sm-12">
                             @Html.LabelFor(m => m.Customer.Email)
                             @Html.ValidationMessageFor(m => m.Customer.Email)
-                            @Html.TextBoxFor(m => m.Customer.Email, new { @class = "form-control" })
+                            @if (Model.IsUpdate)
+                            {
+                                @Html.TextBoxFor(m => m.Customer.Email, new { @class = "form-control", @readonly = true})
+                            }
+                            else
+                            {
+                                @Html.TextBoxFor(m => m.Customer.Email, new { @class = "form-control"})
+                            }
+                            
                         </div>
                         <div class="col-md-3 col-sm-12 col-xs-12">
                             @Html.LabelFor(m => m.Customer.NationalityId)
@@ -71,7 +106,8 @@
                        {
                            AllowClear = false,
                            MinimumInputLength = 0,
-                           Width = "100%"
+                           Width = "100%",
+                           Disabled = @Model.IsUpdate
                        }, new { @class = "form-control" })
                         </div>
                     </div>
@@ -84,7 +120,8 @@
                            AllowClear = true,
                            MinimumInputLength = 0,
                            Width = "100%",
-                           Placeholder = "Select country"
+                           Placeholder = "Select country",
+                           Disabled = @Model.IsUpdate
                        }, new { @class = "form-control" })
                         </div>
                         <div class="col-md-3 col-sm-12 col-xs-12">
@@ -96,7 +133,8 @@
                            MinimumInputLength = 0,
                            Width = "100%",
                            DependsOn = "Customer_CountryId",
-                           Placeholder = "Select province"
+                           Placeholder = "Select province",
+                           Disabled = @Model.IsUpdate
                        }, new { @class = "form-control" })
                         </div>
                         <div class="col-md-3 col-sm-12 col-xs-12">
@@ -108,7 +146,8 @@
                            MinimumInputLength = 0,
                            Width = "100%",
                            DependsOn = "Customer_ProvinceId",
-                           Placeholder = "Select district"
+                           Placeholder = "Select district",
+                           Disabled = @Model.IsUpdate
                        }, new { @class = "form-control" })
                         </div>
                         <div class="col-md-3 col-sm-12 col-xs-12">
@@ -120,7 +159,8 @@
                            MinimumInputLength = 0,
                            AllowClear = true,
                            DependsOn = "Customer_DistrictId",
-                           Placeholder = "Select ward"
+                           Placeholder = "Select ward",
+                           Disabled = @Model.IsUpdate
                        }, new { @class = "form-control" })
                         </div>
                     </div>
@@ -128,14 +168,30 @@
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             @Html.LabelFor(m => m.Customer.Address)
                             @Html.ValidationMessageFor(m => m.Customer.Address)
-                            @Html.TextBoxFor(m => m.Customer.Address, new { @class = "form-control" })
+                            @if (Model.IsUpdate)
+                            {
+                                @Html.TextBoxFor(m => m.Customer.Address, new { @class = "form-control", @readonly =true })
+                            }
+                            else
+                            {
+                                @Html.TextBoxFor(m => m.Customer.Address, new { @class = "form-control"})
+                            }
+                           
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-3 col-sm-12 col-xs-12">
                             @Html.LabelFor(m => m.Customer.IdentityCardNo)
                             @Html.ValidationMessageFor(m => m.Customer.IdentityCardNo)
-                            @Html.TextBoxFor(m => m.Customer.IdentityCardNo, new { @class = "form-control" })
+                            @if (Model.IsUpdate)
+                            {
+                                @Html.TextBoxFor(m => m.Customer.IdentityCardNo, new { @class = "form-control", @readonly=true })
+                            }
+                            else
+                            {
+                                @Html.TextBoxFor(m => m.Customer.IdentityCardNo, new { @class = "form-control"})
+                            }
+                           
                         </div>
                         <div class="col-md-3 col-sm-12 col-xs-12">
                             @Html.LabelFor(m => m.Customer.IdentityCardPlaceId)
@@ -145,18 +201,19 @@
                            DependsOn = "Customer_NationalityId",
                            AllowClear = true,
                            MinimumInputLength = 0,
-                           Width = "100%"
+                           Width = "100%",
+                           Disabled = @Model.IsUpdate
                        }, new { @class = "form-control" })
                         </div>
                         <div class="col-md-3 col-sm-12 col-xs-12">
                             @Html.LabelFor(m => m.Customer.IdentityCardDateValid)
                             @Html.ValidationMessageFor(m => m.Customer.IdentityCardDateValid)
-                            @Html.Kendo().DatePickerFor(m => m.Customer.IdentityCardDateValid).Format("MMM-dd-yyyy").HtmlAttributes(new { style = "width: 100%" })
+                            @Html.Kendo().DatePickerFor(m => m.Customer.IdentityCardDateValid).Enable(!Model.IsUpdate).Format("MMM-dd-yyyy").HtmlAttributes(new { style = "width: 100%" })
                         </div>
                         <div class="col-md-3 col-sm-12 col-xs-12">
                             @Html.LabelFor(m => m.Customer.IdentityCardDateExpired)
                             @Html.ValidationMessageFor(m => m.Customer.IdentityCardDateExpired)
-                            @Html.Kendo().DatePickerFor(m => m.Customer.IdentityCardDateExpired).Format("MMM-dd-yyyy").HtmlAttributes(new { style = "width:100%" })
+                            @Html.Kendo().DatePickerFor(m => m.Customer.IdentityCardDateExpired).Enable(!Model.IsUpdate).Format("MMM-dd-yyyy").HtmlAttributes(new { style = "width:100%" })
                         </div>
                     </div>
 
@@ -204,17 +261,43 @@
                             }, new {@class = "form-control"})
                         </div>
                         <div class="col-md-3 col-sm-12 col-xs-12">
-                            @Html.LabelFor(m=>m.ReferenceProgramId)
-                            @Html.ValidationMessageFor(m=>m.ReferenceProgramId)
-                            @Html.Select2AjaxFor(m=>m.ReferenceProgramId,Url.Action("Programs","DataSource"),new Select2Option()
-                       {
-                           Width = "100%",
-                           MinimumInputLength = 0,
-                           AllowClear = true,
-                           Placeholder = "Select references program..."
-                       },new {@class="form-control"})
+                            @Html.LabelFor(m => m.ReferenceProgramId)
+                            @Html.ValidationMessageFor(m => m.ReferenceProgramId)
+                            @Html.Select2AjaxFor(m => m.ReferenceProgramId, Url.Action("Programs", "DataSource"), new Select2Option()
+                            {
+                                Width = "100%",
+                                MinimumInputLength = 0,
+                                AllowClear = true,
+                                Placeholder = "Select references program..."
+                            }, new {@class = "form-control"})
                         </div>
                     </div>
+                    @if (Model.IsUpdate)
+                    {
+                        <div class="row">
+                            <div class="col-md-3 col-sm-12 col-xs-12">
+                                @Html.LabelFor(m=>m.FinalSchoolId)
+                                @Html.ValidationMessageFor(m=>m.FinalSchoolId)
+                                @Html.Select2AjaxFor(m=>m.FinalSchoolId,Url.Action("Schools","DataSource"),new Select2Option()
+                           {
+                               MinimumInputLength = 0,
+                               AllowClear = true,
+                               Width = "100%"
+                           },new {@class="form-control"})
+                            </div>
+                            <div class="col-md-3 col-sm-12 col-xs-12">
+                                @Html.LabelFor(m=>m.FinalProgramId)
+                                @Html.ValidationMessageFor(m=>m.FinalProgramId)
+                                @Html.Select2AjaxFor(m=>m.FinalProgramId,Url.Action("FinalPrograms", "DataSource"),new Select2Option()
+                           {
+                               AllowClear = true,
+                               DependsOn = "FinalSchoolId",
+                               Width = "100%",
+                               MinimumInputLength = 0
+                           },new {@class="form-control"})
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
         </div>

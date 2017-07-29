@@ -63,6 +63,7 @@ namespace MDoc.Controllers
                 var programs = _programService.GetProgramByIds(id)
                     .Select(x => new {id = x.Id, text = x.Name})
                     .ToList();
+                if(programs.Count == 1) return Json(programs.First(), JsonRequestBehavior.AllowGet);
                 return Json(programs, JsonRequestBehavior.AllowGet);
             }
             var result = _programService.GetPrograms(query)
@@ -316,6 +317,39 @@ namespace MDoc.Controllers
                 .Take(PageSize)
                 .ToList();
             return Json(result,JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult Schools(int? id, string query = "")
+        {
+            if (id.HasValue)
+            {
+                var school = _schoolService.Detail(id.Value);
+                if(school.SchoolId == 0) return JsonNullResult;
+                return Json(new {id=school.SchoolId,text=school.Name},JsonRequestBehavior.AllowGet);
+            }
+            var result = _schoolService.GetSchools(query)
+                .Select(x => new {id = x.SchoolId, text = x.Name})
+                .OrderByDescending(m => m.text.Equals(query))
+                .Take(PageSize)
+                .ToList();
+            return Json(result,JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult FinalPrograms(int? id, int FinalSchoolId, string query = "")
+        {
+            if (id.HasValue)
+            {
+                var program = _programService.GetProgramByIds(id.Value.ToString()).FirstOrDefault();
+                if (program == null) return JsonNullResult;
+                return Json(new {id = program.Id, text = program.Name}, JsonRequestBehavior.AllowGet);
+            }
+            var result = _programService.ProgramInSchool(FinalSchoolId)
+                .Where(m => m.Name.ToLower().Contains(query.ToLower()))
+                .Select(x => new {id = x.Id, text = x.Name})
+                .OrderByDescending(m => m.text.Equals(query))
+                .Take(PageSize)
+                .ToList();
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         #endregion

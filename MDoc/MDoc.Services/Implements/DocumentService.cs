@@ -50,25 +50,28 @@ namespace MDoc.Services.Implements
                             (m.customer.LastName + m.customer.FirstName).ToLower().Contains(query) ||
                             (m.customer.FirstName + m.customer.LastName).ToLower().Contains(query));
             }
-            var result = documents.Select(x => new DocumentModel()
+            var result = documents
+                .Join(UnitOfWork.GetRepository<Address>().Get(),document=>document.document.ReferenceCountryId,country=>country.AddressId,(document,country)=> new {document=document,country=country})
+                .Select(x => new DocumentModel()
             {
-                CustomerId = x.document.CustomerId,
-                Code = x.document.Code,
-                DocumentId = x.document.DocumentId,
-                DocumentTypeId = x.document.DocumentTypeId.ToString(),
-                DocumentStatusId = x.document.DocumentStatusId,
-                ReferenceCountryId = x.document.ReferenceCountryId,
-                ReferenceSchoolId = x.document.ReferenceSchoolId,
-                ReferenceProgramId = x.document.ReferenceProgramId,
-                FinalSchoolId = x.document.FinalSchoolId,
-                FinalProgramId = x.document.FinalProgramId,
-                DocumentType = x.document.DocumentType.Label,
-                DocumentStatus = x.document.DocumentStatus.Label,
+                CustomerId = x.document.document.CustomerId,
+                Code = x.document.document.Code,
+                DocumentId = x.document.document.DocumentId,
+                DocumentTypeId = x.document.document.DocumentTypeId.ToString(),
+                DocumentStatusId = x.document.document.DocumentStatusId,
+                ReferenceCountryId = x.document.document.ReferenceCountryId,
+                ReferenceSchoolId = x.document.document.ReferenceSchoolId,
+                ReferenceProgramId = x.document.document.ReferenceProgramId,
+                FinalSchoolId = x.document.document.FinalSchoolId,
+                FinalProgramId = x.document.document.FinalProgramId,
+                DocumentType = x.document.document.DocumentType.Label,
+                DocumentStatus = x.document.document.DocumentStatus.Label,
+                Country = x.country.Label,
                 Customer = new CustomerModel()
                 {
-                    FirstName = x.customer.FirstName,
-                    LastName = x.customer.LastName,
-                    CustomerId = x.customer.CustomerId
+                    FirstName = x.document.customer.FirstName,
+                    LastName = x.document.customer.LastName,
+                    CustomerId = x.document.customer.CustomerId
                 }
             });
             return result;
@@ -177,7 +180,9 @@ namespace MDoc.Services.Implements
             document.ReferenceCountryId = model.ReferenceCountryId;
             document.ReferenceProgramId = model.ReferenceProgramId;
             document.ReferenceSchoolId = model.ReferenceSchoolId;
-
+            document.FinalProgramId = model.FinalProgramId;
+            document.FinalSchoolId = model.FinalSchoolId;
+            UnitOfWork.SaveChanges();
             return true;
         }
 

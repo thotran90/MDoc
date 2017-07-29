@@ -49,5 +49,7 @@ namespace MDoc.Services.Contract.DataContracts
         [Display(Name = "Nationality")]
         [Required]
         public int NationalityId { get; set; }
+
+        public string FullName => $"{LastName} {FirstName}";
     }
 }
