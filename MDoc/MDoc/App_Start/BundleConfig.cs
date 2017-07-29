@@ -16,7 +16,7 @@ namespace MDoc
                 "~/Scripts/respond.js",
                 "~/Scripts/kendo.modernizr.custom.js",
                 "~/Scripts/material.min.js",
-                "~/Scripts/select2.min.js",
+                "~/Scripts/select2.js",
                 "~/Scripts/custom/select2.js",
                 "~/Scripts/tinymce/tinymce.min.js",
                 "~/Scripts/application/common.js"

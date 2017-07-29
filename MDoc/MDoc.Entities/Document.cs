@@ -1,9 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace MDoc.Entities
 {
     public class Document
     {
+        public Document()
+        {
+            this.DocumentResponsibles = new HashSet<DocumentResponsible>();
+        }
         public int DocumentId { get; set; }
         public byte DocumentStatusId { get; set; }
         public byte DocumentTypeId { get; set; }
@@ -22,5 +27,6 @@ namespace MDoc.Entities
         public virtual DocumentStatus DocumentStatus { get; set; }
         public virtual DocumentType DocumentType { get; set; }
         public virtual Customer Customer { get; set; }
+        public virtual ICollection<DocumentResponsible> DocumentResponsibles { get; set; }
     }
 }

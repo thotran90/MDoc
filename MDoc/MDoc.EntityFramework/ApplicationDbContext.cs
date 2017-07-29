@@ -28,7 +28,8 @@ namespace MDoc.EntityFramework
                 .Add(new SchoolMapping())
                 .Add(new DocumentStatusMapping())
                 .Add(new CustomerMapping())
-                .Add(new DocumentMapping());
+                .Add(new DocumentMapping())
+                .Add(new DoumentResponsibleMapping());
             base.OnModelCreating(modelBuilder);
         }
     }

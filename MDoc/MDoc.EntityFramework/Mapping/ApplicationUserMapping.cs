@@ -11,6 +11,10 @@ namespace MDoc.EntityFramework.Mapping
             ToTable("ApplicationUser", "dbo");
             HasKey(m => m.ApplicationUserId);
             Property(m => m.ApplicationUserId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            HasMany(m=>m.DocumentResponsibles)
+                .WithRequired(m=>m.User)
+                .HasForeignKey(m=>m.UserId)
+                .WillCascadeOnDelete(false);
         }
     }
 }

@@ -6,7 +6,7 @@ namespace MDoc.Services.Contract.Interfaces
     public interface IUserService
     {
         UserModel Login(LoginModel model);
-        IQueryable<UserModel> GetUsers(SearchUserModel arg);
+        IQueryable<UserModel> GetUsers(string query = "");
         UserModel Create(LoginModel model);
         UserModel Update(LoginModel model);
     }

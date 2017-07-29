@@ -45,6 +45,7 @@
     <Compile Include="ApplicationUser.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="Document.cs" />
+    <Compile Include="DocumentResponsible.cs" />
     <Compile Include="DocumentStatus.cs" />
     <Compile Include="DocumentType.cs" />
     <Compile Include="EducationType.cs" />

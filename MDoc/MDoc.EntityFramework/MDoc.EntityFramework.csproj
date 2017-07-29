@@ -56,6 +56,7 @@
     <Compile Include="Mapping\DocumentMapping.cs" />
     <Compile Include="Mapping\DocumentStatusMapping.cs" />
     <Compile Include="Mapping\DocumentTypeMapping.cs" />
+    <Compile Include="Mapping\DoumentResponsibleMapping.cs" />
     <Compile Include="Mapping\EducationTypeMapping.cs" />
     <Compile Include="Mapping\GenderMapping.cs" />
     <Compile Include="Mapping\ProgramMapping.cs" />

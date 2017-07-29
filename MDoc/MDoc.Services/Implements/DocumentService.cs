@@ -5,6 +5,7 @@ using MDoc.Repositories.Contract;
 using MDoc.Services.Contract.DataContracts;
 using MDoc.Services.Contract.Enums;
 using MDoc.Services.Contract.Interfaces;
+using Microsoft.Practices.ObjectBuilder2;
 
 namespace MDoc.Services.Implements
 {
@@ -95,6 +96,8 @@ namespace MDoc.Services.Implements
                 ReferenceProgramId = document.ReferenceProgramId,
                 FinalSchoolId = document.FinalSchoolId,
                 FinalProgramId = document.FinalProgramId,
+                MainResponsibleIds = document.DocumentResponsibles.Where(user=>user.IsMain).Select(x=>x.UserId).JoinStrings(","),
+                SubResponsibleIds = document.DocumentResponsibles.Where(user => !user.IsMain).Select(x => x.UserId).JoinStrings(","),
                 Customer = new CustomerModel()
                 {
                     FirstName = customer.FirstName,
@@ -166,6 +169,31 @@ namespace MDoc.Services.Implements
                 var newType = _documentTypeService.Create(newDocumentTypeArg);
                 document.DocumentTypeId = newType.Id;
             }
+
+            if (!string.IsNullOrEmpty(model.MainResponsibleIds))
+            {
+                var userIds = model.MainResponsibleIds.Split(',').Select(x => Convert.ToInt32(x)).ToList();
+                foreach (var userId in userIds)
+                {
+                    document.DocumentResponsibles.Add(new DocumentResponsible()
+                    {
+                        IsMain = true,
+                        UserId = userId
+                    });
+                }
+            }
+            if (!string.IsNullOrEmpty(model.SubResponsibleIds))
+            {
+                var subUserIds = model.SubResponsibleIds.Split(',').Select(x => Convert.ToInt32(x)).ToList();
+                foreach (var userId in subUserIds)
+                {
+                    document.DocumentResponsibles.Add(new DocumentResponsible()
+                    {
+                        IsMain = false,
+                        UserId = userId
+                    });
+                }
+            }
             UnitOfWork.GetRepository<Document>().Create(document);
             UnitOfWork.SaveChanges();
             return true;
@@ -182,6 +210,32 @@ namespace MDoc.Services.Implements
             document.ReferenceSchoolId = model.ReferenceSchoolId;
             document.FinalProgramId = model.FinalProgramId;
             document.FinalSchoolId = model.FinalSchoolId;
+
+            document.DocumentResponsibles.Clear();
+            if (!string.IsNullOrEmpty(model.MainResponsibleIds))
+            {
+                var userIds = model.MainResponsibleIds.Split(',').Select(x => Convert.ToInt32(x)).ToList();
+                foreach (var userId in userIds)
+                {
+                    document.DocumentResponsibles.Add(new DocumentResponsible()
+                    {
+                        IsMain = true,
+                        UserId = userId
+                    });
+                }
+            }
+            if (!string.IsNullOrEmpty(model.SubResponsibleIds))
+            {
+                var subUserIds = model.SubResponsibleIds.Split(',').Select(x => Convert.ToInt32(x)).ToList();
+                foreach (var userId in subUserIds)
+                {
+                    document.DocumentResponsibles.Add(new DocumentResponsible()
+                    {
+                        IsMain = false,
+                        UserId = userId
+                    });
+                }
+            }
             UnitOfWork.SaveChanges();
             return true;
         }

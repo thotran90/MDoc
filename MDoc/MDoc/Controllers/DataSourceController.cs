@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using MDoc.Services.Contract.Enums;
 using MDoc.Services.Contract.Interfaces;
@@ -10,7 +11,7 @@ namespace MDoc.Controllers
         #region [Constructor]
 
         public DataSourceController(IEducationTypeService educationTypeService, IProgramService programService,
-            ISchoolTypeService schoolTypeService, IAddressService addressService, IGenderService genderService, IDocumentTypeService documentTypeService, ICustomerService customerService, ISchoolService schoolService)
+            ISchoolTypeService schoolTypeService, IAddressService addressService, IGenderService genderService, IDocumentTypeService documentTypeService, ICustomerService customerService, ISchoolService schoolService, IUserService userService)
         {
             _educationTypeService = educationTypeService;
             _programService = programService;
@@ -20,6 +21,7 @@ namespace MDoc.Controllers
             _documentTypeService = documentTypeService;
             _customerService = customerService;
             _schoolService = schoolService;
+            _userService = userService;
         }
 
         #endregion
@@ -34,6 +36,7 @@ namespace MDoc.Controllers
         private readonly IDocumentTypeService _documentTypeService;
         private readonly ICustomerService _customerService;
         private readonly ISchoolService _schoolService;
+        private readonly IUserService _userService;
         #endregion
 
         #region [Actions]
@@ -350,6 +353,44 @@ namespace MDoc.Controllers
                 .Take(PageSize)
                 .ToList();
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult Users(string id = "", string query = "")
+        {
+            if (!string.IsNullOrEmpty(id))
+            {
+                var userIds = id.Split(',').Select(x => Convert.ToInt32(x)).ToList();
+                var users = _userService.GetUsers().Where(m => userIds.Contains(m.UserId))
+                    .Select(x => new {id = x.UserId, text = x.UserName})
+                    .ToList();
+                return Json(users,JsonRequestBehavior.AllowGet);
+            }
+            var result = _userService.GetUsers(query)
+                .Select(x => new {id = x.UserId, text = x.UserName})
+                .OrderByDescending(m => m.text.Equals(query))
+                .Take(PageSize)
+                .ToList();
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult SubUsers(string id = "", string MainResponsibleIds = "", string query = "")
+        {
+            if (!string.IsNullOrEmpty(id))
+            {
+                var userIds = id.Split(',').Select(x => Convert.ToInt32(x)).ToList();
+                var users = _userService.GetUsers().Where(m => userIds.Contains(m.UserId))
+                    .Select(x => new { id = x.UserId, text = x.UserName })
+                    .ToList();
+                return Json(users, JsonRequestBehavior.AllowGet);
+            }
+            var mainUserIds = MainResponsibleIds.Split(',').Select(x => Convert.ToInt32(x)).ToList();
+            var result = _userService.GetUsers(query)
+                .Where(m => !mainUserIds.Contains(m.UserId))
+                .Select(x => new {id = x.UserId, text = x.UserName})
+                .OrderByDescending(m => m.text.Equals(query))
+                .Take(PageSize)
+                .ToList();
+            return Json(result,JsonRequestBehavior.AllowGet);
         }
 
         #endregion

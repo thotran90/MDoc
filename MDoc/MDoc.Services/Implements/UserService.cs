@@ -18,10 +18,18 @@ namespace MDoc.Services.Implements
             throw new NotImplementedException();
         }
 
-        public IQueryable<UserModel> GetUsers(SearchUserModel arg)
-        {
-            throw new NotImplementedException();
-        }
+        public IQueryable<UserModel> GetUsers(string query = "")
+            => UnitOfWork.GetRepository<ApplicationUser>().Get(m => !m.IsDisabled)
+                .Where(m => string.IsNullOrEmpty(query) || m.UserName.ToLower().Contains(query.ToLower()))
+                .Select(x => new UserModel()
+                {
+                    UserId = x.ApplicationUserId,
+                    UserName = x.UserName,
+                    Email = x.Email,
+                    Avatar = x.Avatar,
+                    RegisterDate = x.RegisterDate,
+                    LoginId = x.LoginId
+                });
 
         public UserModel Login(LoginModel model)
         {

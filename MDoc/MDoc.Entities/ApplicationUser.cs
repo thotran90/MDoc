@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace MDoc.Entities
 {
@@ -12,5 +13,11 @@ namespace MDoc.Entities
         public bool IsDisabled { get; set; }
         public string Avatar { get; set; }
         public DateTime? RegisterDate { get; set; }
+        public virtual ICollection<DocumentResponsible> DocumentResponsibles { get; set; }
+
+        public ApplicationUser()
+        {
+            this.DocumentResponsibles = new HashSet<DocumentResponsible>();
+        }
     }
 }
