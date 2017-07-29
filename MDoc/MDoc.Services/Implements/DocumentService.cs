@@ -16,6 +16,7 @@ namespace MDoc.Services.Implements
         private readonly IDocumentTypeService _documentTypeService;
 
         #endregion
+
         #region [Contructor]
         public DocumentService(IUnitOfWork unitOfWork, ICustomerService customerService, IDocumentTypeService documentTypeService) : base(unitOfWork)
         {
@@ -61,6 +62,8 @@ namespace MDoc.Services.Implements
                 ReferenceProgramId = x.document.ReferenceProgramId,
                 FinalSchoolId = x.document.FinalSchoolId,
                 FinalProgramId = x.document.FinalProgramId,
+                DocumentType = x.document.DocumentType.Label,
+                DocumentStatus = x.document.DocumentStatus.Label,
                 Customer = new CustomerModel()
                 {
                     FirstName = x.customer.FirstName,

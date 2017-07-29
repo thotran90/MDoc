@@ -12,8 +12,8 @@
               columns.Bound(c => c.Customer.LastName);
               columns.Bound(c => c.Customer.FirstName);
               columns.Bound(c => c.Code);
-              columns.Bound(c => c.DocumentTypeId);
-              columns.Bound(c => c.DocumentStatusId);
+              columns.Bound(c => c.DocumentType);
+              columns.Bound(c => c.DocumentStatus);
               columns.Command(command =>
                     {
                         command.Destroy().Text("delete");
