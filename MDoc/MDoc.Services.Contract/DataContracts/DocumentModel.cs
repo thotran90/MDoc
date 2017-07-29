@@ -2,6 +2,11 @@
 {
     public class DocumentModel
     {
+        public DocumentModel()
+        {
+            Customer = new CustomerModel();
+        }
+
         public int DocumentId { get; set; }
         public int CustomerId { get; set; }
         public string DocumentTypeId { get; set; }
@@ -16,10 +21,9 @@
         public CustomerModel Customer { get; set; }
         public string DocumentType { get; set; }
         public string DocumentStatus { get; set; }
-
-        public DocumentModel()
-        {
-            this.Customer = new CustomerModel();
-        }
+        public string ReferenceCountry { get; set; }
+        public string ReferenceSchool { get; set; }
+        public string FinalCountry { get; set; }
+        public string FinalSchool { get; set; }
     }
 }

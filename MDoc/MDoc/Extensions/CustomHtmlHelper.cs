@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Metadata.Edm;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
@@ -10,7 +11,7 @@ namespace MDoc.Extensions
 {
     public static class CustomHtmlHelper
     {
-         #region Modal
+        #region Modal
 
         public static MvcHtmlString Modal(this HtmlHelper htmlHelper, string action, string buttonText, string icon,
             ModalOption modalOption, IDictionary<string, object> htmlAttributes = null)
@@ -381,6 +382,17 @@ namespace MDoc.Extensions
             }
             options.PropertyName = ExpressionHelper.GetExpressionText(expression);
             return WysiwygEditor(helper, options, htmlAttribute);
+        }
+
+        #endregion
+
+        #region [Address]
+
+        public static MvcHtmlString AddressNameFor<TModule, TValue>(this HtmlHelper<TModule> helper,
+            Expression<Func<TModule, TValue>> expression)
+        {
+            
+            return null;
         }
 
         #endregion
