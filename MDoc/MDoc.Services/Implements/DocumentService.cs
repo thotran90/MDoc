@@ -169,6 +169,11 @@ namespace MDoc.Services.Implements
         {
             var document = UnitOfWork.GetRepository<Document>().GetByKeys(model.DocumentId);
             if (document == null) return false;
+            document.UpdatedById = model.LoggedUserId;
+            document.UpdatedDate = DateTime.Now;
+            document.ReferenceCountryId = model.ReferenceCountryId;
+            document.ReferenceProgramId = model.ReferenceProgramId;
+            document.ReferenceSchoolId = model.ReferenceSchoolId;
 
             return true;
         }
