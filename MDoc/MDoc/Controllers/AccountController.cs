@@ -59,5 +59,12 @@ namespace MDoc.Controllers
         }
 
         #endregion
+        
+        #region [User Management]
+
+        public ActionResult Index() => View();
+
+        #endregion
+
     }
 }
