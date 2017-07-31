@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Data.Entity.Core.Common.EntitySql;
+using System.Web.Mvc;
 using System.Web.Security;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
@@ -72,6 +73,29 @@ namespace MDoc.Controllers
             var accounts = _userService.GetUsers();
             var result = accounts.ToDataSourceResult(request);
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [MvcSiteMapNode(Title = "Register new account",ParentKey = "user")]
+        public ActionResult Create() => View("Save", new UserModel());
+
+        [HttpGet]
+        [MvcSiteMapNode(Title = "Edit account",ParentKey = "user",PreservedRouteParameters = "id")]
+        public ActionResult Edit(int id)
+        {
+            return View("Save",new UserModel());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Save(UserModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Index");
+            }
+            ModelState.AddModelError("InvalidModel","Fill all of required field before submit.");
+            return View("Save", model);
         }
 
         #endregion

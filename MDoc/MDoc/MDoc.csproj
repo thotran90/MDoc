@@ -507,6 +507,7 @@
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Account\_ListOfAccount.cshtml" />
     <Content Include="Views\Account\_Command.cshtml" />
+    <Content Include="Views\Account\Save.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.css" />
