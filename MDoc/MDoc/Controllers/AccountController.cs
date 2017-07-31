@@ -1,8 +1,11 @@
 ﻿using System.Web.Mvc;
 using System.Web.Security;
+using Kendo.Mvc.Extensions;
+using Kendo.Mvc.UI;
 using MDoc.Services.Contract;
 using MDoc.Services.Contract.DataContracts.User;
 using MDoc.Services.Contract.Interfaces;
+using MvcSiteMapProvider;
 
 namespace MDoc.Controllers
 {
@@ -61,8 +64,15 @@ namespace MDoc.Controllers
         #endregion
         
         #region [User Management]
-
+        [MvcSiteMapNode(Title = "User Management", Key = "user",ParentKey = "home")]
         public ActionResult Index() => View();
+
+        public ActionResult ListOfAccount([DataSourceRequest] DataSourceRequest request)
+        {
+            var accounts = _userService.GetUsers();
+            var result = accounts.ToDataSourceResult(request);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
 
         #endregion
 

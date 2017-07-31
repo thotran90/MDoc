@@ -1,7 +1,14 @@
-﻿
-@{
-    ViewBag.Title = "Index";
+﻿@{
+    ViewBag.Title = "List of application user";
 }
-
-<h2>Index</h2>
-
+<div class="row row-margintop">
+    @Html.Partial("_ListOfAccount")
+</div>
+@section scripts{
+    @Scripts.Render("~/application/user")
+    <script type="text/javascript">
+        $(function() {
+            appUser.setHrightGrid();
+        });
+    </script>
+}

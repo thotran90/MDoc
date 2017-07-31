@@ -242,6 +242,7 @@
     <Content Include="Scripts\application\customer.js" />
     <Content Include="Scripts\application\document.js" />
     <Content Include="Scripts\application\school.js" />
+    <Content Include="Scripts\application\user.js" />
     <Content Include="Scripts\bootstrap-confirmation.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -504,6 +505,8 @@
     <Content Include="Views\Document\_Command.cshtml" />
     <Content Include="Views\Document\Save.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\_ListOfAccount.cshtml" />
+    <Content Include="Views\Account\_Command.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.css" />

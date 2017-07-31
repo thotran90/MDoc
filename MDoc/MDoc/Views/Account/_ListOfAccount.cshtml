@@ -1,0 +1,45 @@
+﻿@using MDoc.Services.Contract.DataContracts.User
+<div class="col-md-12">
+    @(Html.Kendo().Grid<UserModel>()
+          .Name("GridAccounts")
+          .Columns(columns =>
+          {
+              columns.Bound(c => c.UserId).ClientTemplate(@Html.Partial("_Command").ToHtmlString())
+                  .Width(150)
+                  .HeaderTemplate("Actions")
+                  .Sortable(false)
+                  .Filterable(false);
+              columns.Bound(c => c.LoginId);
+              columns.Bound(c => c.UserName);
+              columns.Bound(c => c.Email);
+              columns.Bound(c => c.RegisterDate);
+              columns.Bound(c => c.IsDisabled);
+              columns.Command(command =>
+                    {
+                        command.Destroy().Text("delete");
+                    }).Width(150);
+          })
+          .ToolBar(toolbar =>
+          {
+              toolbar.Template(@<text>
+        <div class="grid-toolbar">
+            <a class="btn btn-primary" href="@Url.Action("Create")"><i class="fa fa-plus-circle"></i> Add new account</a>
+        </div>
+            </text>    );
+          })
+          .Scrollable()
+          .Filterable()
+          .Sortable()
+          .Pageable(pageable => pageable
+              .Refresh(true)
+              .PageSizes(true)
+              .ButtonCount(5))
+          .DataSource(dataSource => dataSource
+              .Ajax()
+              .Read(read => read.Action("ListOfAccount", "Account"))
+              .Model(model => model.Id(p => p.UserId))
+              .PageSize(20)
+              .Destroy(c => c.Action("Remove", "Account"))
+          )
+    )
+</div>
