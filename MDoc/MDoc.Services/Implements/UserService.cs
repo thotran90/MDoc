@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Linq;
 using MDoc.Entities;
+using MDoc.Infrastructures;
 using MDoc.Repositories.Contract;
+using MDoc.Services.Contract;
+using MDoc.Services.Contract.DataContracts;
 using MDoc.Services.Contract.DataContracts.User;
 using MDoc.Services.Contract.Interfaces;
 
@@ -9,13 +12,42 @@ namespace MDoc.Services.Implements
 {
     public class UserService : BaseService, IUserService
     {
-        public UserService(IUnitOfWork unitOfWork) : base(unitOfWork)
+        #region [Variable]
+
+        private readonly IEmailService _emailService;
+        #endregion
+
+        #region [Contructor]
+        public UserService(IUnitOfWork unitOfWork, IEmailService emailService) : base(unitOfWork)
         {
+            _emailService = emailService;
         }
 
-        public UserModel Create(LoginModel model)
+        #endregion
+
+
+        public UserModel Create(UserModel model)
         {
-            throw new NotImplementedException();
+            var password = MD5Helper.GetPassword();
+            var user = new ApplicationUser()
+            {
+                LoginId = model.LoginId,
+                UserName = model.UserName,
+                IsDisabled = false,
+                RegisterDate = DateTime.Now,
+                Email = model.Email,
+                Password = password.ToMd5()
+            };
+            UnitOfWork.GetRepository<ApplicationUser>().Create(user);
+            UnitOfWork.SaveChanges();
+            var emailToUserModel = new EmailModel()
+            {
+                ToAddress = model.Email,
+                Subject = "[MDOC] - Register new user",
+                Body =$"Hello {model.UserName}, </br> Your password is: </br> <strong>{password}</strong></br>Please change your password when you start using MDoc ASAP.</br> If you have any issue, please contact trandev90@gmail.com for more information. <strong>Do not reply</strong> this email."
+            };
+            _emailService.SendEmailToUser(emailToUserModel);
+            return new UserModel() {UserId = user.ApplicationUserId};
         }
 
         public IQueryable<UserModel> GetUsers(string query = "")
@@ -52,7 +84,28 @@ namespace MDoc.Services.Implements
             return result;
         }
 
-        public UserModel Update(LoginModel model)
+        public UserModel Update(UserModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool CheckLoginId(string loginId)
+            => UnitOfWork.GetRepository<ApplicationUser>().Get().Any(m => m.LoginId == loginId);
+
+        public bool CheckEmail(string email)
+            => UnitOfWork.GetRepository<ApplicationUser>().Get().Any(m => m.Email == email);
+
+        public bool UpdateAvatar(UserModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool ChangePassword(ChangePasswordModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Remove(UserModel model)
         {
             throw new NotImplementedException();
         }

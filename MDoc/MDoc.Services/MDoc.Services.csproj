@@ -63,6 +63,7 @@
     <Compile Include="Implements\DocumentStatusService.cs" />
     <Compile Include="Implements\DocumentTypeService.cs" />
     <Compile Include="Implements\EducationTypeService.cs" />
+    <Compile Include="Implements\EmailService.cs" />
     <Compile Include="Implements\GenderService.cs" />
     <Compile Include="Implements\ProgramService.cs" />
     <Compile Include="Implements\SchoolService.cs" />

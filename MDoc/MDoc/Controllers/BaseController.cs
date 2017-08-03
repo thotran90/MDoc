@@ -38,7 +38,7 @@ namespace MDoc.Controllers
                 new Claim(ClaimTypes.Email, appUserState.Email),
                 new Claim(ClaimTypes.PrimarySid, appUserState.UserId.ToString()),
                 new Claim("userState", appUserState.ToString()),
-                new Claim("Avatar", appUserState.Avatar)
+                //new Claim("Avatar", appUserState.Avatar)
             };
 
             // create *required* claims

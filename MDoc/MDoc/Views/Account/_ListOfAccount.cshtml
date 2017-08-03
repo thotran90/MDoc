@@ -4,15 +4,10 @@
           .Name("GridAccounts")
           .Columns(columns =>
           {
-              columns.Bound(c => c.UserId).ClientTemplate(@Html.Partial("_Command").ToHtmlString())
-                  .Width(150)
-                  .HeaderTemplate("Actions")
-                  .Sortable(false)
-                  .Filterable(false);
               columns.Bound(c => c.LoginId);
               columns.Bound(c => c.UserName);
               columns.Bound(c => c.Email);
-              columns.Bound(c => c.RegisterDate);
+              columns.Bound(c => c.RegisterDate).Format("{0:dd/MM/yyyy}");
               columns.Bound(c => c.IsDisabled);
               columns.Command(command =>
                     {

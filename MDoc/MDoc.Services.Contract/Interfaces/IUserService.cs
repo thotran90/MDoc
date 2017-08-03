@@ -7,7 +7,12 @@ namespace MDoc.Services.Contract.Interfaces
     {
         UserModel Login(LoginModel model);
         IQueryable<UserModel> GetUsers(string query = "");
-        UserModel Create(LoginModel model);
-        UserModel Update(LoginModel model);
+        UserModel Create(UserModel model);
+        UserModel Update(UserModel model);
+        bool CheckLoginId(string loginId);
+        bool CheckEmail(string email);
+        bool UpdateAvatar(UserModel model);
+        bool ChangePassword(ChangePasswordModel model);
+        bool Remove(UserModel model);
     }
 }

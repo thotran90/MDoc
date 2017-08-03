@@ -1,4 +1,5 @@
 ﻿using MDoc.Infrastructures;
+using MDoc.Services.Contract;
 using MDoc.Services.Contract.Interfaces;
 using MDoc.Services.Implements;
 using Microsoft.Practices.Unity;
@@ -43,6 +44,7 @@ namespace MDoc.Services.Resolver
             container.RegisterType<IDocumentTypeService, DocumentTypeService>();
             container.RegisterType<IDocumentStatusService, DocumentStatusService>();
             container.RegisterType<IDocumentService, DocumentService>();
+            container.RegisterType<IEmailService, EmailService>();
         }
 
         #endregion

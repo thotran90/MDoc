@@ -10,7 +10,7 @@ namespace MDoc.Services.Contract.DataContracts.User
         [Display(Name = "Login Id")]
         [Required]
         public string LoginId { get; set; }
-
+        [RegularExpression(@"^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*\s+<(\w[-._\w]*\w@\w[-._\w]*\w\.\w{2,3})>$|^(\w[-._\w]*\w@\w[-._\w]*\w\.\w{2,3})$", ErrorMessage = "Invalid email address")]
         [Display(Name = "Email")]
         [Required]
         public string Email { get; set; }
@@ -20,7 +20,6 @@ namespace MDoc.Services.Contract.DataContracts.User
         public string UserName { get; set; }
 
         [Display(Name = "Password")]
-        [Required]
         public string Password { get; set; }
 
         [Display(Name = "Avatar")]
@@ -30,5 +29,6 @@ namespace MDoc.Services.Contract.DataContracts.User
         public DateTime? RegisterDate { get; set; }
 
         public bool IsDisabled { get; set; }
+        public bool IsUpdate => UserId > 0;
     }
 }

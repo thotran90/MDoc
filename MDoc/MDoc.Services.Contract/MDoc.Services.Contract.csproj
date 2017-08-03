@@ -47,12 +47,15 @@
     <Compile Include="DataContracts\DocumentStatusModel.cs" />
     <Compile Include="DataContracts\DocumentTypeModel.cs" />
     <Compile Include="DataContracts\EducationTypeModel.cs" />
+    <Compile Include="DataContracts\EmailModel.cs" />
     <Compile Include="DataContracts\GenderModel.cs" />
     <Compile Include="DataContracts\ProgramModel.cs" />
     <Compile Include="DataContracts\SchoolModel.cs" />
     <Compile Include="DataContracts\SchoolTypeModel.cs" />
+    <Compile Include="DataContracts\User\ChangePasswordModel.cs" />
     <Compile Include="DataContracts\User\SearchUserModel.cs" />
     <Compile Include="Enums\AddressTypeModel.cs" />
+    <Compile Include="IEmailService.cs" />
     <Compile Include="Interfaces\IAddressService.cs" />
     <Compile Include="Interfaces\ICustomerService.cs" />
     <Compile Include="Interfaces\IDocumentService.cs" />

@@ -1,7 +1,38 @@
-﻿
+﻿@model MDoc.Services.Contract.DataContracts.User.UserModel
 @{
-    ViewBag.Title = "Save";
+    ViewBag.Title = @Model.IsUpdate ? "Edit account" : "Register new account";
 }
-
-<h2>Save</h2>
-
+@using (Html.BeginForm("Save", "Account", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m=>m.UserId)
+    @Html.ValidationSummary(true)
+    <div class="row">
+        <div class="col-md-3">
+            @Html.LabelFor(m => m.LoginId)
+            @Html.ValidationMessageFor(m => m.LoginId)
+            @Html.TextBoxFor(m => m.LoginId, new {@class = "form-control"})
+        </div>
+    </div>
+    <div class="row row-margintop">
+        <div class="col-md-3">
+            @Html.LabelFor(m => m.UserName)
+            @Html.ValidationMessageFor(m => m.UserName)
+            @Html.TextBoxFor(m => m.UserName, new {@class = "form-control"})
+        </div>
+    </div>
+    <div class="row row-margintop">
+        <div class="col-md-3">
+            @Html.LabelFor(m => m.Email)
+            @Html.ValidationMessageFor(m => m.Email)
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="row row-margintop">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <a class="btn btn-default" href="@Url.Action("Index", "Account")"><i class="fa fa-backward"></i> Back to list</a>
+            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
+        </div>
+    </div>
+}
+@Html.Hidden("CheckLoginUrl",Url.Action("","Account"))
