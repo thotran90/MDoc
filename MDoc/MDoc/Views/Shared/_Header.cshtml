@@ -1,4 +1,5 @@
-﻿<div class="android-header mdl-layout__header mdl-layout__header--waterfall">
+﻿@using System.IdentityModel.Claims
+<div class="android-header mdl-layout__header mdl-layout__header--waterfall">
     <div class="mdl-layout__header-row">
         <span class="android-title mdl-layout-title">
             <img class="android-logo-image" src="~/Content/images/logo.png">
@@ -28,9 +29,8 @@
             <i class="material-icons">more_vert</i>
         </button>
         <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="more-button">
-            <li class="mdl-menu__item">5.0 Lollipop</li>
-            <li class="mdl-menu__item">4.4 KitKat</li>
-            <li disabled class="mdl-menu__item">4.3 Jelly Bean</li>
+            <li disabled class="mdl-menu__item">Hi! @User.Identity.Name</li>
+            <li class="mdl-menu__item"><a href="@Url.Action("ChangePassword","Account")">Change password</a></li>
             <li class="mdl-menu__item"><a href="@Url.Action("LogOff","Account")"><i class="fa fa-sign-out"></i> Log Out</a></li>
         </ul>
     </div>

@@ -508,6 +508,7 @@
     <Content Include="Views\Account\_ListOfAccount.cshtml" />
     <Content Include="Views\Account\_Command.cshtml" />
     <Content Include="Views\Account\Save.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.css" />

@@ -11,7 +11,7 @@
               columns.Bound(c => c.IsDisabled);
               columns.Command(command =>
                     {
-                        command.Destroy().Text("delete");
+                        command.Destroy().Text("disable");
                     }).Width(150);
           })
           .ToolBar(toolbar =>

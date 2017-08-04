@@ -44,7 +44,7 @@ namespace MDoc.Services.Implements
             {
                 ToAddress = model.Email,
                 Subject = "[MDOC] - Register new user",
-                Body =$"Hello {model.UserName}, </br> Your password is: </br> <strong>{password}</strong></br>Please change your password when you start using MDoc ASAP.</br> If you have any issue, please contact trandev90@gmail.com for more information. <strong>Do not reply</strong> this email."
+                Body =$"Hello {model.UserName}, <br/> Your password is: <br/> <strong>{password}</strong><br/>Please change your password when you start using MDoc ASAP.<br/> If you have any issue, please contact trandev90@gmail.com for more information. <strong>Do not reply</strong> this email."
             };
             _emailService.SendEmailToUser(emailToUserModel);
             return new UserModel() {UserId = user.ApplicationUserId};
@@ -102,12 +102,29 @@ namespace MDoc.Services.Implements
 
         public bool ChangePassword(ChangePasswordModel model)
         {
-            throw new NotImplementedException();
+            var user =
+                UnitOfWork.GetRepository<ApplicationUser>()
+                    .Single(m => !m.IsDisabled && m.ApplicationUserId == model.UserId);
+            if(user == null) return false;
+            user.Password = model.NewPassword.ToMd5();
+            UnitOfWork.SaveChanges();
+            var emailToUserModel = new EmailModel()
+            {
+                ToAddress = user.Email,
+                Subject = "[MDOC] - Change password",
+                Body = $"Hello {user.UserName}, <br/> Your account password is changed: <br/> <strong>{model.NewPassword}</strong><br/> If you have any issue, please contact trandev90@gmail.com for more information. <strong>Do not reply</strong> this email."
+            };
+            _emailService.SendEmailToUser(emailToUserModel);
+            return true;
         }
 
         public bool Remove(UserModel model)
         {
-            throw new NotImplementedException();
+            var user = UnitOfWork.GetRepository<ApplicationUser>().GetByKeys(model.UserId);
+            if(user == null) return false;
+            user.IsDisabled = true;
+            UnitOfWork.SaveChanges();
+            return true;
         }
     }
 }

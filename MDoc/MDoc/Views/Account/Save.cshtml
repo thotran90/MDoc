@@ -7,25 +7,34 @@
     @Html.AntiForgeryToken()
     @Html.HiddenFor(m=>m.UserId)
     @Html.ValidationSummary(true)
+    
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-4 col-sm-12 col-xs-12">
             @Html.LabelFor(m => m.LoginId)
             @Html.ValidationMessageFor(m => m.LoginId)
+            @if (!ViewData.ModelState.IsValid)
+            {
+                @Html.ValidationMessage("LoginIdUsed")
+            }
             @Html.TextBoxFor(m => m.LoginId, new {@class = "form-control"})
         </div>
     </div>
     <div class="row row-margintop">
-        <div class="col-md-3">
+        <div class="col-md-4 col-sm-12 col-xs-12">
             @Html.LabelFor(m => m.UserName)
             @Html.ValidationMessageFor(m => m.UserName)
             @Html.TextBoxFor(m => m.UserName, new {@class = "form-control"})
         </div>
     </div>
     <div class="row row-margintop">
-        <div class="col-md-3">
+        <div class="col-md-4 col-sm-12 col-xs-12">
             @Html.LabelFor(m => m.Email)
             @Html.ValidationMessageFor(m => m.Email)
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            @if (!ViewData.ModelState.IsValid)
+            {
+                @Html.ValidationMessage("EmailUsed")
+            }
+            @Html.TextBoxFor(m => m.Email, new {@class = "form-control"})
         </div>
     </div>
     <div class="row row-margintop">

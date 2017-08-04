@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Data.SqlTypes;
+using System.Web.Mvc;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using MDoc.Services.Contract.DataContracts.User;
@@ -90,6 +91,18 @@ namespace MDoc.Controllers
         {
             if (ModelState.IsValid)
             {
+                var isInUseLoginId = _userService.CheckLoginId(model.LoginId);
+                if (isInUseLoginId)
+                {
+                    ModelState.AddModelError("LoginIdUsed","This login id is in use.Please use another login id");
+                    return View("Save",model);
+                }
+                var isInUseEmail = _userService.CheckEmail(model.Email);
+                if (isInUseEmail)
+                {
+                    ModelState.AddModelError("EmailUsed", "This email is registed for another account.Please use another email.");
+                    return View("Save", model);
+                }
                 _userService.Create(model);
                 return RedirectToAction("Index");
             }
@@ -109,6 +122,57 @@ namespace MDoc.Controllers
         {
             var exist = _userService.CheckEmail(email);
             return Json(exist ? "In use" : "OK", JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [MvcSiteMapNode(Title = "Change password",ParentKey = "home")]
+        public ActionResult ChangePassword() => View(new ChangePasswordModel());
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangePassword(ChangePasswordModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var loginModel = new LoginModel()
+                {
+                    LoginId = CurrentUser.LoginId,
+                    Password = model.OldPassword
+                };
+                var isValidOldPassword = _userService.Login(loginModel).UserId > 0;
+                if (isValidOldPassword)
+                {
+                    model.UserId = CurrentUser.UserId;
+                    var result = _userService.ChangePassword(model);
+                    if (result)
+                    {
+                        return RedirectToAction("LogOff");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("InternalServerError", "Something went wrong. Please try again later.");
+                        return View(model);
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("InvalidCurrentPassword","Current password is incorrect.");
+                    return View(model);
+                }
+            }
+            ModelState.AddModelError("InvalidModel", "Fill all of required field before submit.");
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Remove([DataSourceRequest] DataSourceRequest request, UserModel model)
+        {
+            if (model != null)
+            {
+                _userService.Remove(model);
+            }
+
+            return Json(new[] { model }.ToDataSourceResult(request, ModelState));
         }
 
         #endregion
