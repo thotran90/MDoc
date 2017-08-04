@@ -1,4 +1,5 @@
-﻿<div class="android-drawer mdl-layout__drawer">
+﻿@using Microsoft.AspNet.Identity
+<div class="android-drawer mdl-layout__drawer">
             <span class="mdl-layout-title">
                 <img class="android-logo-image" src="~/Content/images/logo.png">
             </span>
@@ -7,7 +8,11 @@
         <a class="mdl-navigation__link" href=@Url.Action("Index","School")>Schools</a>
         <a class="mdl-navigation__link" href=@Url.Action("Index", "Customer")>Customers</a>
         <a class="mdl-navigation__link" href=@Url.Action("Index", "Document")>Documents</a>
-        <span class="mdl-navigation__link" href="">System Configuration</span>
-        <a class="mdl-navigation__link" href=@Url.Action("Index", "Account")>User Management</a>
+        @if (User.Identity.GetUserId() == "admin")
+        {
+            <span class="mdl-navigation__link" href="">System Configuration</span>
+            <a class="mdl-navigation__link" href=@Url.Action("Index", "Account")>User Management</a>
+        }
+        
     </nav>
         </div>
