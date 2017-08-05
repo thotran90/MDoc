@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using MDoc.Entities;
 using MDoc.EntityFramework.Mapping;
 
 namespace MDoc.EntityFramework
@@ -29,7 +30,9 @@ namespace MDoc.EntityFramework
                 .Add(new DocumentStatusMapping())
                 .Add(new CustomerMapping())
                 .Add(new DocumentMapping())
-                .Add(new DoumentResponsibleMapping());
+                .Add(new DoumentResponsibleMapping())
+                .Add(new SuperAdminMapping())
+                .Add(new CompanyMapping());
             base.OnModelCreating(modelBuilder);
         }
     }

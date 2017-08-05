@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MDoc.Entities.Enums;
+﻿using System.Collections.Generic;
 
 namespace MDoc.Entities
 {

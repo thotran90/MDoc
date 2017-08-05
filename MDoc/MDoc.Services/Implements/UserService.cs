@@ -79,7 +79,8 @@ namespace MDoc.Services.Implements
                 UserName = userEntity.UserName,
                 Avatar = userEntity.Avatar,
                 Email = userEntity.Email,
-                LoginId = userEntity.LoginId
+                LoginId = userEntity.LoginId,
+                IsSuperAdmin = UnitOfWork.GetRepository<SuperAdmin>().Get().Any(m=> m.IsSuperAdmin && m.UserId == userEntity.ApplicationUserId)
             };
             return result;
         }

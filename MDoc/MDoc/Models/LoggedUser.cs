@@ -22,5 +22,7 @@ namespace MDoc.Models
                     : Convert.ToInt32(FindFirst("CompanyId").Value);
 
         public string Avatar => FindFirst("Avatar").Value;
+        public bool IsSuperAdmin => bool.Parse(FindFirst("IsSuperAdmin").Value);
+
     }
 }

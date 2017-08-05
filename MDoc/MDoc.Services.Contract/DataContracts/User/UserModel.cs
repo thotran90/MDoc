@@ -30,5 +30,6 @@ namespace MDoc.Services.Contract.DataContracts.User
 
         public bool IsDisabled { get; set; }
         public bool IsUpdate => UserId > 0;
+        public bool IsSuperAdmin { get; set; }
     }
 }

@@ -5,6 +5,11 @@ namespace MDoc.Entities
 {
     public class ApplicationUser
     {
+        public ApplicationUser()
+        {
+            DocumentResponsibles = new HashSet<DocumentResponsible>();
+        }
+
         public int ApplicationUserId { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }
@@ -14,10 +19,6 @@ namespace MDoc.Entities
         public string Avatar { get; set; }
         public DateTime? RegisterDate { get; set; }
         public virtual ICollection<DocumentResponsible> DocumentResponsibles { get; set; }
-
-        public ApplicationUser()
-        {
-            this.DocumentResponsibles = new HashSet<DocumentResponsible>();
-        }
+        public virtual ICollection<Company> AdministrateCompanies { get; set; }
     }
 }

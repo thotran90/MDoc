@@ -44,5 +44,6 @@ namespace MDoc.Services.Contract.DataContracts
         [Display(Name = "Sub Responsible User(s)")]
         public string SubResponsibleIds { get; set; }
 
+        public bool CanEdit { get; set; }
     }
 }

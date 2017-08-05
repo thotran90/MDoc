@@ -15,6 +15,14 @@ namespace MDoc.EntityFramework.Mapping
                 .WithRequired(m=>m.User)
                 .HasForeignKey(m=>m.UserId)
                 .WillCascadeOnDelete(false);
+            HasMany(m => m.AdministrateCompanies)
+                .WithMany(m => m.Administrators)
+                .Map(cs =>
+                {
+                    cs.MapLeftKey("UserId");
+                    cs.MapRightKey("CompanyId");
+                    cs.ToTable("CompanyAdmin", "dbo");
+                });
         }
     }
 }
