@@ -15,6 +15,7 @@ namespace MDoc.Entities
         public int? DistrictId { get; set; }
         public int? WardId { get; set; }
         public string Address { get; set; }
+        public bool IsDisabled { get; set; }
         public virtual ICollection<ApplicationUser> Administrators { get; set; }
     }
 }

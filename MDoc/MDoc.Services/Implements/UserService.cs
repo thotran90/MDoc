@@ -80,7 +80,8 @@ namespace MDoc.Services.Implements
                 Avatar = userEntity.Avatar,
                 Email = userEntity.Email,
                 LoginId = userEntity.LoginId,
-                IsSuperAdmin = UnitOfWork.GetRepository<SuperAdmin>().Get().Any(m=> m.IsSuperAdmin && m.UserId == userEntity.ApplicationUserId)
+                IsSuperAdmin = UnitOfWork.GetRepository<SuperAdmin>().Get().Any(m=> m.IsSuperAdmin && m.UserId == userEntity.ApplicationUserId),
+                IsCompanyAdmin = userEntity.AdministrateCompanies.Any()
             };
             return result;
         }

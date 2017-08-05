@@ -23,6 +23,6 @@ namespace MDoc.Models
 
         public string Avatar => FindFirst("Avatar").Value;
         public bool IsSuperAdmin => bool.Parse(FindFirst("IsSuperAdmin").Value);
-
+        public bool IsCompanyAdmin => bool.Parse(FindFirst("IsCompanyAdmin").Value);
     }
 }

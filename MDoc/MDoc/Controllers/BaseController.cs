@@ -38,7 +38,8 @@ namespace MDoc.Controllers
                 new Claim(ClaimTypes.Email, appUserState.Email),
                 new Claim(ClaimTypes.PrimarySid, appUserState.UserId.ToString()),
                 new Claim("userState", appUserState.ToString()),
-                new Claim("IsSuperAdmin",appUserState.IsSuperAdmin.ToString())
+                new Claim("IsSuperAdmin",appUserState.IsSuperAdmin.ToString()),
+                new Claim("IsCompanyAdmin",appUserState.IsCompanyAdmin.ToString())
                 //new Claim("Avatar", appUserState.Avatar)
             };
 

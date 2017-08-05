@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Runtime.InteropServices;
 using MDoc.Entities;
 using MDoc.Repositories.Contract;
 using MDoc.Services.Contract.DataContracts;
@@ -9,14 +8,14 @@ using Microsoft.Practices.ObjectBuilder2;
 
 namespace MDoc.Services.Implements
 {
-    public class CompanyService:BaseService,ICompanyService
+    public class CompanyService : BaseService, ICompanyService
     {
         public CompanyService(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
         }
 
         public IQueryable<CompanyModel> ListOfCompanies()
-            => UnitOfWork.GetRepository<Company>().Get().Select(m => new CompanyModel()
+            => UnitOfWork.GetRepository<Company>().Get().Select(m => new CompanyModel
             {
                 Id = m.CompanyId,
                 Name = m.Name,
@@ -30,8 +29,8 @@ namespace MDoc.Services.Implements
         public CompanyModel GetCompanyInformation(int companyId)
         {
             var entity = UnitOfWork.GetRepository<Company>().GetByKeys(companyId);
-            if(entity == null) return new CompanyModel() {Id = 0};
-            var result = new CompanyModel()
+            if (entity == null) return new CompanyModel {Id = 0};
+            var result = new CompanyModel
             {
                 Id = entity.CompanyId,
                 Name = entity.Name,
@@ -51,7 +50,7 @@ namespace MDoc.Services.Implements
 
         public bool Create(CompanyModel model)
         {
-            var entity = new Company()
+            var entity = new Company
             {
                 Name = model.Name,
                 Address = model.Address,
@@ -69,7 +68,7 @@ namespace MDoc.Services.Implements
                 var userIds = model.CompanyAdminIds.Split(',').Select(x => Convert.ToInt32(x)).ToList();
                 var users =
                     UnitOfWork.GetRepository<ApplicationUser>().Get(m => userIds.Contains(m.ApplicationUserId)).ToList();
-                users.ForEach(x=> entity.Administrators.Add(x));
+                users.ForEach(x => entity.Administrators.Add(x));
             }
             UnitOfWork.GetRepository<Company>().Create(entity);
             UnitOfWork.SaveChanges();
@@ -79,7 +78,7 @@ namespace MDoc.Services.Implements
         public bool Update(CompanyModel model)
         {
             var entity = UnitOfWork.GetRepository<Company>().GetByKeys(model.Id);
-            if(entity == null) return false;
+            if (entity == null) return false;
             entity.Name = model.Name;
             entity.Mobile = model.Mobile;
             entity.Email = model.Email;
@@ -103,7 +102,11 @@ namespace MDoc.Services.Implements
 
         public bool Remove(CompanyModel model)
         {
-            throw new System.NotImplementedException();
+            var company = UnitOfWork.GetRepository<Company>().GetByKeys(model.Id);
+            if (company == null) return false;
+            company.IsDisabled = true;
+            UnitOfWork.SaveChanges();
+            return true;
         }
     }
 }

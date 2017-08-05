@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Security.AccessControl;
 
 namespace MDoc.Services.Contract.DataContracts.User
 {
@@ -31,5 +32,6 @@ namespace MDoc.Services.Contract.DataContracts.User
         public bool IsDisabled { get; set; }
         public bool IsUpdate => UserId > 0;
         public bool IsSuperAdmin { get; set; }
+        public bool IsCompanyAdmin { get; set; }
     }
 }

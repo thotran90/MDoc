@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+@using MDoc.Models
+<!DOCTYPE html>
 <html>
 <head>
     <title>@ViewBag.Title - Document Management</title>
@@ -15,7 +17,7 @@
 <body>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
        @Html.Partial("_Header")
-        @Html.Partial("_Sidebar")
+        @Html.Partial("_Sidebar", new LoggedUser(User as ClaimsPrincipal))
         <div class="android-content mdl-layout__content">
             @Html.MvcSiteMap().SiteMapPath()
             <div class="body" id="mainContent">

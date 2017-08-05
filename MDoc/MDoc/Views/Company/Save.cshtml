@@ -1,0 +1,112 @@
+﻿@using MDoc.Extensions
+@using MDoc.Extensions.Options
+@model MDoc.Services.Contract.DataContracts.CompanyModel
+@{
+    ViewBag.Title = "Company Information";
+}
+@using (Html.BeginForm("Save", "Company", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(m=>m.Id)
+    <div class="row">
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            @Html.LabelFor(m => m.Name)
+            @Html.ValidationMessageFor(m => m.Name)
+            @Html.TextBoxFor(m => m.Name, new {@class = "form-control"})
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 col-sm-12 col-xs-12">
+            @Html.LabelFor(m => m.Phone)
+            @Html.ValidationMessageFor(m => m.Phone)
+            @Html.TextBoxFor(m => m.Phone, new {@class = "form-control"})
+        </div>
+        <div class="col-md-3 col-sm-12 col-xs-12">
+            @Html.LabelFor(m => m.Mobile)
+            @Html.ValidationMessageFor(m => m.Mobile)
+            @Html.TextBoxFor(m => m.Mobile, new {@class = "form-control"})
+        </div>
+        <div class="col-md-3 col-sm-12 col-xs-12">
+            @Html.LabelFor(m => m.Email)
+            @Html.ValidationMessageFor(m => m.Email)
+            @Html.TextBoxFor(m => m.Email, new {@class = "form-control"})
+        </div>
+        <div class="col-md-3 col-sm-12 col-xs-12">
+            @Html.LabelFor(m => m.Website)
+            @Html.ValidationMessageFor(m => m.Website)
+            @Html.TextBoxFor(m => m.Website, new {@class = "form-control"})
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 col-sm-12 col-xs-12">
+            @Html.LabelFor(m => m.CountryId)
+            @Html.ValidationMessageFor(m => m.CountryId)
+            @Html.Select2AjaxFor(m => m.CountryId, Url.Action("Countries", "DataSource"), new Select2Option()
+            {
+                MinimumInputLength = 0,
+                Width = "100%",
+                AllowClear = true
+            }, new {@class = "form-control"})
+        </div>
+        <div class="col-md-3 col-sm-12 col-xs-12">
+            @Html.LabelFor(m => m.ProvinceId)
+            @Html.ValidationMessageFor(m => m.ProvinceId)
+            @Html.Select2AjaxFor(m => m.ProvinceId, Url.Action("Provinces", "DataSource"), new Select2Option()
+            {
+                Width = "100%",
+                MinimumInputLength = 0,
+                DependsOn = "CountryId",
+                AllowClear = true
+            }, new {@class = "form-control"})
+        </div>
+        <div class="col-md-3 col-sm-12 col-xs-12">
+            @Html.LabelFor(m => m.DistrictId)
+            @Html.ValidationMessageFor(m => m.DistrictId)
+            @Html.Select2AjaxFor(m => m.DistrictId, Url.Action("Districts", "DataSource"), new Select2Option()
+            {
+                MinimumInputLength = 0,
+                Width = "100%",
+                AllowClear = true,
+                DependsOn = "ProvinceId"
+            }, new {@class = "form-control"})
+        </div>
+        <div class="col-md-3 col-sm-12 col-xs-12">
+            @Html.LabelFor(m => m.WardId)
+            @Html.ValidationMessageFor(m => m.WardId)
+            @Html.Select2AjaxFor(m => m.WardId, Url.Action("Wards", "DataSource"), new Select2Option()
+            {
+                MinimumInputLength = 0,
+                Width = "100%",
+                AllowClear = true,
+                DependsOn = "DistrictId"
+            }, new {@class = "form-control"})
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            @Html.LabelFor(m => m.Address)
+            @Html.ValidationMessageFor(m => m.Address)
+            @Html.TextBoxFor(m => m.Address, new {@class = "form-control"})
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-xs-12 col-sm-12">
+            @Html.LabelFor(m=>m.CompanyAdminIds)
+            @Html.ValidationMessageFor(m=>m.CompanyAdminIds)
+            @Html.Select2AjaxFor(m=>m.CompanyAdminIds,@Url.Action("Users","DataSource"),new Select2Option()
+       {
+           Width = "100%",
+           Multiple = true,
+           AllowClear = true,
+           MinimumInputLength = 0
+       },new {@class="form-control"})
+        </div>
+    </div>
+    <div class="row row-margintop">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <a class="btn btn-default" href="@Url.Action("Index", "Home")"><i class="fa fa-backward"></i> Back</a>
+            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
+        </div>
+    </div>
+}

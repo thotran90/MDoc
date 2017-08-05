@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNet.Identity
+@model MDoc.Models.LoggedUser
 <div class="android-drawer mdl-layout__drawer">
     <span class="mdl-layout-title">
         <img class="android-logo-image" src="~/Content/images/logo.png">
@@ -8,11 +9,15 @@
         <a class="mdl-navigation__link" href=@Url.Action("Index","School")>Schools</a>
         <a class="mdl-navigation__link" href=@Url.Action("Index", "Customer")>Customers</a>
         <a class="mdl-navigation__link" href=@Url.Action("Index", "Document")>Documents</a>
-        @if (User.Identity.GetUserId() == "admin")
+        @if (@Model.IsCompanyAdmin || Model.IsSuperAdmin)
         {
             <span class="mdl-navigation__link" href="">System Configuration</span>
             <a class="mdl-navigation__link" href=@Url.Action("Index", "Account")>User Management</a>
+            <a class="mdl-navigation__link" href=@Url.Action("Information", "Company")>Company Information</a>
         }
+        @if (Model.IsSuperAdmin)
+        {
 
+        }
     </nav>
 </div>
