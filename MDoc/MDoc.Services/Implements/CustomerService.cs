@@ -62,7 +62,11 @@ namespace MDoc.Services.Implements
                 Mobile = customer.Mobile,
                 ProvinceId = customer.ProvinceId,
                 WardId = customer.WardId,
-                NationalityId = customer.NationalityId
+                NationalityId = customer.NationalityId,
+                PassportExpiredDate = customer.PassportExpiredDate,
+                PassportNumber = customer.PassportNumber,
+                PassportValidDate = customer.PassportValidDate,
+                BackupMobile = customer.BackupMobile
             };
             return result;
         }
@@ -89,7 +93,11 @@ namespace MDoc.Services.Implements
                 Mobile = model.Mobile,
                 CreatedById = model.LoggedUserId,
                 CreatedDate = DateTime.Now,
-                NationalityId = model.NationalityId
+                NationalityId = model.NationalityId,
+                PassportExpiredDate = model.PassportExpiredDate,
+                PassportNumber = model.PassportNumber,
+                PassportValidDate = model.PassportValidDate,
+                BackupMobile = model.BackupMobile
             };
             UnitOfWork.GetRepository<Customer>().Create(entity);
             UnitOfWork.SaveChanges();
@@ -116,6 +124,10 @@ namespace MDoc.Services.Implements
             customer.UpdatedDate = DateTime.Now;
             customer.UpdatedById = model.LoggedUserId;
             customer.NationalityId = model.NationalityId;
+            customer.PassportExpiredDate = model.PassportExpiredDate;
+            customer.PassportNumber = model.PassportNumber;
+            customer.PassportValidDate = model.PassportValidDate;
+            customer.BackupMobile = model.BackupMobile;
             UnitOfWork.SaveChanges();
             return true;
         }

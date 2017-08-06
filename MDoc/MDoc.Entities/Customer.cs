@@ -27,6 +27,10 @@ namespace MDoc.Entities
         public DateTime? UpdatedDate { get; set; }
         public bool IsDeleted { get; set; }
         public int  NationalityId { get; set; }
+        public string BackupMobile { get; set; }
+        public string PassportNumber { get; set; }
+        public DateTime? PassportValidDate { get; set; }
+        public DateTime? PassportExpiredDate { get; set; }
         public virtual Gender Gender { get; set; }
         public virtual ICollection<Document> Documents { get; set; }
     }

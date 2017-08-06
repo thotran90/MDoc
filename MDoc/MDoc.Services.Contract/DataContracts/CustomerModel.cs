@@ -49,7 +49,15 @@ namespace MDoc.Services.Contract.DataContracts
         [Display(Name = "Nationality")]
         [Required]
         public int NationalityId { get; set; }
-
+        [Display(Name = "Backup Mobile Number")]
+        [RegularExpression(@"^(\d{10,15})$", ErrorMessage = "Only number is allowed.")]
+        public string BackupMobile { get; set; }
+        [Display(Name = "Passport No.")]
+        public string PassportNumber { get; set; }
+        [Display(Name = "Passport Valid Date")]
+        public DateTime? PassportValidDate { get; set; }
+        [Display(Name = "Passport Expired Date")]
+        public DateTime? PassportExpiredDate { get; set; }
         public string FullName => $"{LastName} {FirstName}";
     }
 }
