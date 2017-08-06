@@ -21,6 +21,10 @@
         $("#Customer_DOB").data("kendoDatePicker").value(customer.DOB);
         $("#Customer_IdentityCardDateValid").data("kendoDatePicker").value(customer.IdentityCardDateValid);
         $("#Customer_IdentityCardDateExpired").data("kendoDatePicker").value(customer.IdentityCardDateExpired);
+        $("#Customer_BackupMobile").val(customer.BackupMobile);
+        $("#Customer_PassportNumber").val(customer.PassportNumber);
+        $("#Customer_PassportValidDate").data("kendoDatePicker").value(customer.PassportValidDate);
+        $("#Customer_PassportExpiredDate").data("kendoDatePicker").value(customer.PassportExpiredDate);
     }
 
     var loadExistDocument = function () {
