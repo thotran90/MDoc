@@ -52,8 +52,11 @@
     <Compile Include="ApplicationDbContext.cs" />
     <Compile Include="Mapping\AddressMapping.cs" />
     <Compile Include="Mapping\ApplicationUserMapping.cs" />
+    <Compile Include="Mapping\ChecklistMapping.cs" />
     <Compile Include="Mapping\CompanyMapping.cs" />
     <Compile Include="Mapping\CustomerMapping.cs" />
+    <Compile Include="Mapping\DocumentChecklistMapping.cs" />
+    <Compile Include="Mapping\DocumentCommentMapping.cs" />
     <Compile Include="Mapping\DocumentMapping.cs" />
     <Compile Include="Mapping\DocumentStatusMapping.cs" />
     <Compile Include="Mapping\DocumentTypeMapping.cs" />

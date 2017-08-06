@@ -8,6 +8,7 @@ namespace MDoc.Entities
         public ApplicationUser()
         {
             DocumentResponsibles = new HashSet<DocumentResponsible>();
+            Comments = new HashSet<DocumentComment>();
         }
 
         public int ApplicationUserId { get; set; }
@@ -20,5 +21,6 @@ namespace MDoc.Entities
         public DateTime? RegisterDate { get; set; }
         public virtual ICollection<DocumentResponsible> DocumentResponsibles { get; set; }
         public virtual ICollection<Company> AdministrateCompanies { get; set; }
+        public virtual ICollection<DocumentComment> Comments { get; set; }
     }
 }

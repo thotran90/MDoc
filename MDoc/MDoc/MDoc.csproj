@@ -186,6 +186,7 @@
     <Content Include="Content\logon.css" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\DataSourceController.cs" />
@@ -512,6 +513,8 @@
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Company\Index.cshtml" />
     <Content Include="Views\Company\Save.cshtml" />
+    <Content Include="Views\Comment\_ListOfComments.cshtml" />
+    <Content Include="Views\Comment\_Save.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.css" />

@@ -211,6 +211,14 @@ namespace MDoc.Services.Implements
                     });
                 }
             }
+            if (!document.DocumentResponsibles.Any())
+            {
+                document.DocumentResponsibles.Add(new DocumentResponsible()
+                {
+                    IsMain = true,
+                    UserId = model.LoggedUserId
+                });
+            }
             UnitOfWork.GetRepository<Document>().Create(document);
             UnitOfWork.SaveChanges();
             return true;

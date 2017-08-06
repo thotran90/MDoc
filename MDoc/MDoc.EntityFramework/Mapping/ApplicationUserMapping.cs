@@ -23,6 +23,10 @@ namespace MDoc.EntityFramework.Mapping
                     cs.MapRightKey("CompanyId");
                     cs.ToTable("CompanyAdmin", "dbo");
                 });
+            HasMany(m=>m.Comments)
+                .WithRequired(m=>m.Creator)
+                .HasForeignKey(m=>m.UserId)
+                .WillCascadeOnDelete(false);
         }
     }
 }

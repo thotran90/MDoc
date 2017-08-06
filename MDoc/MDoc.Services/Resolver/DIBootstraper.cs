@@ -46,6 +46,7 @@ namespace MDoc.Services.Resolver
             container.RegisterType<IDocumentService, DocumentService>();
             container.RegisterType<IEmailService, EmailService>();
             container.RegisterType<ICompanyService, CompanyService>();
+            container.RegisterType<IDocumentCommentService, DocumentCommentService>();
         }
 
         #endregion

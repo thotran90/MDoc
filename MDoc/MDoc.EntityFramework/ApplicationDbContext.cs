@@ -32,7 +32,10 @@ namespace MDoc.EntityFramework
                 .Add(new DocumentMapping())
                 .Add(new DoumentResponsibleMapping())
                 .Add(new SuperAdminMapping())
-                .Add(new CompanyMapping());
+                .Add(new CompanyMapping())
+                .Add(new DocumentCommentMapping())
+                .Add(new ChecklistMapping())
+                .Add(new DocumentChecklistMapping());
             base.OnModelCreating(modelBuilder);
         }
     }

@@ -43,9 +43,12 @@
   <ItemGroup>
     <Compile Include="Address.cs" />
     <Compile Include="ApplicationUser.cs" />
+    <Compile Include="Checklist.cs" />
     <Compile Include="Company.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="Document.cs" />
+    <Compile Include="DocumentChecklist.cs" />
+    <Compile Include="DocumentComment.cs" />
     <Compile Include="DocumentResponsible.cs" />
     <Compile Include="DocumentStatus.cs" />
     <Compile Include="DocumentType.cs" />

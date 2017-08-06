@@ -8,6 +8,8 @@ namespace MDoc.Entities
         public Document()
         {
             this.DocumentResponsibles = new HashSet<DocumentResponsible>();
+            this.Checklists = new HashSet<DocumentChecklist>();
+            this.Comments = new HashSet<DocumentComment>();
         }
         public int DocumentId { get; set; }
         public byte DocumentStatusId { get; set; }
@@ -28,5 +30,7 @@ namespace MDoc.Entities
         public virtual DocumentType DocumentType { get; set; }
         public virtual Customer Customer { get; set; }
         public virtual ICollection<DocumentResponsible> DocumentResponsibles { get; set; }
+        public virtual ICollection<DocumentComment> Comments { get; set; }
+        public virtual ICollection<DocumentChecklist> Checklists { get; set; }
     }
 }

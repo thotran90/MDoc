@@ -15,6 +15,14 @@ namespace MDoc.EntityFramework.Mapping
                 .WithRequired(m=>m.Document)
                 .HasForeignKey(m=>m.DocumentId)
                 .WillCascadeOnDelete(false);
+            HasMany(m=>m.Comments)
+                .WithRequired(m=>m.Document)
+                .HasForeignKey(m=>m.DocumentId)
+                .WillCascadeOnDelete(false);
+            HasMany(m=>m.Checklists)
+                .WithRequired(m=>m.Document)
+                .HasForeignKey(m=>m.DocumentId)
+                .WillCascadeOnDelete(false);
         }
     }
 }

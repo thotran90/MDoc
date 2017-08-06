@@ -60,6 +60,7 @@
     <Compile Include="Implements\BaseService.cs" />
     <Compile Include="Implements\CompanyService.cs" />
     <Compile Include="Implements\CustomerService.cs" />
+    <Compile Include="Implements\DocumentCommentService.cs" />
     <Compile Include="Implements\DocumentService.cs" />
     <Compile Include="Implements\DocumentStatusService.cs" />
     <Compile Include="Implements\DocumentTypeService.cs" />
