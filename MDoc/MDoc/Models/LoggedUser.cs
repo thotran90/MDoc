@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Security.Claims;
+using MDoc.Services.Contract.Interfaces;
 
 namespace MDoc.Models
 {
@@ -13,12 +14,12 @@ namespace MDoc.Models
         public string Name => FindFirst(ClaimTypes.Name).Value;
         public string Email => FindFirst(ClaimTypes.Email).Value;
         public string LoginId => FindFirst(ClaimTypes.NameIdentifier).Value;
-        public int UserId => Convert.ToInt32(FindFirst(ClaimTypes.PrimarySid).Value);
+        public int UserId=> Convert.ToInt32(FindFirst(ClaimTypes.PrimarySid).Value);
 
         public int? CompanyId
             =>
                 string.IsNullOrEmpty(FindFirst("CompanyId").Value)
-                    ? (int?) null
+                    ? (int?)null
                     : Convert.ToInt32(FindFirst("CompanyId").Value);
 
         public string Avatar => FindFirst("Avatar").Value;

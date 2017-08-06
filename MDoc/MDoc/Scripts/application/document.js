@@ -37,8 +37,26 @@
         }
     }
 
+    var updateStatus = function (elm) {
+        var documentId = $(elm).data("id");
+        var statusId = $(elm).data("status");
+        if (documentId && statusId) {
+            var action = $("#UpdateStatusUrl").val();
+            action += "?documentId=" + documentId + "&statusId=" + statusId;
+            $.post(action, function(res) {
+                if (res === "OK") {
+                    var grid = $("#GridDocuments").data("kendoGrid");
+                    grid.dataSource.fetch();
+                } else {
+                    
+                }
+            });
+        }
+    }
+
     return {
         setHeightGrid: setHeightGrid,
-        loadExistDocument: loadExistDocument
+        loadExistDocument: loadExistDocument,
+        updateStatus: updateStatus
     }
 })();

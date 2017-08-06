@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
-using MDoc.Models;
 using MDoc.Services.Contract.DataContracts;
 using MDoc.Services.Contract.Interfaces;
+using MvcSiteMapProvider;
 
 namespace MDoc.Controllers
 {
@@ -18,19 +15,23 @@ namespace MDoc.Controllers
         #endregion
 
         #region [Constructor]
+
         public CompanyController(ICompanyService companyService)
         {
             _companyService = companyService;
         }
+
         #endregion
+
         // GET: Company
         public ActionResult Index()
         {
-            if(!CurrentUser.IsSuperAdmin) return RedirectToAction("Information");
+            if (!CurrentUser.IsSuperAdmin) return RedirectToAction("Information");
             return View();
         }
 
         [HttpGet]
+        [MvcSiteMapNode(Title = "Company Information", ParentKey = "home")]
         public ActionResult Information()
         {
             var exists = _companyService.ListOfCompanies().Any();
@@ -44,9 +45,21 @@ namespace MDoc.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(CompanyModel model)
         {
-            return null;
+            if (ModelState.IsValid)
+            {
+                if (model.Id > 0)
+                    _companyService.Update(model);
+                else
+                {
+                    _companyService.Create(model);
+                }
+                return RedirectToAction("Information");
+            }
+            ModelState.AddModelError("ModelInvalid","Fill all of required field before submit.");
+            return View("Save", model);
         }
     }
 }

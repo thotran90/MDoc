@@ -3,6 +3,8 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using MDoc.Infrastructures;
+using MDoc.Models;
+using MDoc.Services.Contract.Interfaces;
 using Microsoft.Practices.Unity;
 
 namespace MDoc.App_Start

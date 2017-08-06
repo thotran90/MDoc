@@ -97,12 +97,13 @@ namespace MDoc.Controllers
                     ModelState.AddModelError("LoginIdUsed","This login id is in use.Please use another login id");
                     return View("Save",model);
                 }
-                var isInUseEmail = _userService.CheckEmail(model.Email);
-                if (isInUseEmail)
-                {
-                    ModelState.AddModelError("EmailUsed", "This email is registed for another account.Please use another email.");
-                    return View("Save", model);
-                }
+                // TODO: for ISET 
+                //var isInUseEmail = _userService.CheckEmail(model.Email);
+                //if (isInUseEmail)
+                //{
+                //    ModelState.AddModelError("EmailUsed", "This email is registed for another account.Please use another email.");
+                //    return View("Save", model);
+                //}
                 _userService.Create(model);
                 return RedirectToAction("Index");
             }

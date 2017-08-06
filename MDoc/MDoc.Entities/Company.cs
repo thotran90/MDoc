@@ -17,5 +17,10 @@ namespace MDoc.Entities
         public string Address { get; set; }
         public bool IsDisabled { get; set; }
         public virtual ICollection<ApplicationUser> Administrators { get; set; }
+
+        public Company()
+        {
+            this.Administrators = new HashSet<ApplicationUser>();
+        }
     }
 }

@@ -14,14 +14,14 @@
               columns.Bound(c => c.DocumentType);
               columns.Bound(c => c.Country);
               columns.Bound(c => c.DocumentStatus);
-              columns.Command(command =>
-              {
-                 command.Destroy().Text("delete");
-              }).Width(150);
+              //columns.Command(command =>
+              //{
+              //   command.Destroy().Text("delete");
+              //}).Width(150);
           })
           .ToolBar(toolbar =>
           {
-              toolbar.Template(@<text>
+          toolbar.Template(@<text>
         <div class="grid-toolbar">
             <a class="btn btn-primary" href="@Url.Action("Create")"><i class="fa fa-plus-circle"></i> Add new document</a>
         </div>

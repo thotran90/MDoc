@@ -29,20 +29,29 @@ namespace MDoc.Services.Implements
 
         #region [Implements]
 
-        public IQueryable<DocumentModel> ListOfDocument(string query = "")
+        public bool CanEditDocument(int userId, int documentId)
+            =>
+                UnitOfWork.GetRepository<Document>()
+                    .Get()
+                    .Any(
+                        m =>
+                            m.DocumentId == documentId &&
+                            (m.DocumentResponsibles.Any(res => res.UserId == userId) || m.CreatedById == userId));
+
+        public IQueryable<DocumentModel> ListOfDocument(ListDocumentArgument argument)
         {
             var documents = UnitOfWork.GetRepository<Document>().Get(m => !m.IsDeleted)
                 .Join(UnitOfWork.GetRepository<Customer>().Get(), document => document.CustomerId,
                     customer => customer.CustomerId,
                     (document, customer) => new {customer = customer, document = document});
             var documentId = 0;
-            if (int.TryParse(query, out documentId))
+            if (int.TryParse(argument.Code, out documentId))
             {
                 documents = documents.Where(m => int.Parse(m.document.Code) == documentId);
             }
             else
             {
-                query = query.ToLower();
+                var query = argument.Query.ToLower();
                 documents =
                     documents.Where(
                         m =>
@@ -50,6 +59,14 @@ namespace MDoc.Services.Implements
                             m.customer.LastName.ToLower().Contains(query) ||
                             (m.customer.LastName + m.customer.FirstName).ToLower().Contains(query) ||
                             (m.customer.FirstName + m.customer.LastName).ToLower().Contains(query));
+            }
+            if (!argument.IsAdmin)
+            {
+                documents =
+                    documents.Where(
+                        m =>
+                            m.document.CreatedById == argument.UserId ||
+                            m.document.DocumentResponsibles.Any(res => res.UserId == argument.UserId));
             }
             var result = documents
                 .Join(UnitOfWork.GetRepository<Address>().Get(),document=>document.document.ReferenceCountryId,country=>country.AddressId,(document,country)=> new {document=document,country=country})
@@ -143,7 +160,7 @@ namespace MDoc.Services.Implements
                 ReferenceCountryId = model.ReferenceCountryId,
                 ReferenceProgramId = model.ReferenceProgramId,
                 ReferenceSchoolId = model.ReferenceSchoolId,
-                DocumentStatusId = (byte) DocumentStatusEnum.PendingForValidation
+                DocumentStatusId = (byte) DocumentStatusEnum.New
             };
             if (model.CustomerId == 0)
             {

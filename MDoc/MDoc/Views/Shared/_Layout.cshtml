@@ -16,7 +16,7 @@
 </head>
 <body>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-       @Html.Partial("_Header")
+       @Html.Partial("_Header", new LoggedUser(User as ClaimsPrincipal))
         @Html.Partial("_Sidebar", new LoggedUser(User as ClaimsPrincipal))
         <div class="android-content mdl-layout__content">
             @Html.MvcSiteMap().SiteMapPath()

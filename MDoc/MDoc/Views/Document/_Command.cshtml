@@ -1,3 +1,11 @@
-﻿<a class="k-button k-button-icontext" href='@Url.Action("Edit", "Document")/#: DocumentId #'>
-    <i class="fa fa-edit"></i> edit
-</a>
+﻿<div class="btn-group">
+    <a class="btn btn-success"  onclick="appDocument.updateStatus(this)" data-id="#: DocumentId #" data-status="2" title="Start Progress">
+        <i class="fa fa-play"></i>
+    </a>
+    <a class="btn btn-primary" href='@Url.Action("Edit", "Document")/#: DocumentId #' title="Edit Document">
+        <i class="fa fa-edit"></i>
+    </a>
+    <a class="btn btn-danger"  onclick="appDocument.updateStatus(this)" data-id="#: DocumentId #" data-status="3" title="Cancel Document">
+        <i class="fa fa-remove"></i>
+    </a>
+</div>

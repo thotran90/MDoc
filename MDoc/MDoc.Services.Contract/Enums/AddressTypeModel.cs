@@ -12,7 +12,7 @@ namespace MDoc.Services.Contract.Enums
 
     public enum DocumentStatusEnum : byte
     {
-        PendingForValidation=1,
+        New=1,
         InProgress = 2,
         Canceled = 3,
         Passed = 4,

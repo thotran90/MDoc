@@ -4,6 +4,7 @@
 <div class="row row-margintop">
     @Html.Partial("_ListOfDocument")
 </div>
+@Html.Hidden("UpdateStatusUrl",Url.Action("UpdateStatus","Document"))
 @section scripts
 {
     @Scripts.Render("~/application/document")

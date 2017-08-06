@@ -35,7 +35,12 @@ namespace MDoc.Controllers
 
         public JsonResult ListOfDocument([DataSourceRequest] DataSourceRequest request)
         {
-            var documents = _documentService.ListOfDocument();
+            var argument = new ListDocumentArgument()
+            {
+                UserId = CurrentUser.UserId,
+                IsAdmin = CurrentUser.IsSuperAdmin || CurrentUser.IsCompanyAdmin
+            };
+            var documents = _documentService.ListOfDocument(argument);
             var result = documents.ToDataSourceResult(request);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
@@ -48,9 +53,15 @@ namespace MDoc.Controllers
         [MvcSiteMapNode(Title = "Update document",ParentKey = "document", PreservedRouteParameters = "id")]
         public ActionResult Edit(int id)
         {
-            var model = _documentService.Single(id);
-            if(model.DocumentId == 0) return HttpNotFound();
-            return View("Save", model);
+            var canEdit = _documentService.CanEditDocument(CurrentUser.UserId, id);
+            if (CurrentUser.IsSuperAdmin || CurrentUser.IsCompanyAdmin || canEdit)
+            {
+
+                var model = _documentService.Single(id);
+                if (model.DocumentId == 0) return HttpNotFound();
+                return View("Save", model);
+            }
+            return HttpNotFound();
         }
 
         [HttpPost]
@@ -72,7 +83,23 @@ namespace MDoc.Controllers
             ModelState.AddModelError("InvalidModel","Fill all of required field before submit data.");
             return View("Save",model);
         }
-
+        [HttpPost]
+        public JsonResult UpdateStatus(byte statusId, int documentId)
+        {
+            var canEdit = _documentService.CanEditDocument(CurrentUser.UserId, documentId);
+            if (CurrentUser.IsSuperAdmin || CurrentUser.IsCompanyAdmin || canEdit)
+            {
+                var arg = new DocumentModel()
+                {
+                    LoggedUserId = CurrentUser.UserId,
+                    DocumentId = documentId,
+                    DocumentStatusId = statusId
+                };
+                _documentService.UpdateStatus(arg);
+                return Json("OK",JsonRequestBehavior.AllowGet);
+            }
+            return Json("NoRight", JsonRequestBehavior.AllowGet);
+        }
         #endregion
     }
 }
