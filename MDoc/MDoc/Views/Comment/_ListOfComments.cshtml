@@ -1,12 +1,9 @@
 ﻿@model List<MDoc.Services.Contract.DataContracts.DocumentCommentModel>
-@if (Model.Any())
-{
-}
-else
-{
-    <div class="row">
-        <div class="col-md-12">
-            <h5> There 's no record!</h5>
-        </div>
+<div class="row">
+    <div class="col-md-12" id="list-of-comment">
+        @foreach (var comment in Model)
+        {
+            @Html.Partial("_Comment", comment)
+        }
     </div>
-}
+</div>

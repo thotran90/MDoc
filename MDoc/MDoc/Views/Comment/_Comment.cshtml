@@ -1,0 +1,11 @@
+﻿@model MDoc.Services.Contract.DataContracts.DocumentCommentModel
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row text-left">
+            <strong>@Model.Creator :</strong> @Html.Raw(Model.Content)
+        </div>
+        <div class="row">
+            <i>@Model.CreatedDate</i>
+        </div>
+    </div>
+</div>

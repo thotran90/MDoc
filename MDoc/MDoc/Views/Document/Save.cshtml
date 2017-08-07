@@ -316,7 +316,7 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         @Html.Action("ListOfComments", "Comment", new { @id = @Model.DocumentId })
-                        @Html.Action("Creation", "Comment", new { @id = @Model.DocumentId })
+                        @Html.Action("Creation", "Comment")
                     </div>
                 </div>
             </div>
@@ -331,6 +331,7 @@
     </div>
 }
 @Html.Hidden("GetCustomerInformationUrl", Url.Action("Information", "Customer"))
+@Html.Hidden("AddCommentUrl",Url.Action("Save","Comment"))
 @section scripts
  {
     @Scripts.Render("~/application/document")

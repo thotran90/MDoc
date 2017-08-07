@@ -191,7 +191,6 @@
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\DataSourceController.cs" />
     <Compile Include="Controllers\DocumentController.cs" />
-    <Compile Include="Controllers\GridController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SchoolController.cs" />
     <Compile Include="Extensions\CustomHtmlHelper.cs" />
@@ -201,8 +200,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CommentModel.cs" />
     <Compile Include="Models\LoggedUser.cs" />
-    <Compile Include="Models\OrderViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -515,6 +514,7 @@
     <Content Include="Views\Company\Save.cshtml" />
     <Content Include="Views\Comment\_ListOfComments.cshtml" />
     <Content Include="Views\Comment\_Save.cshtml" />
+    <Content Include="Views\Comment\_Comment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.css" />

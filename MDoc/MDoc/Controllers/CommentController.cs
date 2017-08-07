@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MDoc.Models;
 using MDoc.Services.Contract.DataContracts;
 using MDoc.Services.Contract.Interfaces;
 
@@ -31,15 +32,21 @@ namespace MDoc.Controllers
         }
 
         [HttpGet]
-        public ActionResult Creation(int id) => PartialView("_Save", new DocumentCommentModel()
-        {
-            DocumentId = id
-        });
+        public ActionResult Creation() => PartialView("_Save",new CommentModel());
 
         [HttpPost]
-        public JsonResult Save(DocumentCommentModel model)
+        public ActionResult Save(CommentModel model)
         {
-            return null;
+            var comment = new DocumentCommentModel()
+            {
+                DocumentId = model.DocumentId,
+                Content = model.Content,
+                LoggedUserId = CurrentUser.UserId,
+                UserId = CurrentUser.UserId
+            };
+
+            var result = _documentCommentService.Add(comment);
+            return PartialView("_Comment", result);
         }
 
         #endregion

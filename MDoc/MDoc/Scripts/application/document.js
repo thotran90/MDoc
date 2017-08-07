@@ -1,9 +1,10 @@
-﻿var appDocument = (function() {
+﻿var appDocument = (function () {
+    // Set height of grid to fix screen
     var setHeightGrid = function() {
         var height = $(window).height();
         $("#GridDocuments .k-grid-content").css("height", height - 325);
     }
-    
+    // fill customer data to customer area
     var fillCustomerInformation = function(customer) {
         $("#Customer_GenderId").select2("val", customer.GenderId);
         $("#Customer_LastName").val(customer.LastName);
@@ -26,7 +27,7 @@
         $("#Customer_PassportValidDate").data("kendoDatePicker").value(customer.PassportValidDate);
         $("#Customer_PassportExpiredDate").data("kendoDatePicker").value(customer.PassportExpiredDate);
     }
-
+    // load exists customer
     var loadExistDocument = function () {
         if (window.whatever === false) return;
         var customerId = $("#s2id_CustomerId").select2("val");
@@ -40,7 +41,7 @@
             });
         }
     }
-
+    // updatd document status
     var updateStatus = function (elm) {
         var documentId = $(elm).data("id");
         var statusId = $(elm).data("status");
@@ -57,10 +58,33 @@
             });
         }
     }
+    // add document comment
+    var addComment = function() {
+        var documentId = $("#DocumentId").val();
+        if (documentId > 0) {
+            var comment = {
+                DocumentId: documentId,
+                Content: $("textarea#Content").val()
+            };
+            comment.Content = comment.Content.replace(/\n\r?/g, '<br />');
+            var action = $("#AddCommentUrl").val();
+            $.ajax({
+                url: action,
+                data: comment,
+                type: "POST"
+            }).done(function (response) {
+                $("textarea#Content").val("");
+                $("#list-of-comment").append(response);
+            }).fail(function(xhr, status, errorThrown) {
+                console.log(status);
+            });
+        }
+    }
 
     return {
         setHeightGrid: setHeightGrid,
         loadExistDocument: loadExistDocument,
-        updateStatus: updateStatus
+        updateStatus: updateStatus,
+        addComment: addComment
     }
 })();
