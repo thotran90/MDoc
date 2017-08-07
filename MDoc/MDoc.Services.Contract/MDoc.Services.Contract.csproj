@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataContracts\AddressModel.cs" />
+    <Compile Include="DataContracts\ChecklistModel.cs" />
     <Compile Include="DataContracts\CompanyModel.cs" />
     <Compile Include="DataContracts\CustomerModel.cs" />
     <Compile Include="DataContracts\DocumentCommentModel.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="DataContracts\User\ChangePasswordModel.cs" />
     <Compile Include="DataContracts\User\SearchUserModel.cs" />
     <Compile Include="Enums\AddressTypeModel.cs" />
+    <Compile Include="Interfaces\IChecklistService.cs" />
     <Compile Include="Interfaces\IDocumentCommentService.cs" />
     <Compile Include="Interfaces\IEmailService.cs" />
     <Compile Include="Interfaces\IAddressService.cs" />
