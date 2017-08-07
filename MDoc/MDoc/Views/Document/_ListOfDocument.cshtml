@@ -5,23 +5,22 @@
           .Columns(columns =>
           {
               columns.Bound(c => c.CustomerId).ClientTemplate(@Html.Partial("_Command").ToHtmlString())
-                  .Width(150)
+                  .Width(200)
                   .HeaderTemplate("Actions")
                   .Sortable(false)
                   .Filterable(false);
-              columns.Bound(c => c.Code);
-              columns.Bound(c => c.Customer.FullName);
-              columns.Bound(c => c.DocumentType);
-              columns.Bound(c => c.Country);
-              columns.Bound(c => c.DocumentStatus);
-              //columns.Command(command =>
-              //{
-              //   command.Destroy().Text("delete");
-              //}).Width(150);
+              columns.Bound(c => c.Code).Width(100);
+              columns.Bound(c => c.Customer.FullName).HeaderTemplate("Customer");
+              columns.Bound(c => c.DocumentType).HeaderTemplate("Type of Document");
+              columns.Bound(c => c.Country).Width(150); 
+              columns.Bound(c => c.FormatedResponsebileUsers).HeaderTemplate("Responsible Users");
+              columns.Bound(c => c.Creator).HeaderTemplate("Created By");
+              columns.Bound(c => c.CreatedDate).Format("{0: dd/MM/yyyy HH:mm}");
+              columns.Bound(c => c.DocumentStatus).Width(150).HeaderTemplate("Status");
           })
           .ToolBar(toolbar =>
           {
-          toolbar.Template(@<text>
+              toolbar.Template(@<text>
         <div class="grid-toolbar">
             <a class="btn btn-primary" href="@Url.Action("Create")"><i class="fa fa-plus-circle"></i> Add new document</a>
         </div>

@@ -1,4 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using MDoc.Services.Contract.DataContracts.User;
 
 namespace MDoc.Services.Contract.DataContracts
 {
@@ -43,7 +47,12 @@ namespace MDoc.Services.Contract.DataContracts
         public string MainResponsibleIds { get; set; }
         [Display(Name = "Sub Responsible User(s)")]
         public string SubResponsibleIds { get; set; }
-
+        public string Creator { get; set; }
+        public DateTime CreatedDate { get; set; }
         public bool CanEdit { get; set; }
+        public IEnumerable<UserModel> ResponsibleUsers { get; set; }
+
+        public string FormatedResponsebileUsers
+            => ResponsibleUsers.Any() ? string.Join(", ", ResponsibleUsers.Select(e => e.UserName).ToArray()) : "";
     }
 }

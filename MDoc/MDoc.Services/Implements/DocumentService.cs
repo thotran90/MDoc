@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Data.SqlClient;
 using System.Linq;
 using MDoc.Entities;
 using MDoc.Repositories.Contract;
 using MDoc.Services.Contract.DataContracts;
+using MDoc.Services.Contract.DataContracts.User;
 using MDoc.Services.Contract.Enums;
 using MDoc.Services.Contract.Interfaces;
 using Microsoft.Practices.ObjectBuilder2;
@@ -40,59 +42,41 @@ namespace MDoc.Services.Implements
 
         public IQueryable<DocumentModel> ListOfDocument(ListDocumentArgument argument)
         {
-            var documents = UnitOfWork.GetRepository<Document>().Get(m => !m.IsDeleted)
-                .Join(UnitOfWork.GetRepository<Customer>().Get(), document => document.CustomerId,
-                    customer => customer.CustomerId,
-                    (document, customer) => new {customer = customer, document = document});
-            var documentId = 0;
-            if (int.TryParse(argument.Code, out documentId))
-            {
-                documents = documents.Where(m => int.Parse(m.document.Code) == documentId);
-            }
-            else
-            {
-                var query = argument.Query.ToLower();
-                documents =
-                    documents.Where(
-                        m =>
-                            m.customer.FirstName.ToLower().Contains(query) ||
-                            m.customer.LastName.ToLower().Contains(query) ||
-                            (m.customer.LastName + m.customer.FirstName).ToLower().Contains(query) ||
-                            (m.customer.FirstName + m.customer.LastName).ToLower().Contains(query));
-            }
-            if (!argument.IsAdmin)
-            {
-                documents =
-                    documents.Where(
-                        m =>
-                            m.document.CreatedById == argument.UserId ||
-                            m.document.DocumentResponsibles.Any(res => res.UserId == argument.UserId));
-            }
-            var result = documents
-                .Join(UnitOfWork.GetRepository<Address>().Get(),document=>document.document.ReferenceCountryId,country=>country.AddressId,(document,country)=> new {document=document,country=country})
-                .Select(x => new DocumentModel()
-            {
-                CustomerId = x.document.document.CustomerId,
-                Code = x.document.document.Code,
-                DocumentId = x.document.document.DocumentId,
-                DocumentTypeId = x.document.document.DocumentTypeId.ToString(),
-                DocumentStatusId = x.document.document.DocumentStatusId,
-                ReferenceCountryId = x.document.document.ReferenceCountryId,
-                ReferenceSchoolId = x.document.document.ReferenceSchoolId,
-                ReferenceProgramId = x.document.document.ReferenceProgramId,
-                FinalSchoolId = x.document.document.FinalSchoolId,
-                FinalProgramId = x.document.document.FinalProgramId,
-                DocumentType = x.document.document.DocumentType.Label,
-                DocumentStatus = x.document.document.DocumentStatus.Label,
-                Country = x.country.Label,
-                Customer = new CustomerModel()
+            var documents = (from doc in UnitOfWork.GetRepository<Document>().Get()
+                join cus in UnitOfWork.GetRepository<Customer>().Get() on doc.CustomerId equals cus.CustomerId
+                join creator in UnitOfWork.GetRepository<ApplicationUser>().Get() on doc.CreatedById equals
+                    creator.ApplicationUserId
+                join country in UnitOfWork.GetRepository<Address>().Get(m => m.TypeId == "C") on doc.ReferenceCountryId
+                    equals country.AddressId
+                let isAdmin = argument.IsAdmin
+                where
+                    isAdmin ||
+                    (doc.CreatedById == argument.UserId ||
+                     doc.DocumentResponsibles.Any(res => res.UserId == argument.UserId))
+                select new DocumentModel()
                 {
-                    FirstName = x.document.customer.FirstName,
-                    LastName = x.document.customer.LastName,
-                    CustomerId = x.document.customer.CustomerId
-                }
-            });
-            return result;
+                    CustomerId = doc.CustomerId,
+                    Code = doc.Code,
+                    DocumentId = doc.DocumentId,
+                    DocumentTypeId = doc.DocumentTypeId.ToString(),
+                    DocumentType = doc.DocumentType.Label,
+                    CreatedDate = doc.CreatedDate,
+                    Creator = creator.UserName,
+                    Country = country.Label,
+                    DocumentStatus = doc.DocumentStatus.Label,
+                    Customer =  new CustomerModel()
+                    {
+                        FirstName = cus.FirstName,
+                        LastName = cus.LastName,
+                        CustomerId = cus.CustomerId
+                    },
+                    ResponsibleUsers = doc.DocumentResponsibles.Select(x=> new UserModel()
+                    {
+                        UserName = x.User.UserName,
+                        UserId = x.UserId
+                    }).ToList()
+                });
+            return documents;
         }
 
 

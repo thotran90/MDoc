@@ -5,6 +5,9 @@
     <a class="btn btn-primary" href='@Url.Action("Edit", "Document")/#: DocumentId #' title="Edit Document">
         <i class="fa fa-edit"></i>
     </a>
+    <a class="btn btn-success" onclick="appDocument.updateStatus(this)" data-id="#: DocumentId #" data-status="4" title="Passed">
+        <i class="fa fa-check"></i>
+    </a>
     <a class="btn btn-danger"  onclick="appDocument.updateStatus(this)" data-id="#: DocumentId #" data-status="3" title="Cancel Document">
         <i class="fa fa-remove"></i>
     </a>
