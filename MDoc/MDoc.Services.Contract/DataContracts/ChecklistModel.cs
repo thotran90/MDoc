@@ -6,5 +6,6 @@
         public string Label { get; set; }
         public string Description { get; set; }
         public int LoggedUserId { get; set; }
+        public bool? IsChecked { get; set; }
     }
 }

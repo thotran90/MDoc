@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Implements\AddressService.cs" />
     <Compile Include="Implements\BaseService.cs" />
+    <Compile Include="Implements\ChecklistService.cs" />
     <Compile Include="Implements\CompanyService.cs" />
     <Compile Include="Implements\CustomerService.cs" />
     <Compile Include="Implements\DocumentCommentService.cs" />
