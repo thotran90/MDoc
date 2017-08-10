@@ -1,7 +1,16 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "System Configuration";
 }
-
-<h2>Index</h2>
-
+<div class="row">
+    <div class="col-md-12">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#checklist"><i class="fa fa-list"></i> Checklist</a></li>
+        </ul>
+        <div class="tab-content">
+            <div id="checklist" class="tab-pane fade in active">
+                @Html.Action("Checklist","Setting")
+            </div>
+        </div>
+    </div>
+</div>

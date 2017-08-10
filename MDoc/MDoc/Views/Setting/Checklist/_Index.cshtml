@@ -1,0 +1,38 @@
+﻿
+@using MDoc.Services.Contract.DataContracts
+<div class="col-md-12">
+    @(Html.Kendo().Grid<ChecklistModel>()
+          .Name("GridCustomers")
+          .Columns(columns =>
+          {
+              columns.Bound(c => c.Id).ClientTemplate(@Html.Partial("Checklist/_Command").ToHtmlString())
+                  .Width(150)
+                  .HeaderTemplate("Actions")
+                  .Sortable(false)
+                  .Filterable(false);
+              columns.Bound(c => c.Label);
+              columns.Bound(c => c.Description);
+          })
+          .ToolBar(toolbar =>
+          {
+              toolbar.Template(@<text>
+        <div class="grid-toolbar">
+            <a class="btn btn-primary" href="@Url.Action("NewChecklistItem")"><i class="fa fa-plus-circle"></i> Add new item</a>
+        </div>
+            </text>    );
+          })
+          .Scrollable()
+          .Filterable()
+          .Sortable()
+          .Pageable(pageable => pageable
+              .Refresh(true)
+              .PageSizes(true)
+              .ButtonCount(5))
+          .DataSource(dataSource => dataSource
+              .Ajax()
+              .Read(read => read.Action("ListOfChecklist", "Setting"))
+              .Model(model => model.Id(p => p.Id))
+              .PageSize(20)
+          )
+    )
+</div>
