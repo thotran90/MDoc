@@ -63,6 +63,7 @@
     <Compile Include="Mapping\DoumentResponsibleMapping.cs" />
     <Compile Include="Mapping\EducationTypeMapping.cs" />
     <Compile Include="Mapping\GenderMapping.cs" />
+    <Compile Include="Mapping\NoticeMapping.cs" />
     <Compile Include="Mapping\ProgramMapping.cs" />
     <Compile Include="Mapping\SchoolMapping.cs" />
     <Compile Include="Mapping\SchoolTypeMapping.cs" />

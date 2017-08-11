@@ -55,6 +55,7 @@
     <Compile Include="EducationType.cs" />
     <Compile Include="Enums\AddressType.cs" />
     <Compile Include="Gender.cs" />
+    <Compile Include="Notice.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="School.cs" />

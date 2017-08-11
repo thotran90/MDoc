@@ -35,7 +35,8 @@ namespace MDoc.EntityFramework
                 .Add(new CompanyMapping())
                 .Add(new DocumentCommentMapping())
                 .Add(new ChecklistMapping())
-                .Add(new DocumentChecklistMapping());
+                .Add(new DocumentChecklistMapping())
+                .Add(new NoticeMapping());
             base.OnModelCreating(modelBuilder);
         }
     }

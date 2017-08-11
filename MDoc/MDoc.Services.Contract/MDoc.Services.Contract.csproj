@@ -54,6 +54,7 @@
     <Compile Include="DataContracts\EmailModel.cs" />
     <Compile Include="DataContracts\GenderModel.cs" />
     <Compile Include="DataContracts\ListDocumentArgument.cs" />
+    <Compile Include="DataContracts\NoticeModel.cs" />
     <Compile Include="DataContracts\ProgramModel.cs" />
     <Compile Include="DataContracts\SchoolModel.cs" />
     <Compile Include="DataContracts\SchoolTypeModel.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Interfaces\IDocumentTypeService.cs" />
     <Compile Include="Interfaces\IEducationTypeService.cs" />
     <Compile Include="Interfaces\IGenderService.cs" />
+    <Compile Include="Interfaces\INoticeService.cs" />
     <Compile Include="Interfaces\IProgramService.cs" />
     <Compile Include="Interfaces\ISchoolService.cs" />
     <Compile Include="Interfaces\ISchoolTypeService.cs" />

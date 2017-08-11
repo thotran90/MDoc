@@ -68,6 +68,7 @@
     <Compile Include="Implements\EducationTypeService.cs" />
     <Compile Include="Implements\EmailService.cs" />
     <Compile Include="Implements\GenderService.cs" />
+    <Compile Include="Implements\NoticeService.cs" />
     <Compile Include="Implements\ProgramService.cs" />
     <Compile Include="Implements\SchoolService.cs" />
     <Compile Include="Implements\SchoolTypeService.cs" />
