@@ -1,0 +1,17 @@
+﻿@model List<MDoc.Services.Contract.DataContracts.ChecklistModel>
+@if (Model.Any())
+{
+    <ul style="list-style-type: none;">
+        @foreach (var item in Model)
+        {
+            <li id="checklist-item-@item.Id">
+                @Html.Partial("_ChecklistItem", item)
+            </li>
+            
+        }
+    </ul>
+}
+else
+{
+    <p>No item found!</p>
+}

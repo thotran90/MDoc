@@ -658,3 +658,13 @@ a img {
     font-style: italic;
 }
 /*============= End Custom Css ===================*/
+.checklist-info {
+    color: #dcdcdc;
+    font-style: italic;
+}
+.btn {
+    min-width: 15px;
+}
+i.blue {
+    color: blue;
+}

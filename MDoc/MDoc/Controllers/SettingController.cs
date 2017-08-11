@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using MDoc.Services.Contract.DataContracts;
@@ -38,11 +39,43 @@ namespace MDoc.Controllers
         [MvcSiteMapNode(Title = "Add new checklist item",ParentKey = "setting")]
         public ActionResult NewChecklistItem() => View("Checklist/Save", new ChecklistModel());
 
+        [MvcSiteMapNode(Title = "Edit checklist item", ParentKey = "setting", PreservedRouteParameters = "id")]
+        public ActionResult EditChecklistItem(int id)
+        {
+            var item = _checllistService.ListOfItems().FirstOrDefault(m => m.Id == id);
+            if(item == null) return HttpNotFound();
+            return View("Checklist/Save", item);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult SaveChecklistItem(ChecklistModel model)
         {
-            return null;
+            if (ModelState.IsValid)
+            {
+                model.LoggedUserId = CurrentUser.UserId;
+                if (model.IsUpdate)
+                    _checllistService.Update(model);
+                else
+                {
+                    _checllistService.Create(model);
+                }
+                return RedirectToAction("Index");
+            }
+            ModelState.AddModelError("Invalid","Fill all of required field before submit.");
+            return View("Checklist/Save",model);
+        }
+
+        [HttpPost]
+        public JsonResult RemoveChecklistItem(byte id)
+        {
+            var model = new ChecklistModel()
+            {
+                Id = id,
+                LoggedUserId = CurrentUser.UserId
+            };
+            _checllistService.Remove(model);
+            return JsonSuccess();
         }
 
         #endregion

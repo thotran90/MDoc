@@ -10,5 +10,6 @@ namespace MDoc.Services.Contract.Interfaces
         bool Update(ChecklistModel model);
         bool Remove(ChecklistModel model);
         IQueryable<ChecklistModel> ListOfItemsViaDocument(int documentId);
+        ChecklistModel GetChecklistState(int documentId, byte itemId);
     }
 }

@@ -3,6 +3,7 @@
 @model MDoc.Services.Contract.DataContracts.DocumentModel
 @{
     ViewBag.Title = Model.CustomerId > 0 ? "Update document" : "Add new document";
+    var contractCss = Model.IsNeedContract ? "col-md-3 col-sm-12 col-xs-12" : "col-md-3 col-sm-12 col-xs-12 hidden";
 }
 @using (Html.BeginForm("Save", "Document", FormMethod.Post))
 {
@@ -280,29 +281,39 @@
                         @if (Model.IsUpdate)
                         {
 
-                            <div class="col-md-3 col-sm-12 col-xs-12">
-                                @Html.LabelFor(m => m.FinalSchoolId)
-                                @Html.ValidationMessageFor(m => m.FinalSchoolId)
-                                @Html.Select2AjaxFor(m => m.FinalSchoolId, Url.Action("Schools", "DataSource"), new Select2Option()
+                        <div class="col-md-3 col-sm-12 col-xs-12">
+                            @Html.LabelFor(m => m.FinalSchoolId)
+                            @Html.ValidationMessageFor(m => m.FinalSchoolId)
+                            @Html.Select2AjaxFor(m => m.FinalSchoolId, Url.Action("Schools", "DataSource"), new Select2Option()
                            {
                                MinimumInputLength = 0,
                                AllowClear = true,
                                Width = "100%"
                            }, new { @class = "form-control" })
-                            </div>
-                            <div class="col-md-3 col-sm-12 col-xs-12">
-                                @Html.LabelFor(m => m.FinalProgramId)
-                                @Html.ValidationMessageFor(m => m.FinalProgramId)
-                                @Html.Select2AjaxFor(m => m.FinalProgramId, Url.Action("FinalPrograms", "DataSource"), new Select2Option()
+                        </div>
+                        <div class="col-md-3 col-sm-12 col-xs-12">
+                            @Html.LabelFor(m => m.FinalProgramId)
+                            @Html.ValidationMessageFor(m => m.FinalProgramId)
+                            @Html.Select2AjaxFor(m => m.FinalProgramId, Url.Action("FinalPrograms", "DataSource"), new Select2Option()
                            {
                                AllowClear = true,
                                DependsOn = "FinalSchoolId",
                                Width = "100%",
                                MinimumInputLength = 0
                            }, new { @class = "form-control" })
-                            </div>
+                        </div>
 
                         }
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 col-sm-12 col-xs-12">
+                            @Html.CheckBoxFor(m=>m.IsNeedContract,new Dictionary<string, object>() { { "onchange", "appDocument.toggleContract()" } })
+                            @Html.LabelFor(m=>m.IsNeedContract)
+                        </div>
+                        <div class="@contractCss" id="created-contract-area">
+                            @Html.CheckBoxFor(m => m.IsCreatedContract)
+                            @Html.LabelFor(m => m.IsCreatedContract)
+                        </div>
                     </div>
                 </div>
             </div>
@@ -310,6 +321,16 @@
     </div>
     if (Model.IsUpdate)
     {
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Checklist</h3>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        @Html.Action("ListOfChecklist", "Document", new { @id = @Model.DocumentId })
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <h3>Comments</h3>
@@ -331,7 +352,8 @@
     </div>
 }
 @Html.Hidden("GetCustomerInformationUrl", Url.Action("Information", "Customer"))
-@Html.Hidden("AddCommentUrl",Url.Action("Save","Comment"))
+@Html.Hidden("AddCommentUrl", Url.Action("Save", "Comment"))
+@Html.Hidden("SaveChecklistUrl", Url.Action("SaveCheckList", "Document"))
 @section scripts
  {
     @Scripts.Render("~/application/document")

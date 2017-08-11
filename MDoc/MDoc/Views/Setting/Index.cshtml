@@ -14,3 +14,11 @@
         </div>
     </div>
 </div>
+@section scripts{
+    @Scripts.Render("~/application/setting")
+    <script type="text/javascript">
+        (function() {
+            checklist.setHeightGrid();
+        })();
+    </script>
+}

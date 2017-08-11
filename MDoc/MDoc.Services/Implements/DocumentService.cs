@@ -64,6 +64,9 @@ namespace MDoc.Services.Implements
                     Creator = creator.UserName,
                     Country = country.Label,
                     DocumentStatus = doc.DocumentStatus.Label,
+                    DocumentStatusId = doc.DocumentStatusId,
+                    IsCreatedContract = doc.IsCreatedContract,
+                    IsNeedContract = doc.IsNeedContract,
                     Customer =  new CustomerModel()
                     {
                         FirstName = cus.FirstName,
@@ -97,6 +100,8 @@ namespace MDoc.Services.Implements
                 ReferenceProgramId = document.ReferenceProgramId,
                 FinalSchoolId = document.FinalSchoolId,
                 FinalProgramId = document.FinalProgramId,
+                IsCreatedContract = document.IsCreatedContract,
+                IsNeedContract = document.IsNeedContract,
                 MainResponsibleIds = document.DocumentResponsibles.Where(user=>user.IsMain).Select(x=>x.UserId).JoinStrings(","),
                 SubResponsibleIds = document.DocumentResponsibles.Where(user => !user.IsMain).Select(x => x.UserId).JoinStrings(","),
                 Customer = new CustomerModel()
@@ -143,6 +148,8 @@ namespace MDoc.Services.Implements
                 FinalSchoolId = model.FinalSchoolId,
                 ReferenceCountryId = model.ReferenceCountryId,
                 ReferenceProgramId = model.ReferenceProgramId,
+                IsNeedContract = model.IsNeedContract,
+                IsCreatedContract = model.IsCreatedContract,
                 ReferenceSchoolId = model.ReferenceSchoolId,
                 DocumentStatusId = (byte) DocumentStatusEnum.New
             };
@@ -219,7 +226,8 @@ namespace MDoc.Services.Implements
             document.ReferenceSchoolId = model.ReferenceSchoolId;
             document.FinalProgramId = model.FinalProgramId;
             document.FinalSchoolId = model.FinalSchoolId;
-
+            document.IsNeedContract = model.IsNeedContract;
+            document.IsCreatedContract = model.IsCreatedContract;
             document.DocumentResponsibles.Clear();
             if (!string.IsNullOrEmpty(model.MainResponsibleIds))
             {
@@ -271,6 +279,35 @@ namespace MDoc.Services.Implements
             UnitOfWork.SaveChanges();
             return true;
         }
+
+        public bool SaveChecklist(DocumentChecklistModel model)
+        {
+            var item = UnitOfWork.GetRepository<DocumentChecklist>()
+                .GetByKeys(model.DocumentId, model.ChecklistId);
+            if (item == null)
+            {
+                var newItem = new DocumentChecklist()
+                {
+                    DocumentId = model.DocumentId,
+                    ChecklistId = model.ChecklistId,
+                    IsChecked = model.IsChecked,
+                    UpdatedById = model.LoggedUserId,
+                    UpdatedDate = DateTime.Now
+                };
+                UnitOfWork.GetRepository<DocumentChecklist>().Create(newItem);
+                UnitOfWork.SaveChanges();
+                return true;
+            }
+            else
+            {
+                item.UpdatedById = model.LoggedUserId;
+                item.UpdatedDate = DateTime.Now;
+                item.IsChecked = model.IsChecked;
+            }
+            UnitOfWork.SaveChanges();
+            return true;
+        }
+
         #endregion
 
     }

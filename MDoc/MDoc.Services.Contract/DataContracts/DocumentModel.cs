@@ -22,6 +22,7 @@ namespace MDoc.Services.Contract.DataContracts
         public byte? DocumentStatusId { get; set; }
         public string Code { get; set; }
         [Display(Name = "Reference Country")]
+        [Required]
         public int? ReferenceCountryId { get; set; }
         [Display(Name = "Reference School")]
         public int? ReferenceSchoolId { get; set; }
@@ -50,6 +51,10 @@ namespace MDoc.Services.Contract.DataContracts
         public string Creator { get; set; }
         public DateTime CreatedDate { get; set; }
         public bool CanEdit { get; set; }
+        [Display(Name = "Is Need Contract?")]
+        public bool IsNeedContract { get; set; }
+        [Display(Name = "Created Contract?")]
+        public bool IsCreatedContract { get; set; }
         public IEnumerable<UserModel> ResponsibleUsers { get; set; }
 
         public string FormatedResponsebileUsers

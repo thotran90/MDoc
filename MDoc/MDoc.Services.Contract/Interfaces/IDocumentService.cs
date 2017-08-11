@@ -13,5 +13,6 @@ namespace MDoc.Services.Contract.Interfaces
         bool Remove(DocumentModel model);
         bool UpdateStatus(DocumentModel model);
         bool CanEditDocument(int userId, int documentId);
+        bool SaveChecklist(DocumentChecklistModel model);
     }
 }

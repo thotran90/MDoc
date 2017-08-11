@@ -1,8 +1,8 @@
 ﻿
 @using MDoc.Services.Contract.DataContracts
-<div class="col-md-12">
+<div class="col-md-12 row-margintop">
     @(Html.Kendo().Grid<ChecklistModel>()
-          .Name("GridCustomers")
+          .Name("GridChecklists")
           .Columns(columns =>
           {
               columns.Bound(c => c.Id).ClientTemplate(@Html.Partial("Checklist/_Command").ToHtmlString())

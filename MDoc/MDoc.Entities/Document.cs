@@ -26,6 +26,8 @@ namespace MDoc.Entities
         public DateTime CreatedDate { get; set; }
         public int? UpdatedById { get; set; }
         public DateTime? UpdatedDate { get; set; }
+        public bool IsNeedContract { get; set; }
+        public bool IsCreatedContract { get; set; }
         public virtual DocumentStatus DocumentStatus { get; set; }
         public virtual DocumentType DocumentType { get; set; }
         public virtual Customer Customer { get; set; }

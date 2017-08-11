@@ -1,0 +1,11 @@
+﻿@model MDoc.Services.Contract.DataContracts.ChecklistModel
+
+@Html.CheckBoxFor(m => m.IsChecked,new Dictionary<string, object>() { {"data-id",@Model.Id}, {"onchange", "appDocument.saveChecklist(this)" } })
+@Html.DisplayFor(m => m.Label)
+@if (Model.LastUpdatedById.HasValue)
+{
+    <p class="checklist-info">
+        Last updated by <strong>@Model.LastUpdatedUsername</strong> at @Model.LastUpdatedDate
+    </p>
+}
+

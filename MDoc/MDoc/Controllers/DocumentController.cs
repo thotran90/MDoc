@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
@@ -13,14 +14,16 @@ namespace MDoc.Controllers
         #region [Variable]
 
         private readonly IDocumentService _documentService;
+        private readonly IChecklistService _checklistService;
 
         #endregion
 
         #region [Contructor]
 
-        public DocumentController(IDocumentService documentService)
+        public DocumentController(IDocumentService documentService, IChecklistService checklistService)
         {
             _documentService = documentService;
+            _checklistService = checklistService;
         }
 
         #endregion
@@ -50,6 +53,20 @@ namespace MDoc.Controllers
         public ActionResult Create() => View("Save", new DocumentModel());
 
         [HttpGet]
+        [MvcSiteMapNode(Title = "Review document", ParentKey = "document", PreservedRouteParameters = "id")]
+        public ActionResult Detail(int id)
+        {
+            var canEdit = _documentService.CanEditDocument(CurrentUser.UserId, id);
+            if (CurrentUser.IsSuperAdmin || CurrentUser.IsCompanyAdmin || canEdit)
+            {
+                var model = _documentService.Single(id);
+                if (model.DocumentId == 0) return HttpNotFound();
+                return View("Detail", model);
+            }
+            return HttpNotFound();
+        }
+
+        [HttpGet]
         [MvcSiteMapNode(Title = "Update document",ParentKey = "document", PreservedRouteParameters = "id")]
         public ActionResult Edit(int id)
         {
@@ -59,6 +76,7 @@ namespace MDoc.Controllers
 
                 var model = _documentService.Single(id);
                 if (model.DocumentId == 0) return HttpNotFound();
+                if (model.DocumentStatusId == 6) return RedirectToAction("Detail", new {id = model.DocumentId});
                 return View("Save", model);
             }
             return HttpNotFound();
@@ -100,6 +118,22 @@ namespace MDoc.Controllers
             }
             return Json("NoRight", JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult ListOfChecklist(int id)
+        {
+            var checklist = _checklistService.ListOfItemsViaDocument(id).ToList();
+            return PartialView("_ListOfChecklistItem", checklist);
+        }
+
+        [HttpPost]
+        public ActionResult SaveCheckList(DocumentChecklistModel model)
+        {
+            model.LoggedUserId = CurrentUser.UserId;
+            _documentService.SaveChecklist(model);
+            var checklist = _checklistService.GetChecklistState(model.DocumentId, model.ChecklistId);
+            return PartialView("_ChecklistItem", checklist);
+        }
+
         #endregion
     }
 }

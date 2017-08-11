@@ -1,5 +1,5 @@
 ﻿<div class="btn-group">
-    <a class="btn btn-success"  onclick="appDocument.updateStatus(this)" data-id="#: DocumentId #" data-status="2" title="Start Progress">
+    <a class="#= (DocumentStatusId == 1)? 'btn btn-success' : 'hidden'" onclick="appDocument.updateStatus(this) " data-id="#: DocumentId #" data-status="2" title="Start Progress">
         <i class="fa fa-play"></i>
     </a>
     <a class="btn btn-primary" href='@Url.Action("Edit", "Document")/#: DocumentId #' title="Edit Document">
@@ -8,7 +8,13 @@
     <a class="btn btn-success" onclick="appDocument.updateStatus(this)" data-id="#: DocumentId #" data-status="4" title="Passed">
         <i class="fa fa-check"></i>
     </a>
-    <a class="btn btn-danger"  onclick="appDocument.updateStatus(this)" data-id="#: DocumentId #" data-status="3" title="Cancel Document">
+    <a class="btn btn-success" onclick="appDocument.updateStatus(this)" data-id="#: DocumentId #" data-status="5" title="Payment">
+        <i class="fa fa-dollar"></i>
+    </a>
+    <a class="btn btn-success" onclick="appDocument.updateStatus(this)" data-id="#: DocumentId #" data-status="6" title="Done">
+        <i class="fa fa-lock"></i>
+    </a>
+    <a class="btn btn-danger" onclick="appDocument.updateStatus(this)" data-id="#: DocumentId #" data-status="3" title="Cancel Document">
         <i class="fa fa-remove"></i>
     </a>
 </div>

@@ -2,7 +2,7 @@
     // Set height of grid to fix screen
     var setHeightGrid = function() {
         var height = $(window).height();
-        $("#GridDocuments .k-grid-content").css("height", height - 325);
+        $("#GridDocuments .k-grid-content").css("height", height - 350);
     }
     // fill customer data to customer area
     var fillCustomerInformation = function(customer) {
@@ -80,11 +80,47 @@
             });
         }
     }
+    // update checklist
+    var saveChecklist = function(elm) {
+        var documentId = $("#DocumentId").val();
+        if (documentId > 0) {
+            var itemid = $(elm).data("id");
+            var item = {
+                DocumentId: documentId,
+                ChecklistId: itemid,
+                IsChecked: $(elm).is(':checked')
+            };
+            var action = $("#SaveChecklistUrl").val();
+            $.ajax({
+                url: action,
+                data: item,
+                type: "POST"
+            }).done(function (response) {
+                $("#checklist-item-"+itemid).html(response);
+            }).fail(function (xhr, status, errorThrown) {
+                console.log(status);
+            });
+        }
+    }
+    // toggle option created contract
+    var toggleContract = function () {
+
+        var isNeedContract = $("#IsNeedContract").is(':checked');
+        console.log(isNeedContract);
+        if (isNeedContract) {
+            $("#created-contract-area").removeClass("hidden");
+        } else {
+            $("#IsCreatedContract").prop('checked', false);
+            $("#created-contract-area").addClass("hidden");
+        }
+    }
 
     return {
         setHeightGrid: setHeightGrid,
         loadExistDocument: loadExistDocument,
         updateStatus: updateStatus,
-        addComment: addComment
+        addComment: addComment,
+        saveChecklist: saveChecklist,
+        toggleContract: toggleContract
     }
 })();

@@ -45,6 +45,7 @@
     <Compile Include="DataContracts\ChecklistModel.cs" />
     <Compile Include="DataContracts\CompanyModel.cs" />
     <Compile Include="DataContracts\CustomerModel.cs" />
+    <Compile Include="DataContracts\DocumentChecklistModel.cs" />
     <Compile Include="DataContracts\DocumentCommentModel.cs" />
     <Compile Include="DataContracts\DocumentModel.cs" />
     <Compile Include="DataContracts\DocumentStatusModel.cs" />

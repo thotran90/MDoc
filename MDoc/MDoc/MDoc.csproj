@@ -244,6 +244,7 @@
     <Content Include="Scripts\application\customer.js" />
     <Content Include="Scripts\application\document.js" />
     <Content Include="Scripts\application\school.js" />
+    <Content Include="Scripts\application\setting.js" />
     <Content Include="Scripts\application\user.js" />
     <Content Include="Scripts\bootstrap-confirmation.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -520,6 +521,9 @@
     <Content Include="Views\Setting\Checklist\_Index.cshtml" />
     <Content Include="Views\Setting\Checklist\_Command.cshtml" />
     <Content Include="Views\Setting\Checklist\Save.cshtml" />
+    <Content Include="Views\Document\_ListOfChecklistItem.cshtml" />
+    <Content Include="Views\Document\_ChecklistItem.cshtml" />
+    <Content Include="Views\Document\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.css" />

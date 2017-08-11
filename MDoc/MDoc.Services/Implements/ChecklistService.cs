@@ -65,13 +65,39 @@ namespace MDoc.Services.Implements
                 join dvalue in UnitOfWork.GetRepository<DocumentChecklist>().Get(m => m.DocumentId == documentId) on
                     item.ChecklistId equals dvalue.ChecklistId into selectedValue
                 from valued in selectedValue.DefaultIfEmpty()
+                join user in UnitOfWork.GetRepository<ApplicationUser>().Get() on 
+                    valued.UpdatedById equals user.ApplicationUserId into updatedUser
+                from user in updatedUser.DefaultIfEmpty()
                 select new ChecklistModel
                 {
                     Id = item.ChecklistId,
                     Label = item.Label,
                     Description = item.Description,
-                    IsChecked = valued.IsChecked
+                    IsChecked = valued.IsChecked??false,
+                    LastUpdatedById = valued.UpdatedById,
+                    LastUpdatedDate = valued.UpdatedDate,
+                    LastUpdatedUsername = user.UserName
                 });
+            return result;
+        }
+
+        public ChecklistModel GetChecklistState(int documentId, byte itemId)
+        {
+            var item = UnitOfWork.GetRepository<DocumentChecklist>().GetByKeys(documentId, itemId);
+            if(item == null) return new ChecklistModel()
+            {
+                Id = itemId
+            };
+            var result = new ChecklistModel()
+            {
+                Id = item.ChecklistId,
+                Label = item.ChecklistItem.Label,
+                IsChecked = item.IsChecked.Value,
+                LastUpdatedDate = item.UpdatedDate,
+                LastUpdatedById = item.UpdatedById,
+                LastUpdatedUsername =
+                    UnitOfWork.GetRepository<ApplicationUser>().GetByKeys(item.UpdatedById.Value).UserName
+            };
             return result;
         }
     }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
 using MDoc.Models;
 using MDoc.Services.Contract.DataContracts;
@@ -14,30 +11,34 @@ namespace MDoc.Controllers
         #region [Variable]
 
         private readonly IDocumentCommentService _documentCommentService;
+
         #endregion
 
         #region [Constructor]
+
         public CommentController(IDocumentCommentService documentCommentService)
         {
             _documentCommentService = documentCommentService;
         }
+
         #endregion
 
         #region [Actions]
+
         [HttpGet]
         public ActionResult ListOfComments(int id)
         {
             var comments = _documentCommentService.ListOfComments(id, CurrentUser.UserId).ToList();
-            return PartialView("_ListOfComments",comments);
+            return PartialView("_ListOfComments", comments);
         }
 
         [HttpGet]
-        public ActionResult Creation() => PartialView("_Save",new CommentModel());
+        public ActionResult Creation() => PartialView("_Save", new CommentModel());
 
         [HttpPost]
         public ActionResult Save(CommentModel model)
         {
-            var comment = new DocumentCommentModel()
+            var comment = new DocumentCommentModel
             {
                 DocumentId = model.DocumentId,
                 Content = model.Content,
@@ -50,7 +51,5 @@ namespace MDoc.Controllers
         }
 
         #endregion
-
-
     }
 }
