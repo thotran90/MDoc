@@ -2,7 +2,7 @@
     // Set height of grid to fix screen
     var setHeightGrid = function() {
         var height = $(window).height();
-        $("#GridDocuments .k-grid-content").css("height", height - 350);
+        $("#GridDocuments .k-grid-content").css("height", height - 320);
     }
     // fill customer data to customer area
     var fillCustomerInformation = function(customer) {

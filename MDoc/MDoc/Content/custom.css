@@ -165,7 +165,7 @@ html , body{
     visibility: hidden
 }
 .nav-sm .container.body .right_col {
-    padding: 10px 20px;
+    /*padding: 10px 20px;*/
     margin-left: 70px;
     z-index: 2
 }
@@ -350,7 +350,7 @@ body .container.body .right_col {
     background: #F7F7F7
 }
 .nav-md .container.body .right_col {
-    padding: 10px 20px 0;
+    /*padding: 10px 20px 0;*/
     margin-left: 230px
 }
 .nav_title {

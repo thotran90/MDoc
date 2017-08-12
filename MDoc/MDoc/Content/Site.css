@@ -668,3 +668,7 @@ a img {
 i.blue {
     color: blue;
 }
+.breadcrumb {
+    border-radius: 0;
+    border-bottom: 1px solid #778899;
+}

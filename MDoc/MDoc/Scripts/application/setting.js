@@ -1,7 +1,7 @@
 ﻿var checklist = (function() {
     var setHeightGrid = function () {
         var height = $(window).height();
-        $("#GridChecklists .k-grid-content").css("height", height - 375);
+        $("#GridChecklists .k-grid-content").css("height", height - 400);
     }
 
     var remove = function(elm) {
