@@ -1,5 +1,7 @@
 ﻿var common = (function() {
-    
+    var loading = function (displayValue) {
+        $('#fountainG').css('display', displayValue);
+    }
     var loadModal = function () {
         // Fill modal with content from link href
         $(".modal").on("show.bs.modal", function (e) {
@@ -107,10 +109,33 @@
         });
     }
 
+    var showNotification = function ( msg, css, autoHide) {
+        $("#freeow").freeow('MDOC', msg, {
+            classes: css,
+            autoHide: autoHide
+        });
+    }
+
+    var showSuccess = function ( msg) {
+        showNotification(msg, ["gray", "success"], true);
+    }
+
+    var showError = function ( msg) {
+        showNotification( msg, ["gray", "error"], true);
+    }
+
+    var showWarning = function ( msg) {
+        showNotification( msg, ["gray"], true);
+    }
+
     return {
         closeModal: closeModal,
         initHtmlEditor: loadAllHtmlEditor,
-        registerComponent: registerComponent
+        registerComponent: registerComponent,
+        loading: loading,
+        success: showSuccess,
+        error: showError,
+        warning: showWarning
     }
 })();
 

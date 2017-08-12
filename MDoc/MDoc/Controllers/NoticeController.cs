@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Data.Odbc;
+using System.Web.Mvc;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using MDoc.Models;
@@ -47,9 +48,18 @@ namespace MDoc.Controllers
 
         [HttpGet]
         [MvcSiteMapNode(Title = "Edit notice", ParentKey = "notice", PreservedRouteParameters = "id")]
-        public ActionResult Update(int id)
+        public ActionResult Edit(int id,bool isDraft)
         {
-            return View("Save");
+            var notice = _noticeService.Detail(id, isDraft);
+            if(notice == null) return HttpNotFound();
+            var model = new NoticeViewModel()
+            {
+                Id = notice.Id,
+                Title = notice.Title,
+                Content = notice.Body,
+                IsDraft = notice.IsDraft
+            };
+            return View("Save",model);
         }
 
         [HttpPost]
@@ -58,6 +68,23 @@ namespace MDoc.Controllers
         {
             if (ModelState.IsValid)
             {
+                var notice = new NoticeModel()
+                {
+                    Title = model.Title,
+                    Body = model.Content,
+                    IsDraft = model.IsDraft,
+                    LoggedUserId = CurrentUser.UserId,
+                    Id = model.Id
+                };
+                if (model.IsUpdate)
+                {
+                    _noticeService.Update(notice);
+                }
+                else
+                {
+                    _noticeService.Create(notice);
+                }
+                return RedirectToAction("Index");
             }
             ModelState.AddModelError("Invalid","Fill all of required field before submit!");
             return View("Save",model);

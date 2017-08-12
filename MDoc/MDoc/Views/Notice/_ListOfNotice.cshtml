@@ -4,15 +4,17 @@
           .Name("GridNotices")
           .Columns(columns =>
           {
-              columns.Bound(c => c.Id).ClientTemplate("")
+              columns.Bound(c => c.Id).ClientTemplate(@Html.Partial("_Command").ToHtmlString())
                   .Width(150)
                   .HeaderTemplate("Actions")
                   .Sortable(false)
                   .Filterable(false);
               columns.Bound(c => c.Title);
               columns.Bound(c => c.CreatedByUsername);
-              columns.Bound(c => c.CreatedDate);
-              columns.Bound(c => c.IsDraft);
+              columns.Bound(c => c.CreatedDate).Format("{0:dd/MM/yyyy HH:mm}").Width(200);
+              columns.Bound(c => c.IsDraft).HeaderTemplate("Draft?").ClientTemplate("# if(IsDraft == true) {#" +
+                                                                                                   "<i class='fa fa-check blue'></i>" +
+                                                                                                   "#}#").Width(100);
               columns.Command(command =>
                     {
                         command.Destroy().Text("delete");

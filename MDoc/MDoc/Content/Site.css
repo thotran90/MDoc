@@ -670,5 +670,12 @@ i.blue {
 }
 .breadcrumb {
     border-radius: 0;
-    border-bottom: 1px solid #778899;
+    background-color: #dcdcdc;
+}
+.breadcrumb a {
+    font-weight: bold;
+}
+.desc {
+    font-style: italic;
+    color: #757575
 }

@@ -14,7 +14,7 @@ namespace MDoc.Models
         [AllowHtml]
         [Display(Name = "Content of notice")]
         public string Content { get; set; }
-
+        [Display(Name = "Draft notice")]
         public bool IsDraft { get; set; }
         public bool IsUpdate => Id > 0;
     }

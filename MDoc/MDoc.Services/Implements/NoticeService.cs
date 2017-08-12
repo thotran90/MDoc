@@ -42,6 +42,7 @@ namespace MDoc.Services.Implements
                 IsDraft = model.IsDraft
             };
             UnitOfWork.GetRepository<Notice>().Create(notice);
+            UnitOfWork.SaveChanges();
             model.Id = notice.NoticeId;
             return model;
         }
@@ -54,6 +55,7 @@ namespace MDoc.Services.Implements
             notice.Body = model.Body;
             notice.UpdatedById = model.LoggedUserId;
             notice.UpdatedDate = DateTime.Now;
+            notice.IsDraft = model.IsDraft;
             UnitOfWork.SaveChanges();
             return model;
         }

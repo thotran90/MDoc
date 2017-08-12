@@ -15,16 +15,33 @@
         <div class="col-md-9 col-sm-12 col-xs-12">
             @Html.LabelFor(m => m.Title)
             @Html.ValidationMessageFor(m => m.Title)
-            @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
-        </div>
+            @Html.TextBoxFor(m => m.Title, new {@class = "form-control"})
+        </div> 
     </div>
-    <div class="row">
-        <div class="col-md-9 col-sm-12 col-xs-12">
+    <div class="row row-margintop">
+        <div class="col-md-12 col-sm-12 col-xs-12 control-label">
             @Html.LabelFor(m => m.Content)
             @Html.ValidationMessageFor(m => m.Content)
-            @(Html.Kendo().Editor().Name("asadsadasds"))
+            @Html.HtmlEditorFor(m=>m.Content,new HtmlEditorOption()
+            {
+                ShowMenuBar = true,
+                ShowToolbar = true,
+                Height = "400px"
+            })
         </div>
-
+    </div>
+    <div class="row row-margintop">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            @Html.CheckBoxFor(m => m.IsDraft)
+            @Html.LabelFor(m => m.IsDraft)
+            <p class="desc">The user cannot see draft notice. Uncheck this option when you want to public this notice</p>
+        </div>
+    </div>
+    <div class="row row-margintop">
+        <div class="col-md-12 col-xs-12 col-sm-12">
+            <a class="btn btn-default" href="@Url.Action("Index", "Notice")"><i class="fa fa-backward"></i> Back</a>
+            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
+        </div>
     </div>
 }
 @section scripts{

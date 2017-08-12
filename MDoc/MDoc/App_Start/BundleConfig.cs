@@ -18,6 +18,7 @@ namespace MDoc
                 "~/Scripts/select2.js",
                 "~/Scripts/custom/select2.js",
                 "~/Scripts/tinymce/tinymce.min.js",
+                "~/Scripts/freeow/jquery.freeow.min.js",
                 "~/Scripts/custom.js",
                 "~/Scripts/application/common.js"
             };
@@ -28,7 +29,9 @@ namespace MDoc
                 "~/Content/font-awesome.min.css",
                 "~/Content/select2/select2.css",
                 "~/Content/select2-bootstrap.css",
+                "~/Content/freeow.css",
                 "~/Content/custom.css",
+                "~/Content/loading.css",
                 "~/Content/Site.css"
             };
 
