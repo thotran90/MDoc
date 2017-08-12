@@ -15,7 +15,7 @@
     <AssemblyName>MDoc</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -192,6 +192,7 @@
     <Compile Include="Controllers\DataSourceController.cs" />
     <Compile Include="Controllers\DocumentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NoticeController.cs" />
     <Compile Include="Controllers\SchoolController.cs" />
     <Compile Include="Controllers\SettingController.cs" />
     <Compile Include="Extensions\CustomHtmlHelper.cs" />
@@ -524,6 +525,7 @@
     <Content Include="Views\Document\_ListOfChecklistItem.cshtml" />
     <Content Include="Views\Document\_ChecklistItem.cshtml" />
     <Content Include="Views\Document\Detail.cshtml" />
+    <Content Include="Views\Notice\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.css" />
@@ -573,6 +575,8 @@
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost/MDoc</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost/MDoc</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

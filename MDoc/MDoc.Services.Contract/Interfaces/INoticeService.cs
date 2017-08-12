@@ -10,5 +10,6 @@ namespace MDoc.Services.Contract.Interfaces
         NoticeModel Update(NoticeModel model);
         bool Remove(NoticeModel model);
         IQueryable<NoticeModel> GetPublicNotices();
+        NoticeModel Detail(int id, bool isDraft = false);
     }
 }

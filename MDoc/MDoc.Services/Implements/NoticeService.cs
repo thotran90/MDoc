@@ -50,17 +50,59 @@ namespace MDoc.Services.Implements
         {
             var notice = UnitOfWork.GetRepository<Notice>().GetByKeys(model.Id);
             if(notice == null) return new NoticeModel() {Id = 0};
-            return null;
+            notice.Title = model.Title;
+            notice.Body = model.Body;
+            notice.UpdatedById = model.LoggedUserId;
+            notice.UpdatedDate = DateTime.Now;
+            UnitOfWork.SaveChanges();
+            return model;
         }
 
         public bool Remove(NoticeModel model)
         {
-            throw new System.NotImplementedException();
+            var notice = UnitOfWork.GetRepository<Notice>().GetByKeys(model.Id);
+            if (notice == null) return false;
+            notice.IsDisabled = true;
+            notice.UpdatedById = model.LoggedUserId;
+            notice.UpdatedDate = DateTime.Now;
+            UnitOfWork.SaveChanges();
+            return true;
         }
 
         public IQueryable<NoticeModel> GetPublicNotices()
         {
-            throw new System.NotImplementedException();
+            var result = (from notice in UnitOfWork.GetRepository<Notice>().Get(m => !m.IsDisabled && !m.IsDraft)
+                join user in UnitOfWork.GetRepository<ApplicationUser>().Get() on notice.CreatedById equals
+                    user.ApplicationUserId
+                select new NoticeModel()
+                {
+                    Id = notice.NoticeId,
+                    Title = notice.Title,
+                    CreatedById = notice.CreatedById,
+                    CreatedByUsername = user.UserName,
+                    CreatedDate = notice.CreatedDate
+                });
+            return result;
+        }
+
+        public NoticeModel Detail(int id, bool isDraft = false)
+        {
+            var notice =
+                (from notices in
+                    UnitOfWork.GetRepository<Notice>()
+                        .Get(m => !m.IsDisabled && m.IsDraft == isDraft && m.NoticeId == id)
+                    join user in UnitOfWork.GetRepository<ApplicationUser>().Get() on notices.CreatedById equals
+                        user.ApplicationUserId
+                    select new NoticeModel()
+                    {
+                        Title = notices.Title,
+                        Body = notices.Body,
+                        Id = notices.NoticeId,
+                        CreatedById = notices.CreatedById,
+                        CreatedDate = notices.CreatedDate,
+                        CreatedByUsername = user.UserName
+                    }).FirstOrDefault();
+            return notice;
         }
     }
 }
