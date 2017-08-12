@@ -1,0 +1,24 @@
+﻿@model MDoc.Services.Contract.DataContracts.NoticeModel
+@{
+    ViewBag.Title = "Notice";
+}
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <strong>@Model.Title</strong>
+    </div>
+</div>
+<div class="row row-margintop">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        Created By: @Html.DisplayFor(m=>m.CreatedByUsername)
+    </div>
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <p class="desc">@Html.DisplayFor(m=>m.CreatedDate)</p>
+    </div>
+</div>
+<hr/>
+<div class="row">
+    <div class="col-md-12 col-xs-12 col-sm-12">
+        @Html.Raw(Model.Body)
+    </div>
+</div>
+

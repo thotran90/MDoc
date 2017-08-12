@@ -2,5 +2,30 @@
     ViewBag.Title = "Home Page";
 }
 <div class="row">
-    
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        @Html.Action("PendingWork","Document")
+    </div>
+    <div class="col-md-6 col-sm-12 col-xs-12 text-right">
+        @Html.Partial("_Clock")
+    </div>
 </div>
+
+@section scripts
+{
+    @Scripts.Render("~/application/plugin")
+    <script type="text/javascript">
+        (function () {
+            var clock = $("#clock").clock(),
+        data = clock.data('clock');
+
+            // data.pause();
+            // data.start();
+            // data.setTime(new Date());
+
+            var d = new Date();
+            d.setHours(9);
+            d.setMinutes(51);
+            d.setSeconds(20);
+        })();
+    </script>
+}

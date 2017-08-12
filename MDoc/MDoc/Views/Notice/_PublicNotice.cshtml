@@ -1,0 +1,35 @@
+﻿@model MDoc.Models.PublicNoticeViewModel
+@if (Model.HasRecord)
+{
+    foreach (var notice in Model.Result)
+    {
+        <li>
+            <a href="@Url.Action("Read","Notice",new {@id=@notice.Id})">
+                <span>
+                    <strong>@notice.CreatedByUsername</strong>
+                    <span class="time">@notice.CreatedDate</span>
+                </span>
+                <span class="message">
+                    @notice.Title
+                </span>
+            </a>
+        </li>
+    }
+    if (Model.HasMore)
+    {
+        <li>
+            <div class="text-center">
+                <a>
+                    <strong>See All Notices</strong>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+        </li>
+    }
+}
+else
+{
+    <li>
+        Nothing news!
+    </li>
+}

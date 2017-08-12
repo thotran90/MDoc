@@ -225,6 +225,8 @@
     <Compile Include="Models\CommentModel.cs" />
     <Compile Include="Models\LoggedUser.cs" />
     <Compile Include="Models\NoticeViewModel.cs" />
+    <Compile Include="Models\PendingWorkViewModel.cs" />
+    <Compile Include="Models\PublicNoticeViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -272,6 +274,8 @@
     <Content Include="Scripts\bootstrap-confirmation.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\plugins\clock\clock-1.1.0.js" />
+    <Content Include="Scripts\plugins\clock\clock-1.1.0.min.js" />
     <Content Include="Scripts\custom.js" />
     <Content Include="Scripts\custom.min.js" />
     <Content Include="Scripts\custom\select2.js" />
@@ -557,6 +561,10 @@
     <Content Include="Views\Shared\_LoadingBar.cshtml" />
     <Content Include="Views\Shared\_Welcome.cshtml" />
     <Content Include="Views\Notice\_Command.cshtml" />
+    <Content Include="Views\Shared\_Clock.cshtml" />
+    <Content Include="Views\Notice\_PublicNotice.cshtml" />
+    <Content Include="Views\Notice\Read.cshtml" />
+    <Content Include="Views\Document\_Pending.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.css" />

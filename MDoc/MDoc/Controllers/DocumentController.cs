@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
+using MDoc.Models;
 using MDoc.Services.Contract.DataContracts;
 using MDoc.Services.Contract.Interfaces;
 using MvcSiteMapProvider;
@@ -132,6 +133,23 @@ namespace MDoc.Controllers
             _documentService.SaveChecklist(model);
             var checklist = _checklistService.GetChecklistState(model.DocumentId, model.ChecklistId);
             return PartialView("_ChecklistItem", checklist);
+        }
+
+        [HttpGet]
+        [ChildActionOnly]
+        public ActionResult PendingWork()
+        {
+            var arg = new ListDocumentArgument()
+            {
+                UserId = CurrentUser.UserId,
+                IsAdmin = false
+            };
+            var docs = _documentService.ListOfDocument(arg).Where(m => m.DocumentStatusId == 2 || m.DocumentStatusId == 1).ToList();
+            var model = new PendingWorkViewModel()
+            {
+                Records = docs
+            };
+            return PartialView("_Pending",model);
         }
 
         #endregion

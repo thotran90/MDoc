@@ -60,6 +60,7 @@ namespace MDoc
             bundles.Add(new ScriptBundle("~/application/user").Include("~/Scripts/application/user.js"));
             bundles.Add(new ScriptBundle("~/application/setting").Include("~/Scripts/application/setting.js"));
             bundles.Add(new ScriptBundle("~/application/notice").Include("~/Scripts/application/notice.js"));
+            bundles.Add(new ScriptBundle("~/application/plugin").Include("~/Scripts/plugins/clock/clock-1.1.0.min.js"));
 #if !DEBUG
             BundleTable.EnableOptimizations = true;
 #endif

@@ -1,4 +1,5 @@
 ﻿using System.Data.Odbc;
+using System.Linq;
 using System.Web.Mvc;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
@@ -43,15 +44,15 @@ namespace MDoc.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
-        [MvcSiteMapNode(Title = "Add new notice",ParentKey = "notice")]
+        [MvcSiteMapNode(Title = "Add new notice", ParentKey = "notice")]
         public ActionResult Create() => View("Save", new NoticeViewModel());
 
         [HttpGet]
         [MvcSiteMapNode(Title = "Edit notice", ParentKey = "notice", PreservedRouteParameters = "id")]
-        public ActionResult Edit(int id,bool isDraft)
+        public ActionResult Edit(int id, bool isDraft)
         {
             var notice = _noticeService.Detail(id, isDraft);
-            if(notice == null) return HttpNotFound();
+            if (notice == null) return HttpNotFound();
             var model = new NoticeViewModel()
             {
                 Id = notice.Id,
@@ -59,7 +60,7 @@ namespace MDoc.Controllers
                 Content = notice.Body,
                 IsDraft = notice.IsDraft
             };
-            return View("Save",model);
+            return View("Save", model);
         }
 
         [HttpPost]
@@ -86,8 +87,8 @@ namespace MDoc.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            ModelState.AddModelError("Invalid","Fill all of required field before submit!");
-            return View("Save",model);
+            ModelState.AddModelError("Invalid", "Fill all of required field before submit!");
+            return View("Save", model);
         }
 
         [HttpPost]
@@ -100,6 +101,32 @@ namespace MDoc.Controllers
             }
 
             return Json(new[] { model }.ToDataSourceResult(request, ModelState));
+        }
+
+        [HttpGet]
+        public JsonResult CountNotice()
+            => Json(QueryableExtensions.Count(_noticeService.GetPublicNotices()), JsonRequestBehavior.AllowGet);
+
+        [HttpGet]
+        public ActionResult PublicNotice()
+        {
+            var model = new PublicNoticeViewModel();
+            model.Counter = _noticeService.GetPublicNotices().Count();
+
+            model.Result = model.Counter > 10
+                ? _noticeService.GetPublicNotices().OrderByDescending(m => m.CreatedDate).Take(10).ToList()
+                : _noticeService.GetPublicNotices().OrderByDescending(m => m.CreatedDate).ToList();
+            return PartialView("_PublicNotice", model);
+        }
+
+        [HttpGet]
+        [MvcSiteMapNode(Title = "Notice", ParentKey = "home", PreservedRouteParameters = "id")]
+        public ActionResult Read(int id)
+        {
+            var notice = _noticeService.Detail(id);
+            if(notice == null) return HttpNotFound();
+
+            return View(notice);
         }
 
         #endregion

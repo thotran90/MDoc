@@ -1,0 +1,44 @@
+﻿@model MDoc.Models.PendingWorkViewModel
+<div class="panel panel-info">
+    <div class="panel-heading">
+        Pending work
+        @if (Model.HasRecord)
+        {
+            <i class="badge">@Model.Counter</i>
+        }
+    </div>
+    <div class="panel-body">
+        @if (Model.HasRecord)
+        {
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Student</th>
+                            <th>Country</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var doc in Model.Records)
+                        {
+
+                            <tr>
+                                <td><a href="@Url.Action("Edit","Document",new {@id=@doc.DocumentId})">@doc.Code</a></td>
+                                <td>@doc.Customer.FullName</td>
+                                <td>@doc.Country</td>
+                                <td>@doc.DocumentStatus</td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <p>Good job! You don't have any pending document right now!</p>
+        }
+    </div>
+</div>

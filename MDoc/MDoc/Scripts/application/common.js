@@ -94,7 +94,17 @@
         $("#mainContent").css("height", height - 150);
         $("#mainContent").css("overflow", "auto");
     }
-
+    var loadNumberCounter = function () {
+        $('.counter-number').each(function () {
+            var control = $(this);
+            var action = $(this).data("action");
+            if (action) {
+                $.get(action, function(res) {
+                    $(control).html(res);
+                });
+            }
+        });
+    }
     var registerComponent = function() {
         loadModal();
         //$.validator.setDefaults({
@@ -107,7 +117,10 @@
             rootSelector: '[data-toggle=confirmation]'
             // other options
         });
+        loadNumberCounter();
     }
+
+    
 
     var showNotification = function ( msg, css, autoHide) {
         $("#freeow").freeow('MDOC', msg, {
