@@ -181,7 +181,6 @@
     <Content Include="Content\css\select2.css" />
     <Content Include="Content\css\select2.min.css" />
     <Content Include="Content\custom.css" />
-    <Content Include="Content\custom.min.css" />
     <Content Include="Content\freeow.css" />
     <Content Include="Content\images\android-logo.png" />
     <Content Include="Content\images\arrow-active.png" />
@@ -263,6 +262,8 @@
     <None Include="MvcSiteMapSchema.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\PublishProfiles\mdoc - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\mdoc - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\application\common.js" />
     <Content Include="Scripts\application\customer.js" />
@@ -277,7 +278,6 @@
     <Content Include="Scripts\plugins\clock\clock-1.1.0.js" />
     <Content Include="Scripts\plugins\clock\clock-1.1.0.min.js" />
     <Content Include="Scripts\custom.js" />
-    <Content Include="Scripts\custom.min.js" />
     <Content Include="Scripts\custom\select2.js" />
     <Content Include="Scripts\freeow\jquery.freeow.js" />
     <Content Include="Scripts\freeow\jquery.freeow.min.js" />
@@ -612,7 +612,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>56988</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost/MDoc</IISUrl>
           <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>

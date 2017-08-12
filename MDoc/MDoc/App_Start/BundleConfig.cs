@@ -17,7 +17,6 @@ namespace MDoc
                 "~/Scripts/kendo.modernizr.custom.js",
                 "~/Scripts/select2.js",
                 "~/Scripts/custom/select2.js",
-                "~/Scripts/tinymce/tinymce.min.js",
                 "~/Scripts/freeow/jquery.freeow.min.js",
                 "~/Scripts/custom.js",
                 "~/Scripts/application/common.js"
