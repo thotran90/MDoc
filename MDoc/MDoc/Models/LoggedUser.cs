@@ -22,7 +22,6 @@ namespace MDoc.Models
                     ? (int?)null
                     : Convert.ToInt32(FindFirst("CompanyId").Value);
 
-        public string Avatar => FindFirst("Avatar").Value;
         public bool IsSuperAdmin => bool.Parse(FindFirst("IsSuperAdmin").Value);
         public bool IsCompanyAdmin => bool.Parse(FindFirst("IsCompanyAdmin").Value);
     }

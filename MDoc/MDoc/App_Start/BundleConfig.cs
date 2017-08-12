@@ -15,10 +15,10 @@ namespace MDoc
                 "~/Scripts/bootstrap-confirmation.min.js",
                 "~/Scripts/respond.js",
                 "~/Scripts/kendo.modernizr.custom.js",
-                "~/Scripts/material.min.js",
                 "~/Scripts/select2.js",
                 "~/Scripts/custom/select2.js",
                 "~/Scripts/tinymce/tinymce.min.js",
+                "~/Scripts/custom.js",
                 "~/Scripts/application/common.js"
             };
 
@@ -28,6 +28,7 @@ namespace MDoc
                 "~/Content/font-awesome.min.css",
                 "~/Content/select2/select2.css",
                 "~/Content/select2-bootstrap.css",
+                "~/Content/custom.css",
                 "~/Content/Site.css"
             };
 
@@ -55,6 +56,7 @@ namespace MDoc
             bundles.Add(new ScriptBundle("~/application/document").Include("~/Scripts/application/document.js"));
             bundles.Add(new ScriptBundle("~/application/user").Include("~/Scripts/application/user.js"));
             bundles.Add(new ScriptBundle("~/application/setting").Include("~/Scripts/application/setting.js"));
+            bundles.Add(new ScriptBundle("~/application/notice").Include("~/Scripts/application/notice.js"));
 #if !DEBUG
             BundleTable.EnableOptimizations = true;
 #endif

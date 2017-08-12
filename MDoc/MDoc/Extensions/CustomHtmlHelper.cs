@@ -386,15 +386,5 @@ namespace MDoc.Extensions
 
         #endregion
 
-        #region [Address]
-
-        public static MvcHtmlString AddressNameFor<TModule, TValue>(this HtmlHelper<TModule> helper,
-            Expression<Func<TModule, TValue>> expression)
-        {
-            
-            return null;
-        }
-
-        #endregion
     }
 }

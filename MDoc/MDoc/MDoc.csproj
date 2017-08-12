@@ -180,9 +180,28 @@
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Content Include="Content\css\select2.css" />
     <Content Include="Content\css\select2.min.css" />
+    <Content Include="Content\custom.css" />
+    <Content Include="Content\custom.min.css" />
+    <Content Include="Content\freeow.css" />
     <Content Include="Content\images\android-logo.png" />
+    <Content Include="Content\images\arrow-active.png" />
     <Content Include="Content\images\bg.jpg" />
+    <Content Include="Content\images\bghover.png" />
+    <Content Include="Content\images\close.png" />
+    <Content Include="Content\images\doc-icon.ico" />
+    <Content Include="Content\images\error.png" />
+    <Content Include="Content\images\headerbg.png" />
+    <Content Include="Content\images\line.ccc.png" />
     <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\noavatar.png" />
+    <Content Include="Content\images\notibg.png" />
+    <Content Include="Content\images\notice.png" />
+    <Content Include="Content\images\patternbg.png" />
+    <Content Include="Content\images\pushpin.png" />
+    <Content Include="Content\images\searchbutton.png" />
+    <Content Include="Content\images\slide.png" />
+    <Content Include="Content\images\success.png" />
+    <Content Include="Content\images\userinfoarrow.png" />
     <Content Include="Content\logon.css" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -204,6 +223,7 @@
     </Compile>
     <Compile Include="Models\CommentModel.cs" />
     <Compile Include="Models\LoggedUser.cs" />
+    <Compile Include="Models\NoticeViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -244,12 +264,15 @@
     <Content Include="Scripts\application\common.js" />
     <Content Include="Scripts\application\customer.js" />
     <Content Include="Scripts\application\document.js" />
+    <Content Include="Scripts\application\notice.js" />
     <Content Include="Scripts\application\school.js" />
     <Content Include="Scripts\application\setting.js" />
     <Content Include="Scripts\application\user.js" />
     <Content Include="Scripts\bootstrap-confirmation.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\custom.js" />
+    <Content Include="Scripts\custom.min.js" />
     <Content Include="Scripts\custom\select2.js" />
     <Content Include="Scripts\i18n\ar.js" />
     <Content Include="Scripts\i18n\az.js" />
@@ -308,7 +331,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\kendo.modernizr.custom.js" />
-    <Content Include="Scripts\material.min.js" />
+    <Content Include="Scripts\material.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\respond.js" />
@@ -526,6 +549,12 @@
     <Content Include="Views\Document\_ChecklistItem.cshtml" />
     <Content Include="Views\Document\Detail.cshtml" />
     <Content Include="Views\Notice\Index.cshtml" />
+    <Content Include="Views\Notice\_ListOfNotice.cshtml" />
+    <Content Include="Views\Notice\Save.cshtml" />
+    <Content Include="Views\Shared\_TopNav.cshtml" />
+    <Content Include="Views\Shared\_SideBarFooter.cshtml" />
+    <Content Include="Views\Shared\_LoadingBar.cshtml" />
+    <Content Include="Views\Shared\_Welcome.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.css" />
@@ -536,6 +565,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\images\osx\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\DataSource\" />
   </ItemGroup>

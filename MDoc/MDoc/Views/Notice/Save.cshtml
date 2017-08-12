@@ -1,0 +1,35 @@
+﻿@using MDoc.Extensions
+@using MDoc.Extensions.Options
+@model MDoc.Models.NoticeViewModel
+@{
+    ViewBag.Title = @Model.IsUpdate ? "Update notice" : "Add new notice";
+
+}
+
+@using (Html.BeginForm("Save", "Notice", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(m => m.Id)
+    <div class="row">
+        <div class="col-md-9 col-sm-12 col-xs-12">
+            @Html.LabelFor(m => m.Title)
+            @Html.ValidationMessageFor(m => m.Title)
+            @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-9 col-sm-12 col-xs-12">
+            @Html.LabelFor(m => m.Content)
+            @Html.ValidationMessageFor(m => m.Content)
+            @(Html.Kendo().Editor().Name("asadsadasds"))
+        </div>
+
+    </div>
+}
+@section scripts{
+    @Scripts.Render("~/application/notice")
+    <script type="text/javascript">
+       
+    </script>
+}

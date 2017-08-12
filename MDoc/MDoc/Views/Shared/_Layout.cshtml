@@ -14,18 +14,72 @@
     @Styles.Render("~/Content/coreCss")
 
 </head>
-<body>
-    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-       @Html.Partial("_Header", new LoggedUser(User as ClaimsPrincipal))
-        @Html.Partial("_Sidebar", new LoggedUser(User as ClaimsPrincipal))
-        <div class="android-content mdl-layout__content">
-            @Html.MvcSiteMap().SiteMapPath()
-            <div class="body" id="mainContent">
-                @RenderBody()
+<body onload="common.loading('none')" class="nav-md">
+    @Html.Partial("_LoadingBar")
+    <div class="container body">
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col">
+                    <div class="navbar nav_title" style="border: 0;">
+                        <a href="@Url.Action("Index", "Home")" class="site_title">
+                            <i class="fa fa-book"></i> <span>MDoc</span>
+                        </a>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!-- menu profile quick info -->
+                    @Html.Partial("_Welcome", new LoggedUser(User as ClaimsPrincipal))
+                    <!-- /menu profile quick info -->
+                    <br />
+
+                    @Html.Partial("_SideBar", new LoggedUser(User as ClaimsPrincipal))
+
+                    @Html.Partial("_SideBarFooter")
+
+
+                </div>
             </div>
+
+            @Html.Partial("_TopNav", new LoggedUser(User as ClaimsPrincipal))
+
+            <div class="right_col" role="main">
+                <div class="main_container">
+                    @RenderBody()
+                </div>
+
+            </div>
+
+            @Html.Partial("_Footer")
         </div>
+
     </div>
+
+    <div id="modal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content" style="width: 800px;">
+                <span class="loading"></span>
+                <!--Loaded async-->
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+
+    </div>
+
+    <div id="modal-lg" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content" style="width: 1024px;">
+                <span class="loading"></span>
+                <!--Loaded async-->
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+
+    </div>
+    <div id="freeow" class="freeow freeow-top-right"></div>
     @Scripts.Render("~/bundles/coreJs")
+    <script type="text/javascript">
+    $(function() {
+        common.registerComponent();
+    });
+    </script>
     @RenderSection("scripts", false)
+
 </body>
 </html>

@@ -2,6 +2,16 @@
 @{
     ViewBag.Title = "Notice Management";
 }
+<div class="row row-margintop">
+    @Html.Partial("_ListOfNotice")
+</div>
 
-<h2>Index</h2>
-
+@section scripts
+{
+    @Scripts.Render("~/application/notice")
+    <script type="text/javascript">
+        (function() {
+            notice.setHeightGrid();
+        })();
+    </script>
+}

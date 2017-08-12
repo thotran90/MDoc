@@ -1,28 +1,46 @@
-﻿@using Microsoft.AspNet.Identity
-@model MDoc.Models.LoggedUser
-<div class="android-drawer mdl-layout__drawer">
-    <span class="mdl-layout-title">
-        <img class="android-logo-image" src="~/Content/images/logo.png">
-    </span>
-    <nav class="mdl-navigation">
-        <span class="mdl-navigation__link" href="">Master Data</span>
-        <a class="mdl-navigation__link" href=@Url.Action("Index", "School")>Schools</a>
-        @if (Model.IsCompanyAdmin || @Model.IsSuperAdmin)
-        {
-            <a class="mdl-navigation__link" href=@Url.Action("Index", "Customer")>Customers</a>
-        }
-        <a class="mdl-navigation__link" href=@Url.Action("Index", "Document")>Documents</a>
-        @if (@Model.IsCompanyAdmin || Model.IsSuperAdmin)
-        {
-            <span class="mdl-navigation__link" href="">System Configuration</span>
-            <a class="mdl-navigation__link" href=@Url.Action("Index", "Account")>User</a>
-            <a class="mdl-navigation__link" href=@Url.Action("Information", "Company")>Company Information</a>
-            <a class="mdl-navigation__link" href=@Url.Action("Index", "Setting")>Settings</a>
-            <a class="mdl-navigation__link" href=@Url.Action("Index", "Notice")>Notice</a>
-        }
-        @if (Model.IsSuperAdmin)
-        {
-
-        }
-    </nav>
+﻿@model MDoc.Models.LoggedUser
+<!-- sidebar menu -->
+<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+    <div class="menu_section">
+        <h3>Main Function</h3>
+        <ul class="nav side-menu">
+            <li>
+                <a href="@Url.Action("Index", "Home")"><i class="fa fa-home"></i> Home</a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "School")"><i class="fa fa-address-book"></i> Schools</a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "Document")"><i class="fa fa-graduation-cap"></i> Document</a>
+            </li>
+        </ul>
+    </div>
+    @if (Model.IsSuperAdmin || Model.IsCompanyAdmin)
+    {
+        <div class="menu_section">
+            <h3>System Configuration</h3>
+            <ul class="nav side-menu">
+                <li>
+                    <a href="@Url.Action("Index","Account")"><i class="fa fa-user"></i> Account </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Information","Company")"><i class="fa fa-building"></i> Company Information </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Index", "Customer")"><i class="fa fa-group"></i> Customer</a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Index","Notice")"><i class="fa fa-newspaper-o"></i> Notices</a>
+                </li>
+            </ul>
+        </div>
+        <div class="menu_section">
+            <h3>Report</h3>
+            <ul class="nav side-menu">
+                <li><a href="javascript:void(0)"><i class="fa fa-dashboard"></i> Dashboard <span class="label label-success pull-right">Coming Soon</span></a></li>
+            </ul>
+        </div>
+    }
+    
 </div>
+<!-- /sidebar menu -->
