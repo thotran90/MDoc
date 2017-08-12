@@ -1,32 +1,72 @@
 ﻿@using MDoc.Services.Contract.DataContracts.User
-
+@model LoginModel
 @{
     Layout = "";
 }
 
-<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Logon - Document Management</title>
-    <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Open+Sans:600'>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryVal")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Styles.Render("~/Content/logon")
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Document Management. Manage your document, access any where, any device, any time">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>LOGIN - MDoc</title>
+    @Styles.Render("~/Content/coreCss")
 </head>
+<body class="login">
+    <div>
+        <div class="login_wrapper">
+            <div class="animate form login_form">
+                <section class="login_content">
+                    @using (Html.BeginForm("Login"))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        <h1>Login</h1>
+                        if (@ViewData.ModelState.IsValid == false)
+                        {
+                            <div class="error-area">
+                                @Html.ValidationMessage("InvalidUser")
+                            </div>
+                        }
+                        <div>
+                            @Html.ValidationMessageFor(m => m.LoginId)
+                            @Html.TextBoxFor(m => m.LoginId, new {@class = "form-control",@placeholder="Login Id"})
+                        </div>
+                            <div>
+                                @Html.ValidationMessageFor(m => m.Password)
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
+                            </div>
+                            <div class="text-left">
+                                @Html.CheckBoxFor(m => m.IsRemember)
+                                @Html.LabelFor(m => m.IsRemember)
+                            </div>
+                            <div>
+                                .
+                                <button class="btn btn-default" type="submit"><i class="fa fa-sign-in"></i> LOGIN</button>
+                                <a class="reset_pass" href="#">Forgot your password?</a>
+                            </div>
+                            <div class="clearfix"></div>
 
-<body>
-<div class="login-wrap">
-    <div class="login-html">
-        <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
-        <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
-        <div class="login-form">
-            @Html.Partial("_SignIn", new LoginModel())
-            @Html.Partial("_SignUp")
+                            <div class="separator">
+
+                                <div class="clearfix"></div>
+                                <br />
+
+                                <div>
+                                    <h1><i class="fa fa-book"></i> MDOC</h1>
+                                    <p>©@DateTime.Now.Year All Rights Reserved. Power by Tho.Tran</p>
+                                </div>
+                            </div>
+                    }
+                </section>
+            </div>
         </div>
     </div>
-</div>
-    @Html.Partial("_ForgotPassword")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
 </body>
 </html>
