@@ -65,9 +65,13 @@ namespace MDoc.Services.Implements
 
         public UserModel Login(LoginModel model)
         {
+            var isEmail = model.LoginId.IsEmail();
             var userEntity =
-                UnitOfWork.GetRepository<ApplicationUser>()
-                    .Single(m => !m.IsDisabled && m.LoginId == model.LoginId && m.Password == model.SecurePassword);
+                (from user in
+                    UnitOfWork.GetRepository<ApplicationUser>()
+                        .Get(m => !m.IsDisabled && m.Password == model.SecurePassword)
+                    where (isEmail && user.Email == model.LoginId) || (!isEmail && user.LoginId == model.LoginId)
+                    select user).FirstOrDefault();
             if (userEntity == null)
                 return new UserModel
                 {
@@ -95,7 +99,7 @@ namespace MDoc.Services.Implements
             => UnitOfWork.GetRepository<ApplicationUser>().Get().Any(m => m.LoginId == loginId);
 
         public bool CheckEmail(string email)
-            => UnitOfWork.GetRepository<ApplicationUser>().Get().Any(m => m.Email == email);
+            => UnitOfWork.GetRepository<ApplicationUser>().Get().Any(m => m.Email == email && !m.IsDisabled);
 
         public bool UpdateAvatar(UserModel model)
         {
@@ -114,7 +118,7 @@ namespace MDoc.Services.Implements
             {
                 ToAddress = user.Email,
                 Subject = "[MDOC] - Change password",
-                Body = $"Hello {user.UserName}, <br/> Your account password is changed: <br/> <strong>{model.NewPassword}</strong><br/> If you have any issue, please contact trandev90@gmail.com for more information. <strong>Do not reply</strong> this email."
+                Body = $"Hello {user.UserName}, <br/> Your login information is:<br/> LoginId: <strong>{user.LoginId}</strong> <br/> Password: <strong>{model.NewPassword}</strong><br/>Please change your password when you start using MDoc ASAP.<br/> If you have any issue, please contact trandev90@gmail.com for more information. <strong>Do not reply</strong> this email."
             };
             _emailService.SendEmailToUser(emailToUserModel);
             return true;
@@ -127,6 +131,23 @@ namespace MDoc.Services.Implements
             user.IsDisabled = true;
             UnitOfWork.SaveChanges();
             return true;
+        }
+
+        public void RenewPassword(ForgotPasswordModel model)
+        {
+            var currentUser =
+                UnitOfWork.GetRepository<ApplicationUser>().Single(m => !m.IsDisabled && m.Email == model.Email);
+            if(currentUser == null) return;
+            var newPassword = MD5Helper.GetPassword();
+            currentUser.Password = newPassword.ToMd5();
+            UnitOfWork.SaveChanges();
+            var emailToUserModel = new EmailModel()
+            {
+                ToAddress = currentUser.Email,
+                Subject = "[MDOC] - Recover password",
+                Body = $"Hello {currentUser.UserName}, <br/> Your login information is:<br/> LoginId: <strong>{currentUser.LoginId}</strong> <br/> Password: <strong>{newPassword}</strong><br/>Please change your password when you start using MDoc ASAP.<br/> If you have any issue, please contact trandev90@gmail.com for more information. <strong>Do not reply</strong> this email."
+            };
+            _emailService.SendEmailToUser(emailToUserModel);
         }
     }
 }

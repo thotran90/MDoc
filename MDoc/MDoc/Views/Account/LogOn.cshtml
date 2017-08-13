@@ -1,4 +1,6 @@
-﻿@using MDoc.Services.Contract.DataContracts.User
+﻿@using MDoc.Extensions
+@using MDoc.Extensions.Options
+@using MDoc.Services.Contract.DataContracts.User
 @model LoginModel
 @{
     Layout = "";
@@ -14,6 +16,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <title>LOGIN - MDoc</title>
     @Styles.Render("~/Content/coreCss")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
 </head>
 <body class="login">
     <div>
@@ -33,40 +37,66 @@
                         }
                         <div>
                             @Html.ValidationMessageFor(m => m.LoginId)
-                            @Html.TextBoxFor(m => m.LoginId, new {@class = "form-control",@placeholder="Login Id"})
+                            @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login Id / Email" })
                         </div>
-                            <div>
-                                @Html.ValidationMessageFor(m => m.Password)
-                                @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
-                            </div>
-                            <div class="text-left">
-                                @Html.CheckBoxFor(m => m.IsRemember)
-                                @Html.LabelFor(m => m.IsRemember)
-                            </div>
-                            <div>
-                                .
-                                <button class="btn btn-default" type="submit"><i class="fa fa-sign-in"></i> LOGIN</button>
-                                <a class="reset_pass" href="#">Forgot your password?</a>
-                            </div>
+                        <div>
+                            @Html.ValidationMessageFor(m => m.Password)
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
+                        </div>
+                        <div class="text-left">
+                            @Html.CheckBoxFor(m => m.IsRemember)
+                            @Html.LabelFor(m => m.IsRemember)
+                        </div>
+                        <div>
+                            <button class="btn btn-default" type="submit" style="width: 100%"><i class="fa fa-sign-in"></i> LOGIN</button>
+
+                            @*<a class="reset_pass" href="#">Forgot your password?</a>*@
+                        </div>
+                        <div>
+                            @Html.Modal("ForgotPassword", "Forgot your password?", "", new ModalOption()
+                       {
+                           ButtonStyle = "btn btn-default"
+                       })
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <div class="separator">
+
                             <div class="clearfix"></div>
+                            <br />
 
-                            <div class="separator">
-
-                                <div class="clearfix"></div>
-                                <br />
-
-                                <div>
-                                    <h1><i class="fa fa-book"></i> MDOC</h1>
-                                    <p>©@DateTime.Now.Year All Rights Reserved. Power by Tho.Tran</p>
-                                </div>
+                            <div>
+                                <h1>
+                                    <i class="fa fa-book"></i> MDOC
+                                </h1>
+                                <p>©@DateTime.Now.Year All Rights Reserved. Power by Tho.Tran</p>
                             </div>
+                        </div>
                     }
                 </section>
             </div>
         </div>
     </div>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/bootstrap")
+    <div id="modal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content" style="width: 800px;">
+                <span class="loading"></span>
+                <!--Loaded async-->
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+
+    </div>
+    <div id="freeow" class="freeow freeow-top-right"></div>
+    @Scripts.Render("~/bundles/coreJs")
+    <script type="text/javascript">
+        function RecoverPassword(response) {
+            if (response !== "OK") {
+                common.warning(response);
+            } else {
+                common.success("The new password is sent to your email!");
+                common.closeModal();
+            }
+        }
+    </script>
 </body>
 </html>

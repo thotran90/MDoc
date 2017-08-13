@@ -1,5 +1,4 @@
-﻿using System.Data.SqlTypes;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using MDoc.Services.Contract.DataContracts.User;
@@ -44,18 +43,42 @@ namespace MDoc.Controllers
                 if (result.UserId != 0)
                 {
                     IdentitySignin(result, null, model.IsRemember);
-                    return string.IsNullOrEmpty(model.ReturnUrl) ? (ActionResult) RedirectToAction("Index","Home"): Redirect(model.ReturnUrl);
+                    return string.IsNullOrEmpty(model.ReturnUrl)
+                        ? (ActionResult) RedirectToAction("Index", "Home")
+                        : Redirect(model.ReturnUrl);
                 }
             }
             ModelState.AddModelError("InvalidUser", "Username/Password is incorrect.");
             return View(model);
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult ForgotPassword() => PartialView("_ForgotPassword", new ForgotPasswordModel());
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AllowAnonymous]
+        public JsonResult RenewPassword(ForgotPasswordModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var checkEmail = _userService.CheckEmail(model.Email);
+                if (!checkEmail)
+                    return Json("Email address is not exist. Contact system admin for to register new account.",
+                        JsonRequestBehavior.AllowGet);
+                else
+                {
+                    _userService.RenewPassword(model);
+                    return JsonSuccess();
+                }
+            }
+            return Json("Input correct email before submit.",JsonRequestBehavior.AllowGet);
+        }
 
         #endregion
 
         #region [User Management]
-
 
         [HttpGet]
         public ActionResult LogOff()
@@ -94,16 +117,16 @@ namespace MDoc.Controllers
                 var isInUseLoginId = _userService.CheckLoginId(model.LoginId);
                 if (isInUseLoginId)
                 {
-                    ModelState.AddModelError("LoginIdUsed","This login id is in use.Please use another login id");
-                    return View("Save",model);
+                    ModelState.AddModelError("LoginIdUsed", "This login id is in use.Please use another login id");
+                    return View("Save", model);
                 }
-                // TODO: for ISET 
-                //var isInUseEmail = _userService.CheckEmail(model.Email);
-                //if (isInUseEmail)
-                //{
-                //    ModelState.AddModelError("EmailUsed", "This email is registed for another account.Please use another email.");
-                //    return View("Save", model);
-                //}
+                var isInUseEmail = _userService.CheckEmail(model.Email);
+                if (isInUseEmail)
+                {
+                    ModelState.AddModelError("EmailUsed",
+                        "This email is registed for another account.Please use another email.");
+                    return View("Save", model);
+                }
                 _userService.Create(model);
                 return RedirectToAction("Index");
             }
@@ -126,7 +149,7 @@ namespace MDoc.Controllers
         }
 
         [HttpGet]
-        [MvcSiteMapNode(Title = "Change password",ParentKey = "home")]
+        [MvcSiteMapNode(Title = "Change password", ParentKey = "home")]
         public ActionResult ChangePassword() => View(new ChangePasswordModel());
 
         [HttpPost]
@@ -135,7 +158,7 @@ namespace MDoc.Controllers
         {
             if (ModelState.IsValid)
             {
-                var loginModel = new LoginModel()
+                var loginModel = new LoginModel
                 {
                     LoginId = CurrentUser.LoginId,
                     Password = model.OldPassword
@@ -149,17 +172,11 @@ namespace MDoc.Controllers
                     {
                         return RedirectToAction("LogOff");
                     }
-                    else
-                    {
-                        ModelState.AddModelError("InternalServerError", "Something went wrong. Please try again later.");
-                        return View(model);
-                    }
-                }
-                else
-                {
-                    ModelState.AddModelError("InvalidCurrentPassword","Current password is incorrect.");
+                    ModelState.AddModelError("InternalServerError", "Something went wrong. Please try again later.");
                     return View(model);
                 }
+                ModelState.AddModelError("InvalidCurrentPassword", "Current password is incorrect.");
+                return View(model);
             }
             ModelState.AddModelError("InvalidModel", "Fill all of required field before submit.");
             return View(model);
@@ -173,7 +190,7 @@ namespace MDoc.Controllers
                 _userService.Remove(model);
             }
 
-            return Json(new[] { model }.ToDataSourceResult(request, ModelState));
+            return Json(new[] {model}.ToDataSourceResult(request, ModelState));
         }
 
         #endregion

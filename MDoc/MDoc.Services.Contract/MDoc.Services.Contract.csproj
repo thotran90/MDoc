@@ -59,6 +59,7 @@
     <Compile Include="DataContracts\SchoolModel.cs" />
     <Compile Include="DataContracts\SchoolTypeModel.cs" />
     <Compile Include="DataContracts\User\ChangePasswordModel.cs" />
+    <Compile Include="DataContracts\User\ForgotPasswordModel.cs" />
     <Compile Include="DataContracts\User\SearchUserModel.cs" />
     <Compile Include="Enums\AddressTypeModel.cs" />
     <Compile Include="Interfaces\IChecklistService.cs" />

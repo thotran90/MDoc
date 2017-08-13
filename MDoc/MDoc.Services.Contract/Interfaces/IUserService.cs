@@ -14,5 +14,6 @@ namespace MDoc.Services.Contract.Interfaces
         bool UpdateAvatar(UserModel model);
         bool ChangePassword(ChangePasswordModel model);
         bool Remove(UserModel model);
+        void RenewPassword(ForgotPasswordModel model);
     }
 }
