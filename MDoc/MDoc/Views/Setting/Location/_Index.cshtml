@@ -1,0 +1,57 @@
+﻿@using MDoc.Extensions
+@using MDoc.Extensions.Options
+@using MDoc.Services.Contract.DataContracts
+<div class="col-md-12 row-margintop">
+    @(Html.Kendo().Grid<AddressModel>()
+          .Name("GridAddress")
+          .Columns(columns =>
+          {
+              columns.Bound(c => c.AddressId).ClientTemplate("")
+                  .Width(150)
+                  .HeaderTemplate("Actions")
+                  .Sortable(false)
+                  .Filterable(false);
+              columns.Bound(c => c.Label);
+              columns.Bound(c => c.Type);
+              columns.Bound(c => c.AddressCode);
+              columns.Bound(c => c.PostalCode);
+              columns.Bound(c => c.ParentLabel);
+          })
+          .ToolBar(toolbar =>
+          {
+          toolbar.Template(@<text>
+                                   <div class="grid-toolbar">
+                                       @Html.Modal(@Url.Action("NewCountry", "Setting"), "Add New Country", "plus", new ModalOption
+                                  {
+                                      ButtonStyle = "btn btn-sm btn-default"
+                                  })
+                                       @Html.Modal(@Url.Action("NewProvince", "Setting"), "Add New Province", "plus", new ModalOption
+                                  {
+                                      ButtonStyle = "btn btn-sm btn-default"
+                                  })
+                                       @Html.Modal(@Url.Action("NewDistrict", "Setting"), "Add New District", "plus", new ModalOption
+                                       {
+                                           ButtonStyle = "btn btn-sm btn-default"
+                                       })
+                                       @Html.Modal(@Url.Action("NewWard", "Setting"), "Add New Ward", "plus", new ModalOption
+                                  {
+                                      ButtonStyle = "btn btn-sm btn-default"
+                                  })
+                                   </div>
+                                </text>);
+          })
+          .Scrollable()
+          .Filterable()
+          .Sortable()
+          .Pageable(pageable => pageable
+              .Refresh(true)
+              .PageSizes(true)
+              .ButtonCount(5))
+          .DataSource(dataSource => dataSource
+              .Ajax()
+              .Read(read => read.Action("ListOfAddress", "Setting"))
+              .Model(model => model.Id(p => p.AddressId))
+              .PageSize(20)
+          )
+          )
+</div>

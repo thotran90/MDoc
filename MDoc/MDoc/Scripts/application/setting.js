@@ -23,3 +23,14 @@
         remove: remove
     }
 })();
+
+var appAddress = (function() {
+    var setHeightGrid = function () {
+        var height = $(window).height();
+        $("#GridAddress .k-grid-content").css("height", height - 400);
+    }
+
+    return {
+        setHeightGrid: setHeightGrid
+    }
+})();

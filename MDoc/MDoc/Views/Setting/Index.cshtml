@@ -6,10 +6,14 @@
     <div class="col-md-12">
         <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#checklist"><i class="fa fa-list"></i> Checklist</a></li>
+            <li><a data-toggle="tab" href="#address"><i class="fa fa-location-arrow"></i> Address</a></li>
         </ul>
         <div class="tab-content">
             <div id="checklist" class="tab-pane fade in active">
-                @Html.Action("Checklist","Setting")
+                @Html.Action("Checklist", "Setting")
+            </div>
+            <div id="address" class="tab-pane fade in">
+                @Html.Action("Location", "Setting")
             </div>
         </div>
     </div>
@@ -19,6 +23,7 @@
     <script type="text/javascript">
         (function() {
             checklist.setHeightGrid();
+            appAddress.setHeightGrid();
         })();
     </script>
 }

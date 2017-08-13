@@ -12,5 +12,6 @@ namespace MDoc.Services.Contract.Interfaces
         AddressModel Create(AddressModel newEntity);
         AddressModel Update(AddressModel model);
         bool Remove(AddressModel entity);
+        IQueryable<AddressModel> ListOfAddress();
     }
 }

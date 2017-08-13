@@ -222,6 +222,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CommentModel.cs" />
+    <Compile Include="Models\LocationViewModel.cs" />
     <Compile Include="Models\LoggedUser.cs" />
     <Compile Include="Models\NoticeViewModel.cs" />
     <Compile Include="Models\PendingWorkViewModel.cs" />
@@ -565,6 +566,8 @@
     <Content Include="Views\Notice\_PublicNotice.cshtml" />
     <Content Include="Views\Notice\Read.cshtml" />
     <Content Include="Views\Document\_Pending.cshtml" />
+    <Content Include="Views\Setting\Location\_Index.cshtml" />
+    <Content Include="Views\Setting\Location\_Save.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.css" />

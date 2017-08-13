@@ -12,7 +12,7 @@
                 if (textStatus === "success") {
                     jQuery.validator.unobtrusive.parse(link.attr("data-target"));
                 } else if (textStatus === "error") {
-                    common.showError(responseText);
+                    showError(responseText);
                 }
             });
         });

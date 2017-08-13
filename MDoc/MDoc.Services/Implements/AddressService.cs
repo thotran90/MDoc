@@ -25,6 +25,25 @@ namespace MDoc.Services.Implements
 
         #region [Implements]
 
+        public IQueryable<AddressModel> ListOfAddress()
+        {
+            var addresses = (from addres in UnitOfWork.GetRepository<Address>().Get()
+                             join parent in UnitOfWork.GetRepository<Address>().Get() on addres.ParentId equals parent.AddressId into
+                                 parentValue
+                             from parent in parentValue.DefaultIfEmpty()
+                             select new AddressModel()
+                             {
+                                 AddressId = addres.AddressId,
+                                 AddressCode = addres.AddressCode,
+                                 Label = addres.Label,
+                                 ParentId = addres.ParentId,
+                                 PostalCode = addres.PostalCode,
+                                 ParentLabel = parent.Label,
+                                 TypeId = addres.TypeId
+                             });
+            return addresses;
+        }
+
         public IQueryable<AddressModel> ListOfAddress(AddressTypeModel type, int? parentId = null, string query = "")
         {
             var address = UnitOfWork.GetRepository<Address>().Get(m => !m.IsDisabled && m.TypeId == type.ToString());
@@ -52,7 +71,7 @@ namespace MDoc.Services.Implements
         public AddressModel GetAddress(int id)
         {
             var address = UnitOfWork.GetRepository<Address>().GetByKeys(id);
-            if(address == null) return new AddressModel() {AddressId =  0};
+            if (address == null) return new AddressModel() { AddressId = 0 };
             var result = new AddressModel()
             {
                 AddressId = address.AddressId,
@@ -67,7 +86,7 @@ namespace MDoc.Services.Implements
         public IQueryable<AddressModel> ListOfSelectedAddress(string ids)
         {
             var addressIds = ids.Split(',').Select(x => Convert.ToInt32(x)).ToList();
-            if(!addressIds.Any()) return null;
+            if (!addressIds.Any()) return null;
             return UnitOfWork.GetRepository<Address>().Get(m => !m.IsDisabled)
                 .Where(m => addressIds.Contains(m.AddressId))
                 .Select(x => new AddressModel()
@@ -93,7 +112,7 @@ namespace MDoc.Services.Implements
             };
             var result = UnitOfWork.GetRepository<Address>().Create(address);
             UnitOfWork.SaveChanges();
-            if(result == null) return new AddressModel() {AddressId =  0};
+            if (result == null) return new AddressModel() { AddressId = 0 };
             newEntity.AddressId = result.AddressId;
             return newEntity;
         }
@@ -101,7 +120,7 @@ namespace MDoc.Services.Implements
         public AddressModel Update(AddressModel model)
         {
             var entity = UnitOfWork.GetRepository<Address>().GetByKeys(model.AddressId);
-            if(entity == null) return new AddressModel() {AddressId = 0};
+            if (entity == null) return new AddressModel() { AddressId = 0 };
 
             entity.Label = model.Label;
             entity.ParentId = model.ParentId;
