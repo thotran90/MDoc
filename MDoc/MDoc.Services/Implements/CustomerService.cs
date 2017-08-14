@@ -142,6 +142,35 @@ namespace MDoc.Services.Implements
             UnitOfWork.SaveChanges();
             return true;
         }
+        /// <summary>
+        /// List of customer with security
+        /// - User can see customers who they created
+        /// - User can see customers in documnent which one they have responsiblity
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public IQueryable<CustomerModel> ListOfSecureCustomers(int userId)
+        {
+            var result = (from customer in UnitOfWork.GetRepository<Customer>().Get(m => !m.IsDeleted)
+                join gender in UnitOfWork.GetRepository<Gender>().Get() on customer.GenderId equals gender.GenderId into
+                    temp
+                from gender in temp.DefaultIfEmpty()
+                where customer.CreatedById == userId
+                      || customer.Documents.Any(doc => doc.DocumentResponsibles.Any(resp => resp.UserId == userId))
+                select new CustomerModel()
+                {
+                    CustomerId = customer.CustomerId,
+                    FirstName = customer.FirstName,
+                    LastName = customer.LastName,
+                    Address = customer.Address,
+                    DOB = customer.DOB,
+                    Email = customer.Email,
+                    Mobile = customer.Mobile,
+                    GenderId = customer.GenderId,
+                    Gender = gender.Label
+                });
+            return result;
+        }
 
         #endregion
     }

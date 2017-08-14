@@ -8,11 +8,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Document Management. Manage your document, access any where, any device, any time">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryVal")
-    @Html.Partial("_ExternalComponent")
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://kendo.cdn.telerik.com/2016.2.504/styles/kendo.common-material.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://kendo.cdn.telerik.com/2016.2.504/styles/kendo.mobile.all.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://kendo.cdn.telerik.com/2016.2.504/styles/kendo.material.min.css" rel="stylesheet" type="text/css" />
     @Styles.Render("~/Content/coreCss")
-
+    @Scripts.Render("~/bundles/jquery")
+    <script src="https://kendo.cdn.telerik.com/2016.2.504/js/jquery.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2016.2.504/js/jszip.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2016.2.504/js/kendo.all.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2016.2.504/js/kendo.aspnetmvc.min.js"></script>
 </head>
 <body onload="common.loading('none')" class="nav-md">
     @Html.Partial("_LoadingBar")
@@ -74,11 +80,14 @@
 
     </div>
     <div id="freeow" class="freeow freeow-top-right"></div>
+
+    <script src="~/Scripts/tinymce/tinymce.min.js"></script>
+    @Scripts.Render("~/bundles/jqueryVal")
     @Scripts.Render("~/bundles/coreJs")
     <script type="text/javascript">
-    $(function() {
-        common.registerComponent();
-    });
+        $(function () {
+            common.registerComponent();
+        });
     </script>
     @RenderSection("scripts", false)
 

@@ -30,7 +30,19 @@ var appAddress = (function() {
         $("#GridAddress .k-grid-content").css("height", height - 400);
     }
 
+    var saveAddress = function(res) {
+        if (res === "OK") {
+            var grid = $("#GridAddress").data("kendoGrid");
+            grid.dataSource.fetch();
+            common.success("Saved");
+            common.closeModal();
+        } else {
+            common.error("Something went wrong. Please try again!");
+        }
+    }
+
     return {
-        setHeightGrid: setHeightGrid
+        setHeightGrid: setHeightGrid,
+        saveAddress: saveAddress
     }
 })();

@@ -13,6 +13,12 @@
             <li>
                 <a href="@Url.Action("Index", "Document")"><i class="fa fa-graduation-cap"></i> Document</a>
             </li>
+            @if (Model.IsSuperAdmin || Model.IsCompanyAdmin)
+            {
+                <li>
+                    <a href="@Url.Action("Index", "Customer")"><i class="fa fa-group"></i> Customer</a>
+                </li>
+            }
         </ul>
     </div>
     @if (Model.IsSuperAdmin || Model.IsCompanyAdmin)
@@ -28,9 +34,6 @@
                 </li>
                 <li>
                     <a href="@Url.Action("Information", "Company")"><i class="fa fa-building"></i> Company Information </a>
-                </li>
-                <li>
-                    <a href="@Url.Action("Index", "Customer")"><i class="fa fa-group"></i> Customer</a>
                 </li>
                 <li>
                     <a href="@Url.Action("Index", "Notice")"><i class="fa fa-newspaper-o"></i> Notice</a>

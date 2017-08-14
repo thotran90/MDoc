@@ -11,6 +11,7 @@
             $(this).find(".modal-content").load(link.attr("href"), function (responseText, textStatus, xmlhttpRequest) {
                 if (textStatus === "success") {
                     jQuery.validator.unobtrusive.parse(link.attr("data-target"));
+                    loadAllSelect2('.modal-content');
                 } else if (textStatus === "error") {
                     showError(responseText);
                 }
@@ -19,7 +20,7 @@
     }
 
     var closeModal = function () {
-        $("#modal").modal('toggle');
+        $(".modal").modal('hide');
     }
 
     var initTinymce = function (ele) {

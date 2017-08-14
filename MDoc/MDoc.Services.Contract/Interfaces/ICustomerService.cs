@@ -10,5 +10,6 @@ namespace MDoc.Services.Contract.Interfaces
         CustomerModel Create(CustomerModel model);
         bool Update(CustomerModel model);
         bool Remove(CustomerModel model);
+        IQueryable<CustomerModel> ListOfSecureCustomers(int userId);
     }
 }

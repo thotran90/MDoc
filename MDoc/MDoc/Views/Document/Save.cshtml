@@ -27,10 +27,10 @@
                             @Html.ValidationMessageFor(m => m.CustomerId)
                             @Html.Select2AjaxFor(m => m.CustomerId, Url.Action("Customers", "DataSource"), new Select2Option()
                        {
-                           MinimumInputLength = 3,
+                           MinimumInputLength = 0,
                            Width = "100%",
                            AllowClear = true,
-                           Placeholder = "Select exist customer...",
+                           Placeholder = "Load old customer information...",
                            OnChange = "appDocument.loadExistDocument()",
                        }, new { @class = "form-control" })
                         </div>

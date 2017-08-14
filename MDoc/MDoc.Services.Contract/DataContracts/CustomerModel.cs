@@ -35,15 +35,15 @@ namespace MDoc.Services.Contract.DataContracts
         public byte GenderId { get; set; }
         public string Gender { get; set; }
         [Required]
-        [Display(Name = "Date of birth")]
+        [Display(Name = "Date of birth (MM-dd-yyyy)")]
         public DateTime? DOB { get; set; }
         [Display(Name = "Identity Card Place")]
         public int? IdentityCardPlaceId { get; set; }
         [Display(Name = "Identity Card Number")]
         public string IdentityCardNo { get; set; }
-        [Display(Name = "Identity Card Valid Date")]
+        [Display(Name = "Identity Card Valid Date (MM-dd-yyyy)")]
         public DateTime? IdentityCardDateValid { get; set; }
-        [Display(Name = "Identity Card Expired Date")]
+        [Display(Name = "Identity Card Expired Date (MM-dd-yyyy)")]
         public DateTime? IdentityCardDateExpired { get; set; }
         public int LoggedUserId { get; set; }
         [Display(Name = "Nationality")]
@@ -54,9 +54,9 @@ namespace MDoc.Services.Contract.DataContracts
         public string BackupMobile { get; set; }
         [Display(Name = "Passport No.")]
         public string PassportNumber { get; set; }
-        [Display(Name = "Passport Valid Date")]
+        [Display(Name = "Passport Valid Date (MM-dd-yyyy)")]
         public DateTime? PassportValidDate { get; set; }
-        [Display(Name = "Passport Expired Date")]
+        [Display(Name = "Passport Expired Date (MM-dd-yyyy)")]
         public DateTime? PassportExpiredDate { get; set; }
         public string FullName => $"{LastName} {FirstName}";
     }

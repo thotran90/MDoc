@@ -4,6 +4,7 @@ using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using MDoc.Models;
 using MDoc.Services.Contract.DataContracts;
+using MDoc.Services.Contract.Enums;
 using MDoc.Services.Contract.Interfaces;
 using MvcSiteMapProvider;
 
@@ -97,19 +98,45 @@ namespace MDoc.Controllers
         }
 
         [HttpGet]
-        public ActionResult NewCountry() => PartialView("Location/_Save", new LocationViewModel());
+        public ActionResult NewCountry() => PartialView("Location/_Save", new LocationViewModel() {TypeId = AddressTypeModel.C});
         [HttpGet]
-        public ActionResult NewProvince() => PartialView("Location/_Save", new LocationViewModel());
+        public ActionResult NewProvince() => PartialView("Location/_Save", new LocationViewModel() { TypeId = AddressTypeModel.P });
         [HttpGet]
-        public ActionResult NewDistrict() => PartialView("Location/_Save", new LocationViewModel());
+        public ActionResult NewDistrict() => PartialView("Location/_Save", new LocationViewModel() { TypeId = AddressTypeModel.D });
         [HttpGet]
-        public ActionResult NewWard() => PartialView("Location/_Save", new LocationViewModel());
+        public ActionResult NewWard() => PartialView("Location/_Save", new LocationViewModel() { TypeId = AddressTypeModel.W });
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult SaveAddress(LocationViewModel model)
         {
-            return null;
+            if (ModelState.IsValid)
+            {
+                int? parentId = null;
+                switch (model.TypeId)
+                {
+                        case AddressTypeModel.D:
+                        parentId = model.ProvinceId;
+                        break;
+                        case AddressTypeModel.P:
+                        parentId = model.CountryId;
+                        break;
+                        case AddressTypeModel.W:
+                        parentId = model.DistrictId;
+                        break;
+                }
+                var address = new AddressModel()
+                {
+                    Label = model.Label,
+                    AddressCode = model.AddressCode,
+                    TypeId = model.TypeId.ToString(),
+                    PostalCode = model.PostalCode,
+                    ParentId = parentId
+                };
+                _addressService.Create(address);
+                return JsonSuccess();
+            }
+            return Json("Fill all of required field before submit!",JsonRequestBehavior.AllowGet);
         }
 
         #endregion

@@ -20,7 +20,7 @@ namespace MDoc.Services.Implements
 
         public IQueryable<DocumentTypeModel> ListOfDocumentType(string query = "")
             => UnitOfWork.GetRepository<DocumentType>().Get(m => !m.IsDisabled)
-                .Where(m => m.Label.ToLower().Contains(query.ToLower()))
+                .Where(m => string.IsNullOrEmpty(query) || m.Label.ToLower().Contains(query.ToLower()))
                 .Select(x => new DocumentTypeModel
                 {
                     Id = x.DocumentTypeId,

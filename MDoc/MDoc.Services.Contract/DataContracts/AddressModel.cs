@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using MDoc.Services.Contract.Enums;
 
 namespace MDoc.Services.Contract.DataContracts
@@ -6,6 +7,8 @@ namespace MDoc.Services.Contract.DataContracts
     public class AddressModel
     {
         public int AddressId { get; set; }
+        [Display(Name = "Name")]
+        [Required]
         public string Label { get; set; }
         public int? ParentId { get; set; }
         public string AddressCode { get; set; }

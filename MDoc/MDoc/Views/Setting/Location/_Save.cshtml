@@ -1,21 +1,125 @@
-﻿@model MDoc.Models.LocationViewModel
+﻿@using MDoc.Extensions
+@using MDoc.Extensions.Options
+@using MDoc.Services.Contract.Enums
+@model MDoc.Models.LocationViewModel
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal">&times;</button>
     <h4 class="modal-title">Add new location</h4>
 </div>
 @using (Ajax.BeginForm("SaveAddress", new AjaxOptions()
 {
-    HttpMethod = "POST"
+    HttpMethod = "POST",
+    OnSuccess = "appAddress.saveAddress"
 }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
+    @Html.HiddenFor(m => m.TypeId)
     <div class="modal-body">
-        <div class="form-group">
-            @Html.LabelFor(m=>m.Label)
-            @Html.ValidationMessageFor(m=>m.Label)
-            @Html.TextBoxFor(m=>m.Label,new {@class="form-control"})
+        <div class="row">
+            <div class="col-md-12 col-xs-12 col-sm-12">
+                @Html.LabelFor(m => m.Label)
+                @Html.ValidationMessageFor(m => m.Label)
+                @Html.TextBoxFor(m => m.Label, new { @class = "form-control" })
+            </div>
         </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-12 col-xs-12">
+                @Html.LabelFor(m => m.AddressCode)
+                @Html.ValidationMessageFor(m => m.AddressCode)
+                @Html.TextBoxFor(m => m.AddressCode, new { @class = "form-control" })
+            </div>
+            <div class="col-md-6 col-sm-12 col-xs-12">
+                @Html.LabelFor(m => m.PostalCode)
+                @Html.ValidationMessageFor(m => m.PostalCode)
+                @Html.TextBoxFor(m => m.PostalCode, new { @class = "form-control" })
+            </div>
+        </div>
+
+        @if (Model.TypeId == AddressTypeModel.P)
+        {
+            <div class="row">
+                <div class="col-md-12 col-xs-12 col-sm-12">
+                    @Html.LabelFor(m => m.CountryId)
+                    @Html.ValidationMessageFor(m => m.CountryId)
+                    @Html.Select2AjaxFor(m => m.CountryId, Url.Action("Countries", "DataSource"), new Select2Option()
+               {
+                   AllowClear = false,
+                   Width = "100%",
+                   MinimumInputLength = 0
+               }, new { @class = "form-control" })
+                </div>
+            </div>
+        }
+        @if (Model.TypeId == AddressTypeModel.D)
+        {
+            <div class="row">
+                <div class="col-md-12 col-xs-12 col-sm-12">
+                    @Html.LabelFor(m => m.CountryId)
+                    @Html.ValidationMessageFor(m => m.CountryId)
+                    @Html.Select2AjaxFor(m => m.CountryId, Url.Action("Countries", "DataSource"), new Select2Option()
+               {
+                   AllowClear = false,
+                   MinimumInputLength = 0,
+                   Width = "100%"
+               }, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-xs-12 col-sm-12">
+                    @Html.LabelFor(m => m.ProvinceId)
+                    @Html.ValidationMessageFor(m => m.ProvinceId)
+                    @Html.Select2AjaxFor(m => m.ProvinceId, Url.Action("Provinces", "DataSource"), new Select2Option()
+               {
+                   MinimumInputLength = 0,
+                   Width = "100%",
+                   AllowClear = false,
+                   DependsOn = "CountryId"
+               })
+                </div>
+            </div>
+        }
+        @if (Model.TypeId == AddressTypeModel.W)
+        {
+            <div class="row">
+                <div class="col-md-12 col-xs-12 col-sm-12">
+                    @Html.LabelFor(m => m.CountryId)
+                    @Html.ValidationMessageFor(m => m.CountryId)
+                    @Html.Select2AjaxFor(m => m.CountryId, Url.Action("Countries", "DataSource"), new Select2Option()
+               {
+                   AllowClear = false,
+                   MinimumInputLength = 0,
+                   Width = "100%"
+               }, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-xs-12 col-sm-12">
+                    @Html.LabelFor(m => m.ProvinceId)
+                    @Html.ValidationMessageFor(m => m.ProvinceId)
+                    @Html.Select2AjaxFor(m => m.ProvinceId, Url.Action("Provinces", "DataSource"), new Select2Option()
+                    {
+                        MinimumInputLength = 0,
+                        Width = "100%",
+                        AllowClear = false,
+                        DependsOn = "CountryId"
+                    })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-xs-12 col-sm-12">
+                    @Html.LabelFor(m => m.DistrictId)
+                    @Html.ValidationMessageFor(m => m.DistrictId)
+                    @Html.Select2AjaxFor(m => m.DistrictId, Url.Action("Districts", "DataSource"), new Select2Option()
+               {
+                   MinimumInputLength = 0,
+                   Width = "100%",
+                   AllowClear = false,
+                   DependsOn = "ProvinceId"
+               })
+                </div>
+            </div>
+        }
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

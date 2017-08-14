@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
+using MDoc.Services.Contract.DataContracts;
 using MDoc.Services.Contract.Enums;
 using MDoc.Services.Contract.Interfaces;
 
@@ -287,13 +288,18 @@ namespace MDoc.Controllers
                         JsonRequestBehavior.AllowGet)
                     : JsonNullResult;
             }
-            var result =
-                _customerService.ListOfCustomers()
-                    .Where(
-                        m =>
+            IQueryable<CustomerModel> customers;
+            if (CurrentUser.IsSuperAdmin || CurrentUser.IsCompanyAdmin)
+                customers = _customerService.ListOfCustomers();
+            else
+            {
+                customers = _customerService.ListOfSecureCustomers(CurrentUser.UserId);
+            }
+            var result = customers.Where(
+                        m => string.IsNullOrEmpty(query) || (
                             m.LastName.ToLower().Contains(query.ToLower()) ||
                             m.FirstName.ToLower().Contains(query.ToLower()) ||
-                            (m.LastName + " " + m.FirstName).ToLower().Contains(query.ToLower()))
+                            (m.LastName + " " + m.FirstName).ToLower().Contains(query.ToLower())))
                     .Select(m => new {id = m.CustomerId, text = (m.LastName + " " + m.FirstName)})
                     .OrderByDescending(m => m.text.Equals(query))
                     .Take(PageSize)
